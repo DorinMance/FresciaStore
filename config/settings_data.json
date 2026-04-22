@@ -11,14 +11,11 @@
     "topbar_bg": "#1a4a2e",
     "topbar_text_color": "#ffffff",
     "topbar_amount_color": "#c9a84c",
-    "main_menu": "main-menu",
     "logo_text": "frescia",
     "logo_domain": "store",
     "url_facebook": "",
     "url_instagram": "",
     "url_tiktok": "",
-    "footer_description": "Produse italiene autentice livrate direct la ușa ta. Calitate, tradiție și savoare din inima Italiei.",
-    "footer_menu_store": "footer-magazin",
-    "footer_menu_help": "footer-ajutor"
+    "footer_description": "Produse italiene autentice livrate direct la ușa ta. Calitate, tradiție și savoare din inima Italiei."
   }
 }
