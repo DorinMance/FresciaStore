@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>
+    {%- if page_title == shop.name -%}
+      {{ shop.name }} — Produse italiene autentice
+    {%- else -%}
+      {{ page_title }} — {{ shop.name }}
+    {%- endif -%}
+  </title>
+
+  {%- if page_description -%}
+    <meta name="description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  {%- if settings.favicon != blank -%}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
+  {%- endif -%}
+
+  {%- comment -%} Open Graph {%- endcomment -%}
+  <meta property="og:site_name" content="{{ shop.name }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:type" content="website">
+  {%- if page_description -%}
+    <meta property="og:description" content="{{ page_description | escape }}">
+  {%- endif -%}
+
+  {%- comment -%} Google Fonts {%- endcomment -%}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+  {%- comment -%} Theme CSS {%- endcomment -%}
+  {{ 'frescia-theme.css' | asset_url | stylesheet_tag }}
+
+  {%- comment -%} CSS variables from settings {%- endcomment -%}
+  <style>
+    :root {
+      --color-primary:      {{ settings.color_primary }};
+      --color-accent:       {{ settings.color_accent }};
+      --color-primary-dark: {{ settings.color_primary | color_darken: 15 }};
+      --color-primary-light:{{ settings.color_primary | color_lighten: 60 | color_desaturate: 20 }};
+    }
+  </style>
+
+  {%- comment -%} JS globals for translations {%- endcomment -%}
+  <script>
+    window.frTheme = {
+      addedToCart: {{ 'general.cart.added' | t | json }},
+      cartError:   {{ 'general.cart.error' | t | default: 'Eroare. Încearcă din nou.' | json }},
+      shopUrl:     {{ shop.url | json }}
+    };
+  </script>
+
+  {{ content_for_header }}
+</head>
+
+<body>
+
+  {%- comment -%} ── Skip to content ── {%- endcomment -%}
+  <a class="sr-only" href="#main-content">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+  {%- comment -%} ── Topbar ── {%- endcomment -%}
+  {%- if settings.topbar_enabled -%}
+    <div class="frescia-topbar" style="background:{{ settings.topbar_bg }};color:{{ settings.topbar_text_color }};">
+      <p class="frescia-topbar__text">
+        {{ settings.topbar_text }}
+        <strong class="frescia-topbar__amount" style="color:{{ settings.topbar_amount_color }};">
+          {{ settings.topbar_amount }}
+        </strong>
+      </p>
+    </div>
+  {%- endif -%}
+
+  {%- comment -%} ── Navbar ── {%- endcomment -%}
+  <header class="frescia-navbar" role="banner">
+    <div class="container frescia-navbar__inner">
+
+      {%- comment -%} Hamburger (mobile) {%- endcomment -%}
+      <button
+        class="frescia-hamburger"
+        aria-label="{{ 'general.accessibility.open_menu' | t }}"
+        aria-expanded="false"
+        aria-controls="frescia-mobile-menu"
+        type="button"
+      >
+        <span class="frescia-hamburger__line"></span>
+        <span class="frescia-hamburger__line"></span>
+        <span class="frescia-hamburger__line"></span>
+      </button>
+
+      {%- comment -%} Logo {%- endcomment -%}
+      <a href="/" class="frescia-logo" aria-label="{{ shop.name }}">
+        {{- settings.logo_text | default: 'frescia' -}}<span class="frescia-logo__dot">.</span><span class="frescia-logo__domain">{{- settings.logo_domain | default: 'store' -}}</span>
+      </a>
+
+      {%- comment -%} Desktop nav links {%- endcomment -%}
+      {%- if settings.main_menu != blank -%}
+        {%- assign main_nav = linklists[settings.main_menu] -%}
+        <nav class="frescia-nav__links" aria-label="Meniu principal">
+          {%- for link in main_nav.links -%}
+            <a
+              href="{{ link.url }}"
+              class="frescia-nav__link{% if link.active %} active{% endif %}"
+            >
+              {{ link.title }}
+            </a>
+          {%- endfor -%}
+        </nav>
+      {%- else -%}
+        <nav class="frescia-nav__links" aria-label="Meniu principal">
+          <a href="/" class="frescia-nav__link{% if request.path == '/' %} active{% endif %}">Acasă</a>
+          <a href="/collections/all" class="frescia-nav__link{% if request.path contains '/collections' %} active{% endif %}">Produse</a>
+          <a href="/pages/despre-noi" class="frescia-nav__link{% if request.path contains '/pages/despre' %} active{% endif %}">Despre noi</a>
+          <a href="/pages/contact" class="frescia-nav__link{% if request.path contains '/pages/contact' %} active{% endif %}">Contact</a>
+        </nav>
+      {%- endif -%}
+
+      {%- comment -%} Search {%- endcomment -%}
+      <form action="/search" method="get" class="frescia-nav__search" role="search">
+        <input
+          type="search"
+          name="q"
+          placeholder="{{ 'general.search.placeholder' | t }}"
+          aria-label="{{ 'general.search.placeholder' | t }}"
+          value="{{ search.terms | escape }}"
+          autocomplete="off"
+        >
+        <button type="submit" class="frescia-nav__search-btn" aria-label="{{ 'general.search.button' | t }}">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </form>
+
+      {%- comment -%} Icons {%- endcomment -%}
+      <div class="frescia-nav__icons">
+        <a href="/account" class="frescia-nav__icon-btn" aria-label="Contul meu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </a>
+
+        <a href="/cart" class="frescia-nav__icon-btn" aria-label="{{ 'general.cart.title' | t }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span
+            class="frescia-nav__badge"
+            aria-label="{{ 'general.cart.title' | t }}"
+            {%- if cart.item_count == 0 -%} style="display:none;" {%- endif -%}
+          >
+            {{- cart.item_count -}}
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  {%- comment -%} ── Mobile Menu Drawer ── {%- endcomment -%}
+  <div class="frescia-mobile-menu" id="frescia-mobile-menu" role="dialog" aria-modal="true" aria-label="Meniu navigare">
+    <div class="frescia-mobile-menu__overlay" aria-hidden="true"></div>
+    <div class="frescia-mobile-menu__panel">
+      <div class="frescia-mobile-menu__header">
+        <span class="frescia-logo" style="font-size:1.3rem;">
+          {{- settings.logo_text | default: 'frescia' -}}<span class="frescia-logo__dot">.</span><span class="frescia-logo__domain">{{- settings.logo_domain | default: 'store' -}}</span>
+        </span>
+        <button class="frescia-mobile-menu__close frescia-nav__icon-btn" aria-label="{{ 'general.accessibility.close_menu' | t }}" type="button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="frescia-mobile-menu__links">
+        {%- if settings.main_menu != blank -%}
+          {%- assign mob_nav = linklists[settings.main_menu] -%}
+          {%- for link in mob_nav.links -%}
+            <a href="{{ link.url }}" class="frescia-mobile-menu__link">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- else -%}
+          <a href="/" class="frescia-mobile-menu__link">Acasă</a>
+          <a href="/collections/all" class="frescia-mobile-menu__link">Produse</a>
+          <a href="/pages/despre-noi" class="frescia-mobile-menu__link">Despre noi</a>
+          <a href="/pages/contact" class="frescia-mobile-menu__link">Contact</a>
+        {%- endif -%}
+      </nav>
+    </div>
+  </div>
+
+  {%- comment -%} ── Main content ── {%- endcomment -%}
+  <main id="main-content" role="main" tabindex="-1">
+    {{ content_for_layout }}
+  </main>
+
+  {%- comment -%} ── Footer ── {%- endcomment -%}
+  {% render 'footer' %}
+
+  {%- comment -%} ── Theme JS ── {%- endcomment -%}
+  {{ 'frescia-theme.js' | asset_url | script_tag }}
+
+</body>
+</html>

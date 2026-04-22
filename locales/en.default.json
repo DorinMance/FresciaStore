@@ -1,0 +1,93 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Search products...",
+      "button": "Search"
+    },
+    "cart": {
+      "title": "Your cart",
+      "empty": "Your cart is empty",
+      "add": "Add to cart",
+      "added": "Product added to cart!",
+      "view": "View cart",
+      "checkout": "Checkout",
+      "count_one": "{{ count }} item",
+      "count_other": "{{ count }} items"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "of": "of"
+    },
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "open_menu": "Open menu",
+      "close_menu": "Close menu",
+      "play_video": "Play video",
+      "pause_video": "Pause video"
+    }
+  },
+  "products": {
+    "sold_out": "Sold out",
+    "unavailable": "Unavailable",
+    "sale": "Sale",
+    "new": "New",
+    "from": "From",
+    "vendor": "Vendor",
+    "quantity": "Quantity",
+    "view_details": "View details",
+    "add_to_cart": "Add to cart",
+    "out_of_stock": "Out of stock"
+  },
+  "collections": {
+    "all": "All products",
+    "products_count": "{{ count }} products",
+    "sort": {
+      "label": "Sort by",
+      "manual": "Default",
+      "best_selling": "Best selling",
+      "title_ascending": "A-Z",
+      "title_descending": "Z-A",
+      "price_ascending": "Price: low to high",
+      "price_descending": "Price: high to low",
+      "created_descending": "Newest"
+    },
+    "empty": "No products found in this collection.",
+    "use_fewer_filters": "Use fewer filters"
+  },
+  "contact": {
+    "title": "Contact us",
+    "form": {
+      "name": "Your name",
+      "email": "Email address",
+      "phone": "Phone (optional)",
+      "message": "Your message",
+      "submit": "Send message",
+      "success": "Thank you! Your message has been sent. We will contact you soon.",
+      "error": "An error occurred. Please try again."
+    },
+    "info": {
+      "phone": "Phone",
+      "email": "Email",
+      "schedule": "Schedule"
+    }
+  },
+  "footer": {
+    "copyright": "All rights reserved",
+    "categories": "Categories",
+    "store": "Store",
+    "help": "Help",
+    "payment_methods": "Accepted payment methods"
+  },
+  "sidebar": {
+    "categories": "Categories",
+    "special_selections": "Special selections",
+    "on_sale": "On Sale",
+    "new_arrivals": "New in stock",
+    "products_count": "{{ count }} products"
+  },
+  "hero": {
+    "badge": "Authentic Italian"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "general": {
+    "search": {
+      "placeholder": "Caută produse...",
+      "button": "Caută"
+    },
+    "cart": {
+      "title": "Coșul tău",
+      "empty": "Coșul tău este gol",
+      "add": "Adaugă în coș",
+      "added": "Produs adăugat în coș!",
+      "view": "Vezi coș",
+      "checkout": "Finalizează comanda",
+      "count_one": "{{ count }} produs",
+      "count_other": "{{ count }} produse"
+    },
+    "pagination": {
+      "previous": "Anterior",
+      "next": "Următor",
+      "of": "din"
+    },
+    "accessibility": {
+      "skip_to_content": "Sari la conținut",
+      "close": "Închide",
+      "open_menu": "Deschide meniu",
+      "close_menu": "Închide meniu",
+      "play_video": "Redă video",
+      "pause_video": "Pauza video"
+    }
+  },
+  "products": {
+    "sold_out": "Stoc epuizat",
+    "unavailable": "Indisponibil",
+    "sale": "Reducere",
+    "new": "Nou",
+    "from": "De la",
+    "vendor": "Producător",
+    "quantity": "Cantitate",
+    "view_details": "Vezi detalii",
+    "add_to_cart": "Adaugă în coș",
+    "out_of_stock": "Stoc epuizat"
+  },
+  "collections": {
+    "all": "Toate produsele",
+    "products_count": "{{ count }} produse",
+    "sort": {
+      "label": "Sortează după",
+      "manual": "Implicit",
+      "best_selling": "Cele mai vândute",
+      "title_ascending": "A-Z",
+      "title_descending": "Z-A",
+      "price_ascending": "Preț: mic la mare",
+      "price_descending": "Preț: mare la mic",
+      "created_descending": "Cele mai noi"
+    },
+    "empty": "Nu am găsit produse în această colecție.",
+    "use_fewer_filters": "Folosiți mai puține filtre"
+  },
+  "contact": {
+    "title": "Contactează-ne",
+    "form": {
+      "name": "Numele tău",
+      "email": "Adresa de email",
+      "phone": "Telefon (opțional)",
+      "message": "Mesajul tău",
+      "submit": "Trimite mesaj",
+      "success": "Mulțumim! Mesajul tău a fost trimis cu succes. Te vom contacta în curând.",
+      "error": "A apărut o eroare. Te rugăm să încerci din nou."
+    },
+    "info": {
+      "phone": "Telefon",
+      "email": "Email",
+      "schedule": "Program"
+    }
+  },
+  "footer": {
+    "copyright": "Toate drepturile rezervate",
+    "categories": "Categorii",
+    "store": "Magazin",
+    "help": "Ajutor",
+    "payment_methods": "Metode de plată acceptate"
+  },
+  "sidebar": {
+    "categories": "Categorii",
+    "special_selections": "Selecții speciale",
+    "on_sale": "Promoții",
+    "new_arrivals": "Nou în stoc",
+    "products_count": "{{ count }} produse"
+  },
+  "hero": {
+    "badge": "Autentic Italian"
+  }
+}

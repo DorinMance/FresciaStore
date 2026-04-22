@@ -1,0 +1,220 @@
+<div class="frescia-contact">
+  <div class="container">
+
+    {%- comment -%} Page title {%- endcomment -%}
+    <div class="frescia-section-header" style="margin-bottom:40px;">
+      <p class="frescia-section-eyebrow">Suntem aici pentru tine</p>
+      <h1 class="frescia-section-title">{{ page.title }}</h1>
+    </div>
+
+    <div class="frescia-contact__grid">
+
+      {%- comment -%} ── Coloana stânga: Informații + Hartă ── {%- endcomment -%}
+      <div>
+        {%- if page.content != blank -%}
+          <p class="frescia-contact__info-desc">{{ page.content | strip_html | truncate: 200 }}</p>
+        {%- else -%}
+          <p class="frescia-contact__info-desc">
+            Avem o echipă dedicată gata să îți răspundă la orice întrebare despre produsele noastre italiene.
+          </p>
+        {%- endif -%}
+
+        {%- comment -%} Telefon — din schema sau shop settings {%- endcomment -%}
+        {%- if section.settings.contact_phone != blank -%}
+          <div class="frescia-contact__info-item">
+            <div class="frescia-contact__info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.9 2 2 0 0 1 3.59 2.72h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.28 17.28z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="frescia-contact__info-label">{{ 'contact.info.phone' | t }}</p>
+              <a href="tel:{{ section.settings.contact_phone | remove: ' ' }}" class="frescia-contact__info-value">
+                {{ section.settings.contact_phone }}
+              </a>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Email {%- endcomment -%}
+        {%- assign contact_email = section.settings.contact_email | default: shop.email -%}
+        {%- if contact_email != blank -%}
+          <div class="frescia-contact__info-item">
+            <div class="frescia-contact__info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <p class="frescia-contact__info-label">{{ 'contact.info.email' | t }}</p>
+              <a href="mailto:{{ contact_email }}" class="frescia-contact__info-value">
+                {{ contact_email }}
+              </a>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Program {%- endcomment -%}
+        {%- if section.settings.contact_schedule != blank -%}
+          <div class="frescia-contact__info-item">
+            <div class="frescia-contact__info-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div>
+              <p class="frescia-contact__info-label">{{ 'contact.info.schedule' | t }}</p>
+              <p class="frescia-contact__info-value" style="white-space:pre-line;">{{ section.settings.contact_schedule }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Google Maps {%- endcomment -%}
+        {%- if section.settings.maps_embed_url != blank -%}
+          <div class="frescia-contact__map">
+            <iframe
+              src="{{ section.settings.maps_embed_url }}"
+              title="Locație {{ shop.name }}"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            ></iframe>
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ── Coloana dreapta: Formular ── {%- endcomment -%}
+      <div class="frescia-contact__form-card">
+        <h2 class="frescia-contact__form-title">Trimite-ne un mesaj</h2>
+
+        {%- form 'contact' -%}
+
+          {%- if form.posted_successfully? -%}
+            <div class="frescia-form__success">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+              {{ 'contact.form.success' | t }}
+            </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div style="background:#fef2f2;border:1px solid #fca5a5;border-radius:var(--radius-md);padding:14px;margin-bottom:16px;color:#c0392b;font-size:.9rem;">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <div class="frescia-form__group">
+            <label for="contact-name" class="frescia-form__label">
+              {{ 'contact.form.name' | t }} <span aria-hidden="true">*</span>
+            </label>
+            <input
+              type="text"
+              id="contact-name"
+              name="contact[name]"
+              class="frescia-form__input"
+              value="{{ form.name }}"
+              placeholder="{{ 'contact.form.name' | t }}"
+              required
+              autocomplete="name"
+            >
+          </div>
+
+          <div class="frescia-form__group">
+            <label for="contact-email" class="frescia-form__label">
+              {{ 'contact.form.email' | t }} <span aria-hidden="true">*</span>
+            </label>
+            <input
+              type="email"
+              id="contact-email"
+              name="contact[email]"
+              class="frescia-form__input"
+              value="{{ form.email }}"
+              placeholder="{{ 'contact.form.email' | t }}"
+              required
+              autocomplete="email"
+            >
+          </div>
+
+          <div class="frescia-form__group">
+            <label for="contact-phone" class="frescia-form__label">
+              {{ 'contact.form.phone' | t }}
+            </label>
+            <input
+              type="tel"
+              id="contact-phone"
+              name="contact[phone]"
+              class="frescia-form__input"
+              placeholder="{{ 'contact.form.phone' | t }}"
+              autocomplete="tel"
+            >
+          </div>
+
+          <div class="frescia-form__group">
+            <label for="contact-message" class="frescia-form__label">
+              {{ 'contact.form.message' | t }} <span aria-hidden="true">*</span>
+            </label>
+            <textarea
+              id="contact-message"
+              name="contact[body]"
+              class="frescia-form__textarea"
+              placeholder="{{ 'contact.form.message' | t }}"
+              required
+            >{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="frescia-form__submit btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+            {{ 'contact.form.submit' | t }}
+          </button>
+
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pagina Contact",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Informații contact"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Număr de telefon",
+      "placeholder": "+40 700 000 000"
+    },
+    {
+      "type": "email",
+      "id": "contact_email",
+      "label": "Adresă email (lasă gol pentru email-ul magazinului)"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_schedule",
+      "label": "Program de lucru",
+      "default": "Luni - Vineri: 09:00 - 18:00\nSâmbătă: 10:00 - 14:00"
+    },
+    {
+      "type": "header",
+      "content": "Google Maps"
+    },
+    {
+      "type": "text",
+      "id": "maps_embed_url",
+      "label": "URL embed Google Maps",
+      "info": "Mergi pe Google Maps → Share → Embed a map → copiază doar URL-ul din src=\"...\""
+    }
+  ]
+}
+{% endschema %}

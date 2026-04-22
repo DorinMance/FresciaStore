@@ -1,0 +1,162 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Frescia Theme",
+    "theme_version": "1.0.0",
+    "theme_author": "Frescia Store",
+    "theme_documentation_url": "https://fresciastore.ro",
+    "theme_support_url": "https://fresciastore.ro/contact"
+  },
+  {
+    "name": "Culori",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Culoare primară (verde)",
+        "default": "#1a4a2e"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Culoare accent (auriu)",
+        "default": "#c9a84c"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Fundal pagină",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text principal",
+        "default": "#1a1a1a"
+      },
+      {
+        "type": "color",
+        "id": "color_text_light",
+        "label": "Text secundar",
+        "default": "#6b7280"
+      }
+    ]
+  },
+  {
+    "name": "Topbar",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "topbar_enabled",
+        "label": "Activează topbar",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "topbar_text",
+        "label": "Text topbar",
+        "default": "Livrare gratuită pentru comenzi peste"
+      },
+      {
+        "type": "text",
+        "id": "topbar_amount",
+        "label": "Suma livrare gratuită",
+        "default": "350 RON"
+      },
+      {
+        "type": "color",
+        "id": "topbar_bg",
+        "label": "Fundal topbar",
+        "default": "#1a4a2e"
+      },
+      {
+        "type": "color",
+        "id": "topbar_text_color",
+        "label": "Culoare text topbar",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "topbar_amount_color",
+        "label": "Culoare sumă topbar",
+        "default": "#c9a84c"
+      }
+    ]
+  },
+  {
+    "name": "Navigație",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "main_menu",
+        "label": "Meniu principal",
+        "default": "main-menu"
+      },
+      {
+        "type": "text",
+        "id": "logo_text",
+        "label": "Text logo",
+        "default": "frescia"
+      },
+      {
+        "type": "text",
+        "id": "logo_domain",
+        "label": "Domeniu logo",
+        "default": "store"
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "url",
+        "id": "url_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "url",
+        "id": "url_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "url",
+        "id": "url_tiktok",
+        "label": "TikTok URL"
+      }
+    ]
+  },
+  {
+    "name": "Footer",
+    "settings": [
+      {
+        "type": "textarea",
+        "id": "footer_description",
+        "label": "Descriere brand în footer",
+        "default": "Produse italiene autentice livrate direct la ușa ta. Calitate, tradiție și savoare din inima Italiei."
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_store",
+        "label": "Meniu footer Magazin",
+        "default": "footer-magazin"
+      },
+      {
+        "type": "link_list",
+        "id": "footer_menu_help",
+        "label": "Meniu footer Ajutor",
+        "default": "footer-ajutor"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  }
+]

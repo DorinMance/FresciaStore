@@ -1,0 +1,148 @@
+<div class="frescia-trust-bar">
+  <div class="container">
+    <div class="frescia-trust-bar__grid">
+      {%- for block in section.blocks -%}
+        <div class="frescia-trust-bar__item" {{ block.shopify_attributes }}>
+          <div class="frescia-trust-bar__icon">
+            {%- case block.settings.icon -%}
+              {%- when 'italian' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              {%- when 'shipping' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="3" width="15" height="13"/>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                  <circle cx="5.5" cy="18.5" r="2.5"/>
+                  <circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              {%- when 'free' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/>
+                  <path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+                  <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+                </svg>
+              {%- when 'products' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/>
+                  <line x1="8" y1="18" x2="21" y2="18"/>
+                  <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/>
+                  <line x1="3" y1="18" x2="3.01" y2="18"/>
+                </svg>
+              {%- when 'quality' -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                  <polyline points="22 4 12 14.01 9 11.01"/>
+                </svg>
+              {%- else -%}
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+            {%- endcase -%}
+          </div>
+          <div>
+            <div class="frescia-trust-bar__title">{{ block.settings.title }}</div>
+            <div class="frescia-trust-bar__desc">{{ block.settings.description }}</div>
+          </div>
+        </div>
+      {%- else -%}
+        {%- comment -%} Fallback dacă nu există blocks configurate {%- endcomment -%}
+        <div class="frescia-trust-bar__item">
+          <div class="frescia-trust-bar__icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="frescia-trust-bar__title">100% Italian</div>
+            <div class="frescia-trust-bar__desc">Produse autentice din Italia</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust Bar",
+  "tag": "div",
+  "class": "frescia-trust-bar-section",
+  "max_blocks": 4,
+  "settings": [],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Beneficiu",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Iconiță",
+          "options": [
+            { "value": "italian",  "label": "Stea (Italian)" },
+            { "value": "shipping", "label": "Camion (Livrare)" },
+            { "value": "free",     "label": "Cadou (Gratuit)" },
+            { "value": "products", "label": "Listă (Produse)" },
+            { "value": "quality",  "label": "Bifă (Calitate)" }
+          ],
+          "default": "italian"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titlu beneficiu",
+          "default": "100% Italian"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Descriere scurtă",
+          "default": "Produse autentice din Italia"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Bar",
+      "blocks": [
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "italian",
+            "title": "100% Italian",
+            "description": "Produse autentice din Italia"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "shipping",
+            "title": "Livrare rapidă",
+            "description": "1-3 zile lucrătoare"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "free",
+            "title": "Gratuit 350+ RON",
+            "description": "Livrare gratuită la comenzi mari"
+          }
+        },
+        {
+          "type": "benefit",
+          "settings": {
+            "icon": "products",
+            "title": "100+ Produse",
+            "description": "Selecție variată din toată Italia"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,81 @@
+<aside class="frescia-sidebar" aria-label="{{ 'sidebar.categories' | t }}">
+
+  {%- comment -%} ── Selecții speciale ── {%- endcomment -%}
+  <div class="frescia-sidebar__section">
+    <h3 class="frescia-sidebar__heading">{{ 'sidebar.special_selections' | t }}</h3>
+
+    <a href="/collections/promotii" class="frescia-sidebar__special-link frescia-sidebar__special-link--sale">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+      {{ 'sidebar.on_sale' | t }}
+    </a>
+
+    <a href="/collections/noutati" class="frescia-sidebar__special-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      {{ 'sidebar.new_arrivals' | t }}
+    </a>
+  </div>
+
+  {%- comment -%} ── Categorii dinamice din Shopify ── {%- endcomment -%}
+  <div class="frescia-sidebar__section">
+    <h3 class="frescia-sidebar__heading">{{ 'sidebar.categories' | t }}</h3>
+
+    {%- for collection in collections -%}
+      {%- unless collection.handle == 'all' or collection.handle == 'frontpage' -%}
+        <div class="frescia-sidebar__accordion-item">
+          <button
+            class="frescia-sidebar__accordion-trigger"
+            aria-expanded="false"
+            aria-controls="sidebar-col-{{ collection.handle }}"
+          >
+            <span class="frescia-sidebar__accordion-trigger-left">
+              {%- if collection.image -%}
+                <img
+                  src="{{ collection.image | img_url: '56x56', crop: 'center' }}"
+                  alt="{{ collection.title | escape }}"
+                  class="frescia-sidebar__collection-img"
+                  width="28" height="28"
+                  loading="lazy"
+                >
+              {%- else -%}
+                <span class="frescia-sidebar__collection-img" style="background:var(--color-primary-light);display:flex;align-items:center;justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                  </svg>
+                </span>
+              {%- endif -%}
+              <span class="frescia-sidebar__collection-name">{{ collection.title }}</span>
+            </span>
+
+            <span class="frescia-sidebar__count">{{ collection.products_count }}</span>
+
+            <svg class="frescia-sidebar__accordion-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          <div class="frescia-sidebar__accordion-body" id="sidebar-col-{{ collection.handle }}">
+            <a href="{{ collection.url }}" class="frescia-sidebar__sub-link">
+              Toate produsele ({{ collection.products_count }})
+            </a>
+            {%- comment -%}
+              Shopify nu expune subcategorii native — dacă folosești tags sau metafields
+              pentru subcategorii, le poți itera mai jos. Exemplu cu tags:
+            {%- endcomment -%}
+            {%- for tag in collection.all_tags limit: 6 -%}
+              <a href="{{ collection.url }}?q={{ tag | url_encode }}" class="frescia-sidebar__sub-link">
+                {{ tag }}
+              </a>
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endunless -%}
+    {%- endfor -%}
+  </div>
+
+</aside>

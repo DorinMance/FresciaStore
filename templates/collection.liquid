@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="frescia-layout">
+
+    {%- comment -%} ── Sidebar stânga ── {%- endcomment -%}
+    {% render 'sidebar' %}
+
+    {%- comment -%} ── Produse dreapta ── {%- endcomment -%}
+    <div>
+
+      {%- comment -%} Header colecție {%- endcomment -%}
+      <div class="frescia-grid-header">
+        <div>
+          {%- if collection.image -%}
+            <div style="margin-bottom:16px;">
+              <img
+                src="{{ collection.image | img_url: '120x80', crop: 'center' }}"
+                alt="{{ collection.title | escape }}"
+                style="border-radius:var(--radius-md);height:56px;width:auto;object-fit:cover;"
+                loading="eager"
+              >
+            </div>
+          {%- endif -%}
+          <h1 class="frescia-grid-title">{{ collection.title }}</h1>
+          {%- if collection.description != blank -%}
+            <p style="color:var(--color-text-light);font-size:.9rem;margin-top:6px;max-width:540px;">
+              {{ collection.description | strip_html | truncate: 140 }}
+            </p>
+          {%- endif -%}
+        </div>
+        <span class="frescia-grid-count">
+          {{ collection.products_count }} {{ 'collections.products_count' | t: count: collection.products_count }}
+        </span>
+      </div>
+
+      {%- comment -%} Sort {%- endcomment -%}
+      <div style="margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <label for="sort-by" style="font-size:.85rem;font-weight:600;color:var(--color-text-light);">
+          {{ 'collections.sort.label' | t }}:
+        </label>
+        <form method="get" action="{{ collection.url }}">
+          <select
+            id="sort-by"
+            name="sort_by"
+            onchange="this.form.submit()"
+            style="padding:8px 12px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-family:inherit;font-size:.85rem;background:var(--color-white);cursor:pointer;"
+          >
+            {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+            <option value="manual"            {%- if sort_by == 'manual' -%}            selected{%- endif -%}>{{ 'collections.sort.manual' | t }}</option>
+            <option value="best-selling"      {%- if sort_by == 'best-selling' -%}      selected{%- endif -%}>{{ 'collections.sort.best_selling' | t }}</option>
+            <option value="title-ascending"   {%- if sort_by == 'title-ascending' -%}   selected{%- endif -%}>{{ 'collections.sort.title_ascending' | t }}</option>
+            <option value="title-descending"  {%- if sort_by == 'title-descending' -%}  selected{%- endif -%}>{{ 'collections.sort.title_descending' | t }}</option>
+            <option value="price-ascending"   {%- if sort_by == 'price-ascending' -%}   selected{%- endif -%}>{{ 'collections.sort.price_ascending' | t }}</option>
+            <option value="price-descending"  {%- if sort_by == 'price-descending' -%}  selected{%- endif -%}>{{ 'collections.sort.price_descending' | t }}</option>
+            <option value="created-descending"{%- if sort_by == 'created-descending' -%}selected{%- endif -%}>{{ 'collections.sort.created_descending' | t }}</option>
+          </select>
+        </form>
+      </div>
+
+      {%- comment -%} ── Grid produse cu paginare ── {%- endcomment -%}
+      {%- paginate collection.products by 12 -%}
+
+        {%- if collection.products.size > 0 -%}
+          <div class="frescia-product-grid">
+            {%- for product in collection.products -%}
+              <article class="frescia-card" aria-label="{{ product.title | escape }}">
+
+                <a href="{{ product.url }}" class="frescia-card__image-wrap" tabindex="-1">
+                  {%- if product.featured_image -%}
+                    <img
+                      src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
+                      alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                      class="frescia-card__image"
+                      loading="lazy"
+                      width="600" height="600"
+                    >
+                  {%- else -%}
+                    <div class="frescia-card__image" style="background:var(--color-primary-light);display:flex;align-items:center;justify-content:center;height:100%;aspect-ratio:1;">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1" opacity=".3">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                      </svg>
+                    </div>
+                  {%- endif -%}
+
+                  <div class="frescia-card__badges">
+                    {%- if product.compare_at_price > product.price -%}
+                      {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                      <span class="badge badge-sale">-{{ discount }}%</span>
+                    {%- endif -%}
+                    {%- if product.tags contains 'new' or product.tags contains 'nou' -%}
+                      <span class="badge badge-new">Nou</span>
+                    {%- endif -%}
+                  </div>
+                </a>
+
+                <div class="frescia-card__body">
+                  {%- if product.vendor != blank -%}
+                    <p class="frescia-card__vendor">{{ product.vendor }}</p>
+                  {%- endif -%}
+
+                  <h2 class="frescia-card__title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  </h2>
+
+                  <div class="frescia-card__price-row">
+                    <span class="frescia-card__price">{{ product.price | money }}</span>
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="frescia-card__compare-price">{{ product.compare_at_price | money }}</span>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if product.available -%}
+                    <button
+                      class="frescia-card__add-btn"
+                      type="button"
+                      data-add-to-cart
+                      data-variant-id="{{ product.variants.first.id }}"
+                      aria-label="{{ 'general.cart.add' | t }} {{ product.title | escape }}"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <path d="M16 10a4 4 0 0 1-8 0"/>
+                      </svg>
+                      {{ 'products.add_to_cart' | t }}
+                    </button>
+                  {%- else -%}
+                    <button class="frescia-card__add-btn" disabled>
+                      {{ 'products.sold_out' | t }}
+                    </button>
+                  {%- endif -%}
+                </div>
+              </article>
+            {%- endfor -%}
+          </div>
+
+          {%- comment -%} ── Paginare ── {%- endcomment -%}
+          {%- if paginate.pages > 1 -%}
+            <nav class="frescia-pagination" aria-label="Navigare paginare">
+              {%- if paginate.previous -%}
+                <a href="{{ paginate.previous.url }}" aria-label="{{ 'general.pagination.previous' | t }}">
+                  &larr; {{ 'general.pagination.previous' | t }}
+                </a>
+              {%- endif -%}
+
+              {%- for part in paginate.parts -%}
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}">{{ part.title }}</a>
+                {%- elsif part.title == paginate.current_page -%}
+                  <span class="current" aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span>{{ part.title }}</span>
+                {%- endif -%}
+              {%- endfor -%}
+
+              {%- if paginate.next -%}
+                <a href="{{ paginate.next.url }}" aria-label="{{ 'general.pagination.next' | t }}">
+                  {{ 'general.pagination.next' | t }} &rarr;
+                </a>
+              {%- endif -%}
+            </nav>
+          {%- endif -%}
+
+        {%- else -%}
+          <div style="text-align:center;padding:64px 24px;color:var(--color-text-light);">
+            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin:0 auto 16px;display:block;opacity:.35;">
+              <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <p style="font-size:1.1rem;font-weight:500;">{{ 'collections.empty' | t }}</p>
+          </div>
+        {%- endif -%}
+
+      {%- endpaginate -%}
+
+    </div>{%- comment -%} /col dreapta {%- endcomment -%}
+  </div>{%- comment -%} /.frescia-layout {%- endcomment -%}
+</div>

@@ -1,0 +1,112 @@
+<footer class="frescia-footer" role="contentinfo">
+  <div class="container">
+    <div class="frescia-footer__grid">
+
+      {%- comment -%} ── Coloana 1: Brand ── {%- endcomment -%}
+      <div>
+        <div class="frescia-footer__logo">
+          {{ settings.logo_text | default: 'frescia' }}<span style="color:var(--color-accent)">.</span>{{ settings.logo_domain | default: 'store' }}
+        </div>
+        <p class="frescia-footer__desc">{{ settings.footer_description }}</p>
+
+        <div class="frescia-footer__social">
+          {%- if settings.url_facebook != blank -%}
+            <a href="{{ settings.url_facebook }}" class="frescia-footer__social-link" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+
+          {%- if settings.url_instagram != blank -%}
+            <a href="{{ settings.url_instagram }}" class="frescia-footer__social-link" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+          {%- endif -%}
+
+          {%- if settings.url_tiktok != blank -%}
+            <a href="{{ settings.url_tiktok }}" class="frescia-footer__social-link" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+              </svg>
+            </a>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} ── Coloana 2: Categorii dinamice ── {%- endcomment -%}
+      <div>
+        <h3 class="frescia-footer__col-title">{{ 'footer.categories' | t }}</h3>
+        <ul class="frescia-footer__links">
+          {%- for collection in collections limit: 8 -%}
+            {%- unless collection.handle == 'all' or collection.handle == 'frontpage' -%}
+              <li>
+                <a href="{{ collection.url }}" class="frescia-footer__link">
+                  {{ collection.title }}
+                </a>
+              </li>
+            {%- endunless -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      {%- comment -%} ── Coloana 3: Magazin (meniu din Customizer) ── {%- endcomment -%}
+      <div>
+        <h3 class="frescia-footer__col-title">{{ 'footer.store' | t }}</h3>
+        <ul class="frescia-footer__links">
+          {%- if settings.footer_menu_store != blank -%}
+            {%- assign footer_store_menu = linklists[settings.footer_menu_store] -%}
+            {%- for link in footer_store_menu.links -%}
+              <li>
+                <a href="{{ link.url }}" class="frescia-footer__link">{{ link.title }}</a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a href="/collections/all" class="frescia-footer__link">Toate produsele</a></li>
+            <li><a href="/pages/despre-noi" class="frescia-footer__link">Despre noi</a></li>
+            <li><a href="/blogs/news" class="frescia-footer__link">Blog</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+      {%- comment -%} ── Coloana 4: Ajutor (meniu din Customizer) ── {%- endcomment -%}
+      <div>
+        <h3 class="frescia-footer__col-title">{{ 'footer.help' | t }}</h3>
+        <ul class="frescia-footer__links">
+          {%- if settings.footer_menu_help != blank -%}
+            {%- assign footer_help_menu = linklists[settings.footer_menu_help] -%}
+            {%- for link in footer_help_menu.links -%}
+              <li>
+                <a href="{{ link.url }}" class="frescia-footer__link">{{ link.title }}</a>
+              </li>
+            {%- endfor -%}
+          {%- else -%}
+            <li><a href="/pages/contact" class="frescia-footer__link">Contact</a></li>
+            <li><a href="/policies/shipping-policy" class="frescia-footer__link">Livrare</a></li>
+            <li><a href="/policies/refund-policy" class="frescia-footer__link">Returnări</a></li>
+            <li><a href="/policies/privacy-policy" class="frescia-footer__link">Confidențialitate</a></li>
+          {%- endif -%}
+        </ul>
+      </div>
+
+    </div>{%- comment -%} /.frescia-footer__grid {%- endcomment -%}
+
+    {%- comment -%} ── Footer Bottom ── {%- endcomment -%}
+    <div class="frescia-footer__bottom">
+      <p class="frescia-footer__copy">
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ 'footer.copyright' | t }}.
+      </p>
+
+      <div class="frescia-footer__payments" aria-label="{{ 'footer.payment_methods' | t }}">
+        <span class="frescia-footer__payment-badge">VISA</span>
+        <span class="frescia-footer__payment-badge">MC</span>
+        <span class="frescia-footer__payment-badge" style="font-size:.65rem;">Apple Pay</span>
+        <span class="frescia-footer__payment-badge" style="font-size:.65rem;">G Pay</span>
+      </div>
+    </div>
+  </div>
+</footer>
