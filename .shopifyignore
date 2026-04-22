@@ -1,10 +1,12 @@
-*.tmp.*
 *.tmp
+*.tmp.*
+**/*.tmp
+**/*.tmp.*
 *~
-.DS_Store
-Thumbs.db
 *.swp
 *.swo
+.DS_Store
+Thumbs.db
 .idea/
 .vscode/
 node_modules/
