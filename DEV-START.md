@@ -14,7 +14,7 @@ shopify auth login --store fresciastore.myshopify.com
 cd "D:/Sites/Clienti/04. FresciaStore"
 
 # Pornește preview live cu date reale din magazin
-shopify theme dev --store fresciastore.myshopify.com
+shopify theme dev --store fresciastoredemo.myshopify.com
 ```
 
 Shopify CLI îți dă un URL de tipul:
@@ -31,10 +31,10 @@ Shopify CLI îți dă un URL de tipul:
 
 ```bash
 # Pull ultimele fișiere din Shopify (dacă ai editat din Customizer)
-shopify theme pull --store fresciastore.myshopify.com
+shopify theme pull --store fresciastoredemo.myshopify.com
 
 # Push fișiere locale pe Shopify (fără git)
-shopify theme push --store fresciastore.myshopify.com
+shopify theme push --store fresciastoredemo.myshopify.com
 
 # Verifică erori Liquid în temă
 shopify theme check
