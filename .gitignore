@@ -1,5 +1,5 @@
 # Shopify Theme
-config/settings_data.json
+# config/settings_data.json — inclus în repo pentru deploy complet
 
 # OS
 .DS_Store

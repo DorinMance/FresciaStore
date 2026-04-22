@@ -1,13 +1,17 @@
-<section class="frescia-hero" aria-label="{{ section.settings.heading | escape }}">
+<section
+  class="frescia-hero{% unless section.settings.video_url != blank %} frescia-hero--no-video{% endunless %}"
+  aria-label="{{ section.settings.heading | escape }}"
+  id="frescia-hero"
+>
 
   {%- comment -%} Video background {%- endcomment -%}
   {%- if section.settings.video_url != blank -%}
     <video
       class="frescia-hero__video"
+      id="hero-video"
       src="{{ section.settings.video_url }}"
       autoplay
       muted
-      loop
       playsinline
       preload="auto"
       aria-hidden="true"
@@ -16,21 +20,22 @@
     <img
       src="{{ section.settings.fallback_image | img_url: '1920x' }}"
       alt="{{ section.settings.heading | escape }}"
-      class="frescia-hero__video"
+      class="frescia-hero__video frescia-hero--no-video"
       style="object-fit:cover;"
     >
   {%- else -%}
     <div class="frescia-hero__video" style="background:var(--color-primary);"></div>
   {%- endif -%}
 
-  {%- comment -%} Overlay {%- endcomment -%}
+  {%- comment -%} Overlay — se întunecă când video-ul se termină {%- endcomment -%}
   <div
     class="frescia-hero__overlay"
+    id="hero-overlay"
     style="background: rgba({{ section.settings.overlay_color | color_extract: 'red' }}, {{ section.settings.overlay_color | color_extract: 'green' }}, {{ section.settings.overlay_color | color_extract: 'blue' }}, {{ section.settings.overlay_opacity | divided_by: 100.0 }});"
   ></div>
 
-  {%- comment -%} Content {%- endcomment -%}
-  <div class="frescia-hero__content">
+  {%- comment -%} Conținut — ascuns până video se termină (dacă există video) {%- endcomment -%}
+  <div class="frescia-hero__content" id="hero-content">
     {%- if section.settings.badge_text != blank -%}
       <div class="frescia-hero__badge">
         <span class="badge badge-italian">
@@ -65,12 +70,14 @@
     </div>
   </div>
 
-  {%- comment -%} Play/Pause button {%- endcomment -%}
-  {%- if section.settings.video_url != blank and section.settings.show_play_btn -%}
+  {%- comment -%} Buton play/pause (vizibil doar după ce apare conținutul) {%- endcomment -%}
+  {%- if section.settings.video_url != blank -%}
     <button
       class="frescia-hero__play-btn"
+      id="hero-play-btn"
       aria-label="{{ 'general.accessibility.pause_video' | t }}"
       type="button"
+      style="display:none;"
     >
       <svg class="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>
@@ -97,18 +104,12 @@
       "type": "text",
       "id": "video_url",
       "label": "URL video (mp4)",
-      "info": "Introdu URL-ul direct al fișierului video MP4. Poți folosi un video din Files Shopify."
+      "info": "1. Mergi în Shopify Admin → Settings → Files → Upload file → încarcă fișierul .mp4. 2. Click pe fișierul încărcat → copiază URL-ul. 3. Lipește URL-ul aici."
     },
     {
       "type": "image_picker",
       "id": "fallback_image",
       "label": "Imagine fallback (dacă nu ai video)"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_play_btn",
-      "label": "Afișează buton play/pause",
-      "default": true
     },
     {
       "type": "header",
@@ -123,15 +124,15 @@
     {
       "type": "range",
       "id": "overlay_opacity",
-      "label": "Opacitate overlay (%)",
+      "label": "Opacitate overlay initial (%)",
       "min": 10,
-      "max": 90,
+      "max": 80,
       "step": 5,
-      "default": 60
+      "default": 40
     },
     {
       "type": "header",
-      "content": "Conținut"
+      "content": "Conținut (apare după video)"
     },
     {
       "type": "text",
@@ -187,8 +188,7 @@
         "subheading": "Produse italiene autentice — de la paste și uleiuri, la dulciuri și gust tradițional.",
         "btn1_text": "Descoperă produsele",
         "btn2_text": "Povestea noastră",
-        "overlay_opacity": 60,
-        "show_play_btn": true
+        "overlay_opacity": 40
       }
     }
   ]

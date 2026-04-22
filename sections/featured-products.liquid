@@ -1,0 +1,228 @@
+<section
+  class="frescia-fp-section"
+  style="background:{{ section.settings.bg_color }};padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;"
+>
+  <div class="container">
+
+    {%- comment -%} Header secțiune {%- endcomment -%}
+    <div class="frescia-fp-section__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="frescia-section-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="frescia-section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="frescia-section-subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_text != blank -%}
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="frescia-fp-section__cta">
+          {{ section.settings.cta_text }}
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Grid produse — blocuri selectate manual din Customizer {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="frescia-product-grid frescia-fp-section__grid">
+        {%- for block in section.blocks -%}
+          {%- assign product = block.settings.product -%}
+          {%- if product != blank -%}
+            <article class="frescia-card" {{ block.shopify_attributes }}>
+              <a href="{{ product.url }}" class="frescia-card__image-wrap" tabindex="-1">
+                {%- if product.featured_image -%}
+                  <img
+                    src="{{ product.featured_image | img_url: '600x600', crop: 'center' }}"
+                    alt="{{ product.featured_image.alt | default: product.title | escape }}"
+                    class="frescia-card__image"
+                    loading="lazy"
+                    width="600" height="600"
+                  >
+                {%- else -%}
+                  <div class="frescia-card__image" style="background:var(--color-primary-light);display:flex;align-items:center;justify-content:center;height:100%;aspect-ratio:1;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1" opacity=".3">
+                      <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                      <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                  </div>
+                {%- endif -%}
+
+                <div class="frescia-card__badges">
+                  {%- if product.compare_at_price > product.price -%}
+                    {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+                    <span class="badge badge-sale">-{{ discount }}%</span>
+                  {%- endif -%}
+                  {%- if block.settings.show_new_badge -%}
+                    <span class="badge badge-new">Nou</span>
+                  {%- endif -%}
+                </div>
+              </a>
+
+              <div class="frescia-card__body">
+                {%- if product.vendor != blank -%}
+                  <p class="frescia-card__vendor">{{ product.vendor }}</p>
+                {%- endif -%}
+
+                <h3 class="frescia-card__title">
+                  <a href="{{ product.url }}">{{ product.title }}</a>
+                </h3>
+
+                <div class="frescia-card__price-row">
+                  <span class="frescia-card__price">{{ product.price | money }}</span>
+                  {%- if product.compare_at_price > product.price -%}
+                    <span class="frescia-card__compare-price">{{ product.compare_at_price | money }}</span>
+                  {%- endif -%}
+                </div>
+
+                {%- if product.available -%}
+                  <button
+                    class="frescia-card__add-btn"
+                    type="button"
+                    data-add-to-cart
+                    data-variant-id="{{ product.variants.first.id }}"
+                    aria-label="{{ 'general.cart.add' | t }} {{ product.title | escape }}"
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+                      <line x1="3" y1="6" x2="21" y2="6"/>
+                      <path d="M16 10a4 4 0 0 1-8 0"/>
+                    </svg>
+                    {{ 'products.add_to_cart' | t }}
+                  </button>
+                {%- else -%}
+                  <button class="frescia-card__add-btn" disabled>
+                    {{ 'products.sold_out' | t }}
+                  </button>
+                {%- endif -%}
+              </div>
+            </article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="text-align:center;color:var(--color-text-light);padding:40px;">
+        Adaugă produse din panoul Customizer → click pe această secțiune → "Adaugă produs".
+      </p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Produse selectate manual",
+  "tag": "section",
+  "class": "frescia-featured-products",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titlu secțiune"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Text mic deasupra titlului",
+      "placeholder": "ex: Oferte speciale"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu secțiune",
+      "default": "Produse recomandate"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitlu (opțional)"
+    },
+    {
+      "type": "header",
+      "content": "Buton 'Vezi toate'"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Text buton",
+      "placeholder": "ex: Vezi toate ofertele"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Link buton"
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Culoare fundal",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Spațiu sus (px)",
+      "min": 16,
+      "max": 100,
+      "step": 8,
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Spațiu jos (px)",
+      "min": 16,
+      "max": 100,
+      "step": 8,
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Produs",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Selectează produsul"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_new_badge",
+          "label": "Afișează badge 'Nou'",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oferte speciale",
+      "settings": {
+        "eyebrow": "Promoții",
+        "title": "Oferte speciale",
+        "subtitle": "Produse italiene la prețuri reduse, selecție curatoriată de noi.",
+        "cta_text": "Vezi toate ofertele",
+        "bg_color": "#ffffff"
+      }
+    },
+    {
+      "name": "Noutăți",
+      "settings": {
+        "eyebrow": "Nou în stoc",
+        "title": "Produse noi",
+        "subtitle": "Cele mai recente produse italiene adăugate în magazin.",
+        "cta_text": "Descoperă noutățile",
+        "bg_color": "#f9fafb"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,83 @@
+<section class="frescia-cat-tiles-section" style="padding:48px 0 40px;">
+  <div class="container">
+
+    <div class="frescia-cat-tiles__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="frescia-section-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="frescia-section-title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div class="frescia-cat-tiles__grid">
+      {%- for collection in collections limit: section.settings.max_collections -%}
+        {%- unless collection.handle == 'all' or collection.handle == 'frontpage' -%}
+          <a href="{{ collection.url }}" class="frescia-cat-tile">
+            <div class="frescia-cat-tile__img-wrap">
+              {%- if collection.image -%}
+                <img
+                  src="{{ collection.image | img_url: '400x400', crop: 'center' }}"
+                  alt="{{ collection.title | escape }}"
+                  class="frescia-cat-tile__img"
+                  loading="lazy"
+                  width="400" height="400"
+                >
+              {%- else -%}
+                <div class="frescia-cat-tile__img-placeholder">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1.5" opacity=".5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                </div>
+              {%- endif -%}
+            </div>
+            <span class="frescia-cat-tile__name">{{ collection.title }}</span>
+            <span class="frescia-cat-tile__count">{{ collection.products_count }} produse</span>
+          </a>
+        {%- endunless -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Categorii (tiles)",
+  "tag": "section",
+  "class": "frescia-category-tiles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Text mic deasupra",
+      "default": "Catalog"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu secțiune",
+      "default": "Categorii de produse"
+    },
+    {
+      "type": "range",
+      "id": "max_collections",
+      "label": "Număr maxim categorii afișate",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorii produse",
+      "settings": {
+        "eyebrow": "Catalog",
+        "title": "Categorii de produse",
+        "max_collections": 8
+      }
+    }
+  ]
+}
+{% endschema %}

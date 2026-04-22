@@ -74,25 +74,51 @@
     }
   };
 
-  /* ── 4. HERO VIDEO PLAY/PAUSE ───────────────────────────── */
+  /* ── 4. HERO VIDEO — blur + text reveal la sfârsit ────────── */
   const HeroVideo = {
     init() {
-      const btn   = document.querySelector('.frescia-hero__play-btn');
-      const video = document.querySelector('.frescia-hero__video');
-      if (!btn || !video) return;
+      const hero  = document.getElementById('frescia-hero');
+      const video = document.getElementById('hero-video');
+      const btn   = document.getElementById('hero-play-btn');
+      if (!hero) return;
 
-      const iconPlay  = btn.querySelector('.icon-play');
-      const iconPause = btn.querySelector('.icon-pause');
+      /* Fără video → text imediat vizibil */
+      if (!video) {
+        hero.classList.add('frescia-hero--no-video');
+        return;
+      }
+
+      const iconPlay  = btn ? btn.querySelector('.icon-play')  : null;
+      const iconPause = btn ? btn.querySelector('.icon-pause') : null;
 
       const updateIcon = () => {
+        if (!btn) return;
         if (iconPlay)  iconPlay.style.display  = video.paused ? 'block' : 'none';
         if (iconPause) iconPause.style.display = video.paused ? 'none'  : 'block';
       };
 
-      btn.addEventListener('click', () => {
-        video.paused ? video.play() : video.pause();
+      /* Video s-a terminat → activează efectul blur + reveal text */
+      video.addEventListener('ended', () => {
+        hero.classList.add('frescia-hero--ended');
         updateIcon();
       });
+
+      /* Fallback: dacă video nu pornește în 3s → afișează textul oricum */
+      const fallbackTimer = setTimeout(() => {
+        if (!hero.classList.contains('frescia-hero--ended')) {
+          hero.classList.add('frescia-hero--ended');
+        }
+      }, 15000);
+
+      video.addEventListener('ended', () => clearTimeout(fallbackTimer));
+
+      /* Play/Pause după reveal */
+      if (btn) {
+        btn.addEventListener('click', () => {
+          video.paused ? video.play() : video.pause();
+          updateIcon();
+        });
+      }
 
       updateIcon();
     }

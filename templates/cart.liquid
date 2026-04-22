@@ -1,0 +1,100 @@
+<div class="container" style="padding-top:40px;padding-bottom:64px;max-width:900px;">
+
+  <h1 style="font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);margin-bottom:32px;">{{ 'general.cart.title' | t }}</h1>
+
+  {%- if cart.item_count > 0 -%}
+    {%- form 'cart', cart -%}
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start;">
+
+        {%- comment -%} Cart items {%- endcomment -%}
+        <div>
+          {%- for item in cart.items -%}
+            <div style="display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--color-border);">
+              <a href="{{ item.url }}" style="flex-shrink:0;">
+                <img
+                  src="{{ item.image | img_url: '160x160', crop: 'center' }}"
+                  alt="{{ item.title | escape }}"
+                  width="80" height="80"
+                  style="border-radius:var(--radius-md);border:1px solid var(--color-border);"
+                >
+              </a>
+              <div style="flex:1;min-width:0;">
+                <a href="{{ item.url }}" style="font-family:var(--font-heading);font-size:.95rem;font-weight:600;color:var(--color-black);display:block;margin-bottom:4px;">
+                  {{ item.product.title }}
+                </a>
+                {%- unless item.variant.title == 'Default Title' -%}
+                  <p style="font-size:.8rem;color:var(--color-text-light);margin-bottom:8px;">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+                  <div style="display:flex;align-items:center;border:1.5px solid var(--color-border);border-radius:var(--radius-md);overflow:hidden;">
+                    <button type="button" onclick="const i=this.nextElementSibling;i.value=Math.max(0,parseInt(i.value)-1);if(parseInt(i.value)===0)this.closest('form').submit();" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--color-bg-alt);">−</button>
+                    <input
+                      type="number"
+                      name="updates[]"
+                      value="{{ item.quantity }}"
+                      min="0"
+                      style="width:44px;height:32px;text-align:center;border:none;border-left:1px solid var(--color-border);border-right:1px solid var(--color-border);font-size:.88rem;"
+                    >
+                    <button type="button" onclick="this.previousElementSibling.value=parseInt(this.previousElementSibling.value)+1;" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--color-bg-alt);">+</button>
+                  </div>
+                  <span style="font-weight:700;color:var(--color-primary);font-size:.95rem;">{{ item.line_price | money }}</span>
+                  <a href="/cart/change?line={{ forloop.index }}&quantity=0" style="font-size:.78rem;color:var(--color-text-light);text-decoration:underline;">Șterge</a>
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+
+          <button type="submit" name="update" style="margin-top:16px;padding:10px 20px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-size:.85rem;background:var(--color-white);cursor:pointer;transition:all var(--transition);">
+            Actualizează coșul
+          </button>
+        </div>
+
+        {%- comment -%} Summary {%- endcomment -%}
+        <div style="background:var(--color-bg-alt);border:1px solid var(--color-border);border-radius:var(--radius-lg);padding:28px;position:sticky;top:calc(var(--nav-h) + 20px);">
+          <h2 style="font-family:var(--font-heading);font-size:1.2rem;color:var(--color-primary);margin-bottom:20px;">Sumar comandă</h2>
+
+          <div style="display:flex;justify-content:space-between;margin-bottom:12px;font-size:.92rem;">
+            <span style="color:var(--color-text-light);">Subtotal</span>
+            <span style="font-weight:600;">{{ cart.total_price | money }}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:20px;font-size:.83rem;color:var(--color-text-light);">
+            <span>Taxe calculate la checkout</span>
+          </div>
+          <div style="border-top:1px solid var(--color-border);padding-top:16px;margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;font-size:1.05rem;font-weight:700;">
+              <span>Total</span>
+              <span style="color:var(--color-primary);">{{ cart.total_price | money }}</span>
+            </div>
+          </div>
+
+          <textarea
+            name="note"
+            placeholder="Notă pentru comandă (opțional)"
+            style="width:100%;padding:10px 12px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-family:inherit;font-size:.85rem;resize:none;height:72px;margin-bottom:16px;"
+          >{{ cart.note }}</textarea>
+
+          <button type="submit" name="checkout" class="btn btn-green" style="width:100%;padding:15px;font-size:1rem;">
+            Finalizează comanda →
+          </button>
+          <a href="/collections/all" style="display:block;text-align:center;margin-top:12px;font-size:.85rem;color:var(--color-text-light);text-decoration:underline;">
+            Continuă cumpărăturile
+          </a>
+        </div>
+
+      </div>
+    {%- endform -%}
+
+  {%- else -%}
+    <div style="text-align:center;padding:80px 24px;">
+      <svg width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1" style="margin:0 auto 20px;display:block;opacity:.3;">
+        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <h2 style="font-family:var(--font-heading);font-size:1.5rem;color:var(--color-primary);margin-bottom:12px;">{{ 'general.cart.empty' | t }}</h2>
+      <p style="color:var(--color-text-light);margin-bottom:28px;">Adaugă produse în coș pentru a continua.</p>
+      <a href="/collections/all" class="btn btn-green">Descoperă produsele</a>
+    </div>
+  {%- endif -%}
+
+</div>

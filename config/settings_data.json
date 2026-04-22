@@ -1,0 +1,24 @@
+{
+  "current": {
+    "color_primary": "#1a4a2e",
+    "color_accent": "#c9a84c",
+    "color_background": "#ffffff",
+    "color_text": "#1a1a1a",
+    "color_text_light": "#6b7280",
+    "topbar_enabled": true,
+    "topbar_text": "Livrare gratuită pentru comenzi peste",
+    "topbar_amount": "350 RON",
+    "topbar_bg": "#1a4a2e",
+    "topbar_text_color": "#ffffff",
+    "topbar_amount_color": "#c9a84c",
+    "main_menu": "main-menu",
+    "logo_text": "frescia",
+    "logo_domain": "store",
+    "url_facebook": "",
+    "url_instagram": "",
+    "url_tiktok": "",
+    "footer_description": "Produse italiene autentice livrate direct la ușa ta. Calitate, tradiție și savoare din inima Italiei.",
+    "footer_menu_store": "footer-magazin",
+    "footer_menu_help": "footer-ajutor"
+  }
+}
