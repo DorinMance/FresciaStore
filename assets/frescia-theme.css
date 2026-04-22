@@ -729,8 +729,13 @@ h1, h2, h3, h4, h5 {
 
 .frescia-product-grid {
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* Pe homepage (fără sidebar) rămâne 4 coloane */
+.frescia-layout .frescia-product-grid {
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
 }
 
 /* Product Card */
@@ -749,7 +754,7 @@ h1, h2, h3, h4, h5 {
 
 .frescia-card__image-wrap {
   position: relative;
-  aspect-ratio: 1;
+  aspect-ratio: 4/3;
   overflow: hidden;
   background: var(--color-bg-alt);
 }
@@ -1455,7 +1460,8 @@ input[type="radio"].product-option-input:checked + .option-btn {
 @media (max-width: 1024px) {
   .frescia-nav__links { gap: 20px; }
   .frescia-trust-bar__grid { grid-template-columns: repeat(2, 1fr); }
-  .frescia-product-grid { grid-template-columns: repeat(2, 1fr); }
+  .frescia-product-grid { grid-template-columns: repeat(3, 1fr); }
+  .frescia-layout .frescia-product-grid { grid-template-columns: repeat(2, 1fr); }
   .frescia-cat-grid { grid-template-columns: repeat(2, 1fr); }
   .frescia-footer__grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .frescia-cat-tiles__grid { grid-template-columns: repeat(4, 1fr); }
@@ -1484,7 +1490,8 @@ input[type="radio"].product-option-input:checked + .option-btn {
   .frescia-hero { height: 70vh; min-height: 420px; }
   .frescia-hero__buttons { flex-direction: column; }
 
-  .frescia-product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .frescia-product-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .frescia-layout .frescia-product-grid { grid-template-columns: repeat(2, 1fr); }
   .frescia-cat-grid { grid-template-columns: repeat(2, 1fr); }
   .frescia-cat-tiles__grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
