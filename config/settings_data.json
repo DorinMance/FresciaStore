@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "color_primary": "#1a4a2e",
@@ -16,6 +25,49 @@
     "url_facebook": "",
     "url_instagram": "",
     "url_tiktok": "",
-    "footer_description": "Produse italiene autentice livrate direct la ușa ta. Calitate, tradiție și savoare din inima Italiei."
+    "footer_description": "Produse italiene autentice livrate direct la ușa ta. Calitate, tradiție și savoare din inima Italiei.",
+    "sections": {
+      "hero-video": {
+        "type": "hero-video",
+        "settings": {
+          "video_url": "https://cdn.shopify.com/videos/c/o/v/1cc1a9de73e2467fbe11db68b421727b.mp4",
+          "overlay_color": "#1a4a2e",
+          "overlay_opacity": 40,
+          "badge_text": "Autentic Italian",
+          "heading": "Savoarea Italiei la ușa ta",
+          "subheading": "Produse italiene autentice — de la paste și uleiuri, la dulciuri și gust tradițional.",
+          "btn1_text": "Descoperă produsele",
+          "btn1_url": "",
+          "btn2_text": "Povestea noastră",
+          "btn2_url": ""
+        }
+      },
+      "trust-bar": {
+        "type": "trust-bar",
+        "settings": {}
+      },
+      "category-tiles": {
+        "type": "category-tiles",
+        "settings": {
+          "eyebrow": "Catalog",
+          "title": "Categorii de produse",
+          "max_collections": 8
+        }
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "eyebrow": "",
+          "title": "Produse recomandate",
+          "subtitle": "",
+          "cta_text": "",
+          "cta_url": "",
+          "bg_color": "#ffffff",
+          "padding_top": 56,
+          "padding_bottom": 56
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
