@@ -21,6 +21,7 @@ yarn-error.log*
 # Shopify CLI
 .shopify/
 shopify.app.toml
+.shopifyrc
 
 # Temp
 *.tmp
