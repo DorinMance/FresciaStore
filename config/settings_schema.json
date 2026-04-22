@@ -89,8 +89,7 @@
       {
         "type": "link_list",
         "id": "main_menu",
-        "label": "Meniu principal",
-        "default": "main-menu"
+        "label": "Meniu principal"
       },
       {
         "type": "text",
@@ -138,14 +137,12 @@
       {
         "type": "link_list",
         "id": "footer_menu_store",
-        "label": "Meniu footer Magazin",
-        "default": "footer-magazin"
+        "label": "Meniu footer Magazin"
       },
       {
         "type": "link_list",
         "id": "footer_menu_help",
-        "label": "Meniu footer Ajutor",
-        "default": "footer-ajutor"
+        "label": "Meniu footer Ajutor"
       }
     ]
   },
