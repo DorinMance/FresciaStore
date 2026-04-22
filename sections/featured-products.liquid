@@ -5,7 +5,7 @@
   <div class="container">
 
     {%- comment -%} Header secțiune {%- endcomment -%}
-    <div class="frescia-fp-section__header">
+    <div class="frescia-fp-section__header reveal">
       {%- if section.settings.eyebrow != blank -%}
         <p class="frescia-section-eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
@@ -31,7 +31,7 @@
         {%- for block in section.blocks -%}
           {%- assign product = block.settings.product -%}
           {%- if product != blank -%}
-            <article class="frescia-card" {{ block.shopify_attributes }}>
+            <article class="frescia-card reveal reveal--delay-{{ forloop.index | modulo: 4 | plus: 1 }}" {{ block.shopify_attributes }}>
               <a href="{{ product.url }}" class="frescia-card__image-wrap" tabindex="-1">
                 {%- if product.featured_image -%}
                   <img

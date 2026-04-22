@@ -1,7 +1,7 @@
 <section class="frescia-cat-tiles-section" style="padding:48px 0 40px;">
   <div class="container">
 
-    <div class="frescia-cat-tiles__header">
+    <div class="frescia-cat-tiles__header reveal">
       {%- if section.settings.eyebrow != blank -%}
         <p class="frescia-section-eyebrow">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
@@ -11,7 +11,7 @@
     <div class="frescia-cat-tiles__grid">
       {%- for collection in collections limit: section.settings.max_collections -%}
         {%- unless collection.handle == 'all' or collection.handle == 'frontpage' -%}
-          <a href="{{ collection.url }}" class="frescia-cat-tile">
+          <a href="{{ collection.url }}" class="frescia-cat-tile reveal reveal--delay-{{ forloop.index | modulo: 4 | plus: 1 }}">
             <div class="frescia-cat-tile__img-wrap">
               {%- if collection.image -%}
                 <img

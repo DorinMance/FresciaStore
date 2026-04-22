@@ -272,6 +272,30 @@
     }
   };
 
+  /* ── 11. SCROLL REVEAL ──────────────────────────────────── */
+  const ScrollReveal = {
+    init() {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('reveal--visible'));
+        return;
+      }
+
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('reveal--visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+    }
+  };
+
   /* ── INIT ────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     StickyNav.init();
@@ -283,6 +307,7 @@
     SearchToggle.init();
     SmoothScroll.init();
     LazyImages.init();
+    ScrollReveal.init();
   });
 
 })();

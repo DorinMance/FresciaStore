@@ -1,0 +1,98 @@
+<section class="frescia-newsletter">
+  <div class="container">
+    <div class="frescia-newsletter__inner reveal">
+
+      <div class="frescia-newsletter__icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+
+      <h2 class="frescia-newsletter__title">{{ section.settings.title }}</h2>
+      <p class="frescia-newsletter__desc">{{ section.settings.description }}</p>
+
+      {%- form 'customer', id: 'newsletter-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="frescia-newsletter__form">
+          <input
+            type="email"
+            name="contact[email]"
+            class="frescia-newsletter__input"
+            placeholder="{{ section.settings.placeholder }}"
+            required
+            autocomplete="email"
+          >
+          <button type="submit" class="frescia-newsletter__btn">
+            {{ section.settings.btn_text }}
+          </button>
+        </div>
+        {%- if form.posted_successfully? -%}
+          <p style="color:var(--color-primary);font-weight:600;margin-top:12px;">
+            ✓ {{ section.settings.success_msg }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
+
+      <p class="frescia-newsletter__note">{{ section.settings.note }}</p>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "frescia-newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu",
+      "default": "Fii primul care află ofertele noastre"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descriere",
+      "default": "Înscrie-te la newsletter și primești 10% reducere la prima comandă + noutăți săptămânale despre produsele noastre italiene."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Placeholder câmp email",
+      "default": "adresa@email.ro"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Text buton",
+      "default": "Abonează-te"
+    },
+    {
+      "type": "text",
+      "id": "success_msg",
+      "label": "Mesaj succes",
+      "default": "Mulțumim! Te-ai abonat cu succes."
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Notă mică (GDPR etc.)",
+      "default": "Nu facem spam. Te poți dezabona oricând."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+      "settings": {
+        "title": "Fii primul care află ofertele noastre",
+        "description": "Înscrie-te la newsletter și primești 10% reducere la prima comandă + noutăți săptămânale despre produsele noastre italiene.",
+        "btn_text": "Abonează-te",
+        "note": "Nu facem spam. Te poți dezabona oricând."
+      }
+    }
+  ]
+}
+{% endschema %}

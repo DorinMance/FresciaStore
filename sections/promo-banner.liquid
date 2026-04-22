@@ -1,0 +1,127 @@
+<section class="frescia-promo-banner" style="background:{{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="frescia-promo-banner__inner">
+
+      <div class="frescia-promo-banner__text reveal">
+        {%- if section.settings.tag != blank -%}
+          <p class="frescia-promo-banner__tag">{{ section.settings.tag }}</p>
+        {%- endif -%}
+
+        <h2 class="frescia-promo-banner__title">
+          {%- if section.settings.title_highlight != blank -%}
+            {{ section.settings.title | replace: section.settings.title_highlight, '<em>' | append: '</em>' }}
+          {%- else -%}
+            {{ section.settings.title }}
+          {%- endif -%}
+        </h2>
+
+        {%- if section.settings.description != blank -%}
+          <p class="frescia-promo-banner__desc">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="frescia-promo-banner__actions reveal reveal--delay-2">
+        {%- if section.settings.btn1_text != blank -%}
+          <a href="{{ section.settings.btn1_url | default: '/collections/all' }}" class="frescia-promo-banner__btn frescia-promo-banner__btn--primary">
+            {{ section.settings.btn1_text }}
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        {%- if section.settings.btn2_text != blank -%}
+          <a href="{{ section.settings.btn2_url | default: '/collections/all' }}" class="frescia-promo-banner__btn frescia-promo-banner__btn--ghost">
+            {{ section.settings.btn2_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Banner promoțional",
+  "tag": "section",
+  "class": "frescia-promo-banner-section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Culoare fundal",
+      "default": "#1a4a2e"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Text mic deasupra (tag)",
+      "default": "Ofertă specială"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu banner",
+      "default": "Produse italiene autentice la prețuri speciale"
+    },
+    {
+      "type": "text",
+      "id": "title_highlight",
+      "label": "Cuvânt de evidențiat (auriu)",
+      "info": "Scrie exact cuvântul din titlu pe care vrei să-l colorezi auriu",
+      "placeholder": "ex: autentice"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descriere",
+      "default": "Descoperă selecția noastră de produse aduse direct din Italia — paste, uleiuri, brânzeturi și vinuri de top."
+    },
+    {
+      "type": "header",
+      "content": "Buton principal"
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Text buton 1",
+      "default": "Cumpără acum"
+    },
+    {
+      "type": "url",
+      "id": "btn1_url",
+      "label": "Link buton 1"
+    },
+    {
+      "type": "header",
+      "content": "Buton secundar (opțional)"
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Text buton 2",
+      "placeholder": "ex: Descoperă categoriile"
+    },
+    {
+      "type": "url",
+      "id": "btn2_url",
+      "label": "Link buton 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner promoțional",
+      "settings": {
+        "bg_color": "#1a4a2e",
+        "tag": "Ofertă specială",
+        "title": "Produse italiene autentice la prețuri speciale",
+        "title_highlight": "autentice",
+        "description": "Descoperă selecția noastră de produse aduse direct din Italia — paste, uleiuri, brânzeturi și vinuri de top.",
+        "btn1_text": "Cumpără acum",
+        "btn2_text": "Toate categoriile"
+      }
+    }
+  ]
+}
+{% endschema %}

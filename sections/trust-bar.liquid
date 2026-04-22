@@ -2,7 +2,7 @@
   <div class="container">
     <div class="frescia-trust-bar__grid">
       {%- for block in section.blocks -%}
-        <div class="frescia-trust-bar__item" {{ block.shopify_attributes }}>
+        <div class="frescia-trust-bar__item reveal reveal--delay-{{ forloop.index }}" {{ block.shopify_attributes }}>
           <div class="frescia-trust-bar__icon">
             {%- case block.settings.icon -%}
               {%- when 'italian' -%}
