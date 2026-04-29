@@ -1338,40 +1338,39 @@ h1, h2, h3, h4, h5 {
 /* Vizitator care revine — skip video, totul instant */
 .frescia-hero--instant {
   background:
-    radial-gradient(ellipse 55% 60% at 50% 55%, rgba(116,170,80,.13) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 70% at 4% 82%,  rgba(116,170,80,.18) 0%, transparent 48%),
-    radial-gradient(ellipse 28% 50% at 96% 6%,  rgba(218,41,28,.09) 0%, transparent 50%),
-    linear-gradient(145deg, #1e3d20 0%, #0c1a0a 45%, #10151d 100%);
+    radial-gradient(ellipse 45% 50% at 8% 88%,   rgba(116,170,80,.24) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 50% at 50% 108%,  rgba(116,170,80,.16) 0%, transparent 58%),
+    radial-gradient(ellipse 32% 42% at 95% 6%,    rgba(218,41,28,.11)  0%, transparent 48%),
+    radial-gradient(ellipse 18% 25% at 50% 48%,   rgba(116,170,80,.06) 0%, transparent 100%),
+    linear-gradient(158deg, #1b3d1e 0%, #0b1a0c 28%, #0d1319 58%, #111722 100%);
 }
-/* Arcuri concentrice deasupra overlay-ului */
+/* Ramuri de măslin SVG + elemente decorative italiene */
 .frescia-hero--instant::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background:
-    radial-gradient(circle 650px at 105% -20%, transparent 644px, rgba(116,170,80,.28) 644px, rgba(116,170,80,.28) 650px, transparent 650px),
-    radial-gradient(circle 490px at 105% -20%, transparent 484px, rgba(116,170,80,.20) 484px, rgba(116,170,80,.20) 489px, transparent 489px),
-    radial-gradient(circle 330px at 105% -20%, transparent 324px, rgba(116,170,80,.14) 324px, rgba(116,170,80,.14) 328px, transparent 328px),
-    radial-gradient(circle 420px at -6% 108%,  transparent 414px, rgba(116,170,80,.20) 414px, rgba(116,170,80,.20) 419px, transparent 419px),
-    radial-gradient(circle 280px at -6% 108%,  transparent 274px, rgba(116,170,80,.13) 274px, rgba(116,170,80,.13) 278px, transparent 278px);
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 800' preserveAspectRatio='xMidYMid slice'><path d='M-20 830 C80 680 130 530 165 375 C200 220 215 95 245 -30' stroke='%2374AA50' stroke-width='2.5' fill='none' stroke-linecap='round' opacity='0.5'/><ellipse cx='100' cy='615' rx='35' ry='16' transform='rotate(-38 100 615)' fill='%2374AA50' opacity='0.48'/><ellipse cx='135' cy='582' rx='33' ry='15' transform='rotate(22 135 582)' fill='%2374AA50' opacity='0.38'/><ellipse cx='88' cy='546' rx='30' ry='14' transform='rotate(-52 88 546)' fill='%2374AA50' opacity='0.42'/><ellipse cx='122' cy='512' rx='30' ry='14' transform='rotate(32 122 512)' fill='%2374AA50' opacity='0.36'/><ellipse cx='95' cy='478' rx='28' ry='13' transform='rotate(-28 95 478)' fill='%2374AA50' opacity='0.38'/><ellipse cx='130' cy='446' rx='28' ry='13' transform='rotate(42 130 446)' fill='%2374AA50' opacity='0.32'/><ellipse cx='108' cy='412' rx='26' ry='12' transform='rotate(-35 108 412)' fill='%2374AA50' opacity='0.3'/><ellipse cx='142' cy='380' rx='26' ry='12' transform='rotate(28 142 380)' fill='%2374AA50' opacity='0.26'/><ellipse cx='118' cy='346' rx='24' ry='11' transform='rotate(-45 118 346)' fill='%2374AA50' opacity='0.24'/><ellipse cx='152' cy='314' rx='22' ry='10' transform='rotate(20 152 314)' fill='%2374AA50' opacity='0.2'/><circle cx='95' cy='568' r='5.5' fill='%2374AA50' opacity='0.62'/><circle cx='126' cy='498' r='5' fill='%2374AA50' opacity='0.58'/><circle cx='104' cy='430' r='4.5' fill='%2374AA50' opacity='0.52'/><circle cx='132' cy='364' r='4' fill='%2374AA50' opacity='0.46'/><path d='M32 830 C70 705 80 600 90 480 C100 355 96 255 102 138' stroke='%2374AA50' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='0.28'/><ellipse cx='60' cy='640' rx='22' ry='10' transform='rotate(-45 60 640)' fill='%2374AA50' opacity='0.38'/><ellipse cx='75' cy='558' rx='20' ry='9' transform='rotate(-30 75 558)' fill='%2374AA50' opacity='0.3'/><ellipse cx='68' cy='480' rx='18' ry='8' transform='rotate(-50 68 480)' fill='%2374AA50' opacity='0.25'/><path d='M1460 -20 C1370 130 1322 278 1285 425 C1248 572 1240 685 1228 800' stroke='%2374AA50' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.38'/><ellipse cx='1382' cy='130' rx='28' ry='13' transform='rotate(40 1382 130)' fill='%2374AA50' opacity='0.4'/><ellipse cx='1350' cy='163' rx='26' ry='12' transform='rotate(-22 1350 163)' fill='%2374AA50' opacity='0.34'/><ellipse cx='1374' cy='202' rx='24' ry='11' transform='rotate(52 1374 202)' fill='%2374AA50' opacity='0.3'/><ellipse cx='1340' cy='235' rx='24' ry='11' transform='rotate(-30 1340 235)' fill='%2374AA50' opacity='0.26'/><ellipse cx='1362' cy='275' rx='22' ry='10' transform='rotate(38 1362 275)' fill='%2374AA50' opacity='0.22'/><ellipse cx='1328' cy='308' rx='22' ry='10' transform='rotate(-20 1328 308)' fill='%2374AA50' opacity='0.2'/><circle cx='1366' cy='146' r='4.5' fill='%2374AA50' opacity='0.55'/><circle cx='1357' cy='218' r='4' fill='%2374AA50' opacity='0.48'/><circle cx='1344' cy='290' r='3.5' fill='%2374AA50' opacity='0.42'/><g transform='translate(1180,400)' opacity='0.18'><circle cx='0' cy='0' r='200' stroke='%2374AA50' stroke-width='1.5' fill='none' stroke-dasharray='10 5'/><circle cx='0' cy='0' r='172' stroke='%2374AA50' stroke-width='0.75' fill='none'/><circle cx='0' cy='0' r='144' stroke='%2374AA50' stroke-width='1' fill='none' stroke-dasharray='5 5'/><circle cx='0' cy='0' r='116' stroke='%2374AA50' stroke-width='0.5' fill='none'/></g><g transform='translate(1330,740)' opacity='0.12'><circle cx='0' cy='0' r='120' stroke='%2374AA50' stroke-width='1' fill='none' stroke-dasharray='6 4'/><circle cx='0' cy='0' r='90' stroke='%2374AA50' stroke-width='0.75' fill='none'/></g><line x1='240' y1='74' x2='700' y2='74' stroke='%23ffffff' stroke-width='0.6' opacity='0.06'/><line x1='740' y1='726' x2='1200' y2='726' stroke='%23ffffff' stroke-width='0.6' opacity='0.06'/><circle cx='420' cy='185' r='4' fill='%2374AA50' opacity='0.2'/><circle cx='650' cy='625' r='3.5' fill='%2374AA50' opacity='0.18'/><circle cx='820' cy='145' r='3' fill='%2374AA50' opacity='0.15'/><circle cx='960' cy='678' r='4.5' fill='%2374AA50' opacity='0.16'/><circle cx='380' cy='462' r='3' fill='%23DA291C' opacity='0.12'/><circle cx='1100' cy='555' r='3' fill='%23DA291C' opacity='0.1'/><path d='M48 32 L28 32 L28 52' stroke='%2374AA50' stroke-width='1.5' fill='none' opacity='0.38'/><path d='M1392 768 L1412 768 L1412 748' stroke='%2374AA50' stroke-width='1.5' fill='none' opacity='0.32'/><rect x='0' y='0' width='4' height='266' fill='%23009246' opacity='0.58'/><rect x='0' y='266' width='4' height='266' fill='%23f5f2ea' opacity='0.38'/><rect x='0' y='532' width='4' height='268' fill='%23ce2b37' opacity='0.58'/></svg>");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 /* Tricolor vertical pe marginea dreaptă */
 .frescia-hero--instant::after {
   content: '';
   position: absolute;
   top: 0; right: 0; bottom: 0;
-  width: 4px;
+  width: 5px;
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(to bottom,
     #009246 0%,          #009246 33.33%,
     rgba(245,242,234,.9) 33.33%, rgba(245,242,234,.9) 66.66%,
     #ce2b37 66.66%);
-  opacity: .55;
+  opacity: .6;
 }
-/* Overlay mai verde în loc de carbon gri */
+/* Overlay mai întunecat */
 .frescia-hero--instant .frescia-hero__overlay {
   background: rgba(8, 22, 8, 0.42) !important;
 }
@@ -1380,6 +1379,64 @@ h1, h2, h3, h4, h5 {
 .frescia-hero--instant .frescia-hero__content,
 .frescia-hero--instant .frescia-hero__overlay,
 .frescia-hero--instant .fh-mob-vis { transition: none !important; animation: none !important; }
+/* Desktop: afișează decorațiunile fh-mob-vis și scalează-le */
+.frescia-hero--instant .fh-mob-vis {
+  display: block !important;
+  opacity: 1 !important;
+}
+@media (min-width: 769px) {
+  .frescia-hero--instant .fh-branch {
+    position: absolute;
+    transform-origin: bottom center;
+  }
+  .frescia-hero--instant .fh-branch--l {
+    bottom: -20px; left: -10px;
+    width: 155px; height: 330px;
+    transform-origin: bottom left;
+  }
+  .frescia-hero--instant .fh-branch--r {
+    top: 70px; right: -5px;
+    width: 115px; height: 248px;
+    transform-origin: top right;
+    transform: scaleX(-1);
+  }
+  .frescia-hero--instant .fh-orb {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(116,170,80,.15);
+  }
+  .frescia-hero--instant .fh-orb--1 {
+    width: 400px; height: 400px;
+    top: 50%; right: -210px;
+    transform: translateY(-50%);
+  }
+  .frescia-hero--instant .fh-orb--2 {
+    width: 268px; height: 268px;
+    top: 50%; right: -164px;
+    transform: translateY(-50%);
+    border-color: rgba(116,170,80,.09);
+  }
+  .frescia-hero--instant .fh-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(116,170,80,.55);
+  }
+  .frescia-hero--instant .fh-dot--a { width: 9px;  height: 9px;  top: 32%; right: 20%; }
+  .frescia-hero--instant .fh-dot--b { width: 7px;  height: 7px;  top: 58%; right: 36%; opacity: .7; }
+  .frescia-hero--instant .fh-dot--c { width: 8px;  height: 8px;  top: 44%; right: 10%; }
+  .frescia-hero--instant .fh-dot--d { width: 5px;  height: 5px;  top: 22%; right: 26%; opacity: .5; }
+  .frescia-hero--instant .fh-it-corner {
+    position: absolute;
+    top: 108px; left: 28px;
+  }
+  .frescia-hero--instant .fh-it-seal {
+    width: 116px; height: 116px;
+  }
+  .frescia-hero--instant .fh-it-seal__title  { font-size: 12px; letter-spacing: 3px; }
+  .frescia-hero--instant .fh-it-seal__sub    { font-size: 9px;  letter-spacing: 4px; }
+  .frescia-hero--instant .fh-it-seal__stars  { font-size: 8px;  letter-spacing: 4px; }
+  .frescia-hero--instant .fh-it-seal__divider { width: 48px; }
+}
 
 /* Starea ended: blur pe video + text apare */
 .frescia-hero--ended .frescia-hero__video {
