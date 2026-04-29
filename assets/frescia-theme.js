@@ -296,6 +296,81 @@
     }
   };
 
+  /* ── 12. ABOUT PAGE — data-animate observer ─────────────── */
+  const AboutAnimations = {
+    init() {
+      const els = document.querySelectorAll('[data-animate]');
+      if (!els.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(el => {
+          el.style.opacity = '1';
+          el.classList.add('is-visible');
+        });
+        return;
+      }
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el    = entry.target;
+          const delay = parseInt(el.dataset.delay || '0', 10);
+          setTimeout(() => {
+            el.style.animationDelay = '0ms';
+            el.classList.add('is-visible');
+          }, delay);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+
+      els.forEach(el => obs.observe(el));
+    }
+  };
+
+  /* ── 13. COUNTER ANIMATION ───────────────────────────────── */
+  const CounterAnimation = {
+    easeOut(t) { return 1 - Math.pow(1 - t, 3); },
+
+    animateCount(el) {
+      const target   = parseInt(el.dataset.count, 10);
+      const duration = target > 999 ? 2000 : 1200;
+      const start    = performance.now();
+
+      const tick = (now) => {
+        const elapsed  = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const value    = Math.round(this.easeOut(progress) * target);
+
+        el.textContent = value >= 1000
+          ? value.toLocaleString('ro-RO')
+          : value;
+
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    },
+
+    init() {
+      const counters = document.querySelectorAll('[data-count]');
+      if (!counters.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        counters.forEach(el => { el.textContent = parseInt(el.dataset.count, 10).toLocaleString('ro-RO'); });
+        return;
+      }
+
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          this.animateCount(entry.target);
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.5 });
+
+      counters.forEach(el => obs.observe(el));
+    }
+  };
+
   /* ── INIT ────────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
     StickyNav.init();
@@ -308,6 +383,8 @@
     SmoothScroll.init();
     LazyImages.init();
     ScrollReveal.init();
+    AboutAnimations.init();
+    CounterAnimation.init();
   });
 
 })();
