@@ -97,8 +97,8 @@
       </button>
 
       {%- comment -%} Logo {%- endcomment -%}
-      <a href="/" class="frescia-logo" aria-label="{{ shop.name }}">
-        {{- settings.logo_text | default: 'frescia' -}}<span class="frescia-logo__dot">.</span><span class="frescia-logo__domain">{{- settings.logo_domain | default: 'store' -}}</span>
+      <a href="/" class="frescia-logo frescia-logo--img" aria-label="{{ shop.name }}">
+        <img src="{{ 'frescia-logo.png' | asset_url }}" alt="{{ shop.name }}" width="160" height="48" loading="eager">
       </a>
 
       {%- comment -%} Desktop nav links {%- endcomment -%}
@@ -173,8 +173,8 @@
     <div class="frescia-mobile-menu__overlay" aria-hidden="true"></div>
     <div class="frescia-mobile-menu__panel">
       <div class="frescia-mobile-menu__header">
-        <span class="frescia-logo" style="font-size:1.3rem;">
-          {{- settings.logo_text | default: 'frescia' -}}<span class="frescia-logo__dot">.</span><span class="frescia-logo__domain">{{- settings.logo_domain | default: 'store' -}}</span>
+        <span class="frescia-logo frescia-logo--img" style="display:flex;align-items:center;">
+          <img src="{{ 'frescia-logo.png' | asset_url }}" alt="{{ shop.name }}" width="130" height="39" loading="lazy">
         </span>
         <button class="frescia-mobile-menu__close frescia-nav__icon-btn" aria-label="{{ 'general.accessibility.close_menu' | t }}" type="button">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

@@ -198,12 +198,16 @@ h1, h2, h3, h4, h5 {
 
 /* Logo */
 .frescia-logo {
-  font-family: var(--font-heading);
-  font-size: 1.55rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  letter-spacing: -.5px;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
+  text-decoration: none;
+}
+.frescia-logo--img img {
+  display: block;
+  height: 48px;
+  width: auto;
+  object-fit: contain;
 }
 .frescia-logo__dot { color: var(--color-accent); }
 .frescia-logo__domain { color: var(--color-accent); }
