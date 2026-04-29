@@ -82,6 +82,9 @@
       const btn   = document.getElementById('hero-play-btn');
       if (!hero) return;
 
+      /* Vizitator care revine — skip video, conținut instant */
+      if (hero.classList.contains('frescia-hero--instant')) return;
+
       /* Fără video → text imediat vizibil */
       if (!video) {
         hero.classList.add('frescia-hero--no-video');
@@ -99,13 +102,15 @@
 
       /* Video s-a terminat → activează efectul blur + reveal text */
       video.addEventListener('ended', () => {
+        sessionStorage.setItem('frescia-hero-seen', '1');
         hero.classList.add('frescia-hero--ended');
         updateIcon();
       });
 
-      /* Fallback: dacă video nu pornește în 3s → afișează textul oricum */
+      /* Fallback: dacă video nu pornește în 15s → afișează textul oricum */
       const fallbackTimer = setTimeout(() => {
         if (!hero.classList.contains('frescia-hero--ended')) {
+          sessionStorage.setItem('frescia-hero-seen', '1');
           hero.classList.add('frescia-hero--ended');
         }
       }, 15000);

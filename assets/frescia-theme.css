@@ -1335,6 +1335,13 @@ h1, h2, h3, h4, h5 {
   pointer-events: auto;
 }
 
+/* Vizitator care revine — skip video, totul instant */
+.frescia-hero--instant .frescia-hero__video,
+.frescia-hero--instant .fh-mob-video { display: none !important; }
+.frescia-hero--instant .frescia-hero__content,
+.frescia-hero--instant .frescia-hero__overlay,
+.frescia-hero--instant .fh-mob-vis { transition: none !important; animation: none !important; }
+
 /* Starea ended: blur pe video + text apare */
 .frescia-hero--ended .frescia-hero__video {
   filter: blur(10px) brightness(0.6) saturate(0.8);

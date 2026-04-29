@@ -3,6 +3,11 @@
   aria-label="{{ section.settings.heading | escape }}"
   id="frescia-hero"
 >
+  <script>
+  if (sessionStorage.getItem('frescia-hero-seen')) {
+    document.getElementById('frescia-hero').classList.add('frescia-hero--ended','frescia-hero--instant');
+  }
+  </script>
 
   {%- comment -%} Video background {%- endcomment -%}
   {%- if section.settings.video_url != blank -%}
@@ -154,16 +159,20 @@
 
   <script>
   (function() {
+    var hero = document.getElementById('frescia-hero');
+    if (!hero || hero.classList.contains('frescia-hero--instant')) return;
     var v = document.getElementById('fh-mob-video');
     if (!v) return;
     var rate = 1.45;
     v.playbackRate = rate;
     v.addEventListener('loadedmetadata', function() { v.playbackRate = rate; });
-    var hero = document.getElementById('frescia-hero');
-    if (!hero) return;
-    var fallback = setTimeout(function() { hero.classList.add('frescia-hero--ended'); }, 15000);
+    var fallback = setTimeout(function() {
+      sessionStorage.setItem('frescia-hero-seen', '1');
+      hero.classList.add('frescia-hero--ended');
+    }, 15000);
     v.addEventListener('ended', function() {
       clearTimeout(fallback);
+      sessionStorage.setItem('frescia-hero-seen', '1');
       hero.classList.add('frescia-hero--ended');
     });
   })();
