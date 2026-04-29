@@ -26,7 +26,20 @@
     <div class="frescia-hero__video" style="background:var(--color-primary);"></div>
   {%- endif -%}
 
-  {%- comment -%} Mobile: animație brand (ascunsă pe desktop) {%- endcomment -%}
+  {%- comment -%} Mobile: video dedicat (ascuns pe desktop) {%- endcomment -%}
+  <video
+    class="fh-mob-video"
+    id="fh-mob-video"
+    src="{{ 'frescia-mobile.mp4' | asset_url }}"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="none"
+    aria-hidden="true"
+  ></video>
+
+  {%- comment -%} Mobile: animație brand fallback (ascunsă pe desktop și când avem video) {%- endcomment -%}
   <div class="fh-mob-vis" aria-hidden="true">
     <!-- Ramură de măslin stânga jos -->
     <svg class="fh-branch fh-branch--l" viewBox="0 0 90 200" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -130,6 +143,15 @@
       </svg>
     </button>
   {%- endif -%}
+
+  <script>
+  (function() {
+    var v = document.getElementById('fh-mob-video');
+    if (!v) return;
+    v.playbackRate = 2;
+    v.addEventListener('loadedmetadata', function() { v.playbackRate = 2; });
+  })();
+  </script>
 
 </section>
 

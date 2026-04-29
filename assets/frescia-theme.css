@@ -2827,6 +2827,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
 .fr-mob-toolbar { display: none; }
 .fr-about-hero__mob-art { display: none; }
 .fh-mob-vis { display: none; }
+.fh-mob-video { display: none; }
 
 @media (max-width: 768px) {
 
@@ -2920,14 +2921,17 @@ input[type="radio"].product-option-input:checked + .option-btn {
   }
 
   /* ── Homepage hero mobile visual ────────────────────────── */
-  .fh-mob-vis {
+  .fh-mob-video {
     display: block;
     position: absolute;
     inset: 0;
-    overflow: hidden;
-    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: 0;
   }
+  /* Animația cu ramuri rămâne ascunsă — avem video real pe mobile */
+  .fh-mob-vis { display: none; }
 
   /* Ramuri de măslin */
   .fh-branch {
