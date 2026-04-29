@@ -1,16 +1,30 @@
-<!-- DEBUG: path="{{ request.path }}" page_type="{{ request.page_type }}" -->
-{%- if request.path == '/pages/despre-noi' -%}
+<!-- Pagina Despre Noi (ascunsa pana la verificarea JS) -->
+<div id="fr-about-page" style="display:none">
   {%- section 'about-page' -%}
-{%- else -%}
-<div class="container" style="text-align:center;padding:100px 24px;">
-  <div style="font-size:7rem;font-family:var(--font-heading);color:var(--color-primary-light);line-height:1;margin-bottom:8px;">404</div>
-  <h1 style="font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);margin-bottom:14px;">Pagina nu a fost găsită</h1>
-  <p style="color:var(--color-text-light);margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto;">
-    Ne pare rău, pagina pe care o cauți nu există sau a fost mutată.
-  </p>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-    <a href="/" class="btn btn-green">Acasă</a>
-    <a href="/collections/all" class="btn btn-outline" style="color:var(--color-primary);border-color:var(--color-primary);">Toate produsele</a>
+</div>
+
+<!-- 404 standard (ascuns daca URL-ul e /pages/despre-noi) -->
+<div id="fr-404-page">
+  <div class="container" style="text-align:center;padding:100px 24px;">
+    <div style="font-size:7rem;font-family:var(--font-heading);color:var(--color-primary-light);line-height:1;margin-bottom:8px;">404</div>
+    <h1 style="font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);margin-bottom:14px;">Pagina nu a fost găsită</h1>
+    <p style="color:var(--color-text-light);margin-bottom:32px;max-width:440px;margin-left:auto;margin-right:auto;">
+      Ne pare rău, pagina pe care o cauți nu există sau a fost mutată.
+    </p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="/" class="btn btn-green">Acasă</a>
+      <a href="/collections/all" class="btn btn-outline" style="color:var(--color-primary);border-color:var(--color-primary);">Toate produsele</a>
+    </div>
   </div>
 </div>
-{%- endif -%}
+
+<script>
+(function() {
+  var path = window.location.pathname.replace(/\/$/, '');
+  if (path === '/pages/despre-noi') {
+    document.getElementById('fr-about-page').style.display = 'block';
+    document.getElementById('fr-404-page').style.display = 'none';
+    document.title = 'Despre noi — {{ shop.name }}';
+  }
+})();
+</script>
