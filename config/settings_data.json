@@ -9,17 +9,17 @@
  */
 {
   "current": {
-    "color_primary": "#1a4a2e",
-    "color_accent": "#c9a84c",
+    "color_primary": "#74AA50",
+    "color_accent": "#DA291C",
     "color_background": "#ffffff",
-    "color_text": "#1a1a1a",
+    "color_text": "#3F3F44",
     "color_text_light": "#6b7280",
     "topbar_enabled": true,
     "topbar_text": "Livrare gratuită pentru comenzi peste",
     "topbar_amount": "350 RON",
-    "topbar_bg": "#1a4a2e",
+    "topbar_bg": "#3F3F44",
     "topbar_text_color": "#ffffff",
-    "topbar_amount_color": "#c9a84c",
+    "topbar_amount_color": "#74AA50",
     "logo_text": "frescia",
     "logo_domain": "store",
     "url_facebook": "",
@@ -31,7 +31,7 @@
         "type": "hero-video",
         "settings": {
           "video_url": "https://cdn.shopify.com/videos/c/o/v/1cc1a9de73e2467fbe11db68b421727b.mp4",
-          "overlay_color": "#1a4a2e",
+          "overlay_color": "#3F3F44",
           "overlay_opacity": 40,
           "badge_text": "Autentic Italian",
           "heading": "Savoarea Italiei la ușa ta",
