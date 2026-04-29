@@ -1,0 +1,366 @@
+<!-- ═══════════════════════════════════════════════════════
+     FRESCIA — DESPRE NOI
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- ── 1. HERO ─────────────────────────────────────────────── -->
+<section class="fr-about-hero">
+  <div class="fr-about-hero__bg"></div>
+  <div class="fr-about-hero__overlay"></div>
+  <div class="container fr-about-hero__container">
+    <div class="fr-about-hero__content">
+      <p class="fr-eyebrow fr-eyebrow--light" data-animate="fade-up">Cine suntem</p>
+      <h1 class="fr-about-hero__title" data-animate="fade-up" data-delay="120">
+        Din pasiune pentru<br>
+        <em class="fr-about-hero__italic">gusto dell'Italia</em>
+      </h1>
+      <p class="fr-about-hero__sub" data-animate="fade-up" data-delay="240">
+        Frescia Store aduce autenticul gust italian în casa ta — produse selecționate
+        cu dragoste direct de la artizani din inima Italiei.
+      </p>
+      <a href="#fr-povestea" class="btn btn--primary fr-about-hero__cta" data-animate="fade-up" data-delay="360">
+        Descoperă povestea
+      </a>
+    </div>
+  </div>
+  <div class="fr-about-hero__scroll" aria-hidden="true">
+    <span class="fr-about-hero__scroll-line"></span>
+    <span class="fr-about-hero__scroll-dot"></span>
+  </div>
+</section>
+
+<!-- ── 2. POVESTEA ─────────────────────────────────────────── -->
+<section class="fr-about-story" id="fr-povestea">
+  <div class="container">
+    <div class="fr-about-story__grid">
+
+      <div class="fr-about-story__media" data-animate="fade-right">
+        <div class="fr-about-story__img-frame">
+          <div class="fr-about-story__img-inner">
+            {%- if section.settings.story_image -%}
+              <img src="{{ section.settings.story_image | img_url: '800x1000', crop: 'center' }}"
+                   alt="Povestea Frescia" loading="lazy" width="800" height="1000">
+            {%- else -%}
+              <div class="fr-about-story__placeholder">
+                <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <rect width="200" height="240" fill="#eef7e8"/>
+                  <path d="M100 60 C60 80 40 120 60 150 C80 180 120 180 140 150 C160 120 140 80 100 60Z" fill="#74AA50" opacity=".25"/>
+                  <path d="M100 80 C75 95 65 125 80 145 C95 165 115 160 130 140 C145 120 135 90 100 80Z" fill="#74AA50" opacity=".4"/>
+                  <circle cx="100" cy="115" r="18" fill="#74AA50" opacity=".6"/>
+                  <path d="M100 75 L100 65" stroke="#74AA50" stroke-width="3" stroke-linecap="round"/>
+                  <path d="M100 65 C100 55 110 48 118 52" stroke="#74AA50" stroke-width="2" stroke-linecap="round" fill="none"/>
+                  <circle cx="118" cy="50" r="4" fill="#74AA50" opacity=".8"/>
+                </svg>
+              </div>
+            {%- endif -%}
+          </div>
+          <div class="fr-about-story__badge" data-animate="scale" data-delay="300">
+            <span class="fr-about-story__badge-num">4<sup>+</sup></span>
+            <span class="fr-about-story__badge-txt">ani de pasiune</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fr-about-story__content" data-animate="fade-left">
+        <p class="fr-eyebrow">Povestea noastră</p>
+        <h2 class="fr-section-title">Născuți din dragostea<br>pentru Italia</h2>
+        <p class="fr-about-story__p">
+          Frescia Store s-a născut în 2020 din pasiunea unui grup de entuziaști ai gastronomiei
+          italiene care visau să aducă în România gustul autentic al Italiei — nu produse
+          generice de supermarket, ci adevărate bijuterii culinare de la micii artizani.
+        </p>
+        <p class="fr-about-story__p">
+          Fiecare produs din catalogul nostru are o poveste: pasta din grâu dur sicilian
+          mâcinată la piatră, uleiul de măsline extravirgin recoltat manual în Toscana,
+          parmigiano-reggiano maturat 24 de luni în cantinele din Emilia-Romagna.
+          Nu vindem simple alimente — aducem experiențe gastronomice complete.
+        </p>
+        <div class="fr-about-story__pills">
+          <span class="fr-about-story__pill">🌿 Ingrediente naturale</span>
+          <span class="fr-about-story__pill">🇮🇹 Made in Italy</span>
+          <span class="fr-about-story__pill">🤝 Artizanat local</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 3. STATS ─────────────────────────────────────────────── -->
+<section class="fr-about-stats">
+  <div class="container">
+    <div class="fr-about-stats__grid">
+      <div class="fr-about-stat" data-animate="fade-up" data-delay="0">
+        <div class="fr-about-stat__inner">
+          <span class="fr-about-stat__num" data-count="500">0</span><span class="fr-about-stat__suffix">+</span>
+        </div>
+        <p class="fr-about-stat__label">produse italiene</p>
+      </div>
+      <div class="fr-about-stat" data-animate="fade-up" data-delay="100">
+        <div class="fr-about-stat__inner">
+          <span class="fr-about-stat__num" data-count="50">0</span><span class="fr-about-stat__suffix">+</span>
+        </div>
+        <p class="fr-about-stat__label">producători parteneri</p>
+      </div>
+      <div class="fr-about-stat" data-animate="fade-up" data-delay="200">
+        <div class="fr-about-stat__inner">
+          <span class="fr-about-stat__num" data-count="10000">0</span><span class="fr-about-stat__suffix">+</span>
+        </div>
+        <p class="fr-about-stat__label">comenzi livrate</p>
+      </div>
+      <div class="fr-about-stat" data-animate="fade-up" data-delay="300">
+        <div class="fr-about-stat__inner">
+          <span class="fr-about-stat__num" data-count="20">0</span>
+        </div>
+        <p class="fr-about-stat__label">regiuni italiene reprezentate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 4. VALORI ────────────────────────────────────────────── -->
+<section class="fr-about-values">
+  <div class="container">
+    <p class="fr-eyebrow fr-eyebrow--center" data-animate="fade-up">Ce ne definește</p>
+    <h2 class="fr-section-title fr-section-title--center" data-animate="fade-up" data-delay="100">Valorile Frescia</h2>
+    <div class="fr-about-values__grid">
+
+      <div class="fr-about-value-card" data-animate="fade-up" data-delay="0">
+        <div class="fr-about-value-card__icon fr-about-value-card__icon--green">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M17 8C8 10 5.9 16.17 3.82 19.34A1 1 0 012 19c1-4 4-8 8-10"/>
+            <path d="M17 8l-1-5-5 3"/>
+          </svg>
+        </div>
+        <h3 class="fr-about-value-card__title">Autenticitate</h3>
+        <p class="fr-about-value-card__text">
+          Fiecare produs poartă certificatul de origine italian. Nicio compromisie cu autenticitatea — lucrăm direct cu producătorii.
+        </p>
+      </div>
+
+      <div class="fr-about-value-card" data-animate="fade-up" data-delay="100">
+        <div class="fr-about-value-card__icon fr-about-value-card__icon--red">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <h3 class="fr-about-value-card__title">Calitate premium</h3>
+        <p class="fr-about-value-card__text">
+          Selecționăm riguros fiecare produs — gustate, verificate, aprobate. Dacă nu e bun pentru masa noastră, nu ajunge la tine.
+        </p>
+      </div>
+
+      <div class="fr-about-value-card" data-animate="fade-up" data-delay="200">
+        <div class="fr-about-value-card__icon fr-about-value-card__icon--nud">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        <h3 class="fr-about-value-card__title">Origine trasabilă</h3>
+        <p class="fr-about-value-card__text">
+          Știi exact de unde vine fiecare produs: ferma, artizanul, regiunea. Transparență totală de la câmp la masă.
+        </p>
+      </div>
+
+      <div class="fr-about-value-card" data-animate="fade-up" data-delay="300">
+        <div class="fr-about-value-card__icon fr-about-value-card__icon--carbon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
+          </svg>
+        </div>
+        <h3 class="fr-about-value-card__title">Pasiune sinceră</h3>
+        <p class="fr-about-value-card__text">
+          Nu suntem un depozit de produse — suntem ambasadori ai culturii gastronomice italiene. Facem asta pentru că o iubim.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 5. TIMELINE ──────────────────────────────────────────── -->
+<section class="fr-about-timeline">
+  <div class="container">
+    <p class="fr-eyebrow fr-eyebrow--center" data-animate="fade-up">Drumul nostru</p>
+    <h2 class="fr-section-title fr-section-title--center" data-animate="fade-up" data-delay="100">Călătoria Frescia</h2>
+
+    <div class="fr-tl">
+      <div class="fr-tl__axis">
+        <div class="fr-tl__line" data-animate="line-grow"></div>
+      </div>
+
+      <div class="fr-tl__item fr-tl__item--left" data-animate="fade-right" data-delay="0">
+        <div class="fr-tl__dot"></div>
+        <div class="fr-tl__card">
+          <span class="fr-tl__year">2020</span>
+          <h3 class="fr-tl__heading">Fondarea Frescia Store</h3>
+          <p class="fr-tl__text">Din pasiunea pentru gastronomia italiană s-a născut ideea unui magazin cu produse autentice, selecționate direct de la sursă.</p>
+        </div>
+      </div>
+
+      <div class="fr-tl__item fr-tl__item--right" data-animate="fade-left" data-delay="100">
+        <div class="fr-tl__dot"></div>
+        <div class="fr-tl__card">
+          <span class="fr-tl__year">2021</span>
+          <h3 class="fr-tl__heading">Primii 1.000 de clienți</h3>
+          <p class="fr-tl__text">Comunitatea Frescia a crescut organic — clienți care au descoperit gustul adevărat și s-au întors mereu.</p>
+        </div>
+      </div>
+
+      <div class="fr-tl__item fr-tl__item--left" data-animate="fade-right" data-delay="200">
+        <div class="fr-tl__dot"></div>
+        <div class="fr-tl__card">
+          <span class="fr-tl__year">2022</span>
+          <h3 class="fr-tl__heading">Extinderea catalogului</h3>
+          <p class="fr-tl__text">Am adăugat peste 200 de produse noi: vinuri, conserve artizanale, brânzeturi maturate și dulciuri tradiționale.</p>
+        </div>
+      </div>
+
+      <div class="fr-tl__item fr-tl__item--right" data-animate="fade-left" data-delay="300">
+        <div class="fr-tl__dot"></div>
+        <div class="fr-tl__card">
+          <span class="fr-tl__year">2023</span>
+          <h3 class="fr-tl__heading">Lansarea celor 3 divizii</h3>
+          <p class="fr-tl__text">Frescia Store, Frescia Food &amp; Beverage și Frescia Cash &amp; Carry — fiecare segment de piață acoperit cu excelență.</p>
+        </div>
+      </div>
+
+      <div class="fr-tl__item fr-tl__item--left" data-animate="fade-right" data-delay="400">
+        <div class="fr-tl__dot fr-tl__dot--active"></div>
+        <div class="fr-tl__card fr-tl__card--active">
+          <span class="fr-tl__year">2024 —</span>
+          <h3 class="fr-tl__heading">500+ produse & 20+ regiuni</h3>
+          <p class="fr-tl__text">Acoperim astăzi toată Italia — de la Valle d'Aosta la Sicilia — cu cel mai complet catalog de produse italiene autentice din România.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 6. REGIUNI ITALIENE ──────────────────────────────────── -->
+<section class="fr-about-regions">
+  <div class="container">
+    <p class="fr-eyebrow fr-eyebrow--center" data-animate="fade-up">Surse de excelență</p>
+    <h2 class="fr-section-title fr-section-title--center" data-animate="fade-up" data-delay="100">Regiunile noastre preferate</h2>
+    <div class="fr-regions-grid">
+
+      <div class="fr-region-card" data-animate="scale" data-delay="0">
+        <div class="fr-region-card__flag">🌿</div>
+        <div class="fr-region-card__body">
+          <h3 class="fr-region-card__name">Toscana</h3>
+          <p class="fr-region-card__specialty">Ulei de măsline extravirgin, vinuri Chianti, Pecorino</p>
+        </div>
+      </div>
+
+      <div class="fr-region-card" data-animate="scale" data-delay="80">
+        <div class="fr-region-card__flag">🍝</div>
+        <div class="fr-region-card__body">
+          <h3 class="fr-region-card__name">Sicilia</h3>
+          <p class="fr-region-card__specialty">Paste din grâu dur, roșii uscate, capers, ulei de portocale</p>
+        </div>
+      </div>
+
+      <div class="fr-region-card" data-animate="scale" data-delay="160">
+        <div class="fr-region-card__flag">🧀</div>
+        <div class="fr-region-card__body">
+          <h3 class="fr-region-card__name">Emilia-Romagna</h3>
+          <p class="fr-region-card__specialty">Parmigiano Reggiano, Prosciutto di Parma, Aceto Balsamico</p>
+        </div>
+      </div>
+
+      <div class="fr-region-card" data-animate="scale" data-delay="240">
+        <div class="fr-region-card__flag">🍕</div>
+        <div class="fr-region-card__body">
+          <h3 class="fr-region-card__name">Campania</h3>
+          <p class="fr-region-card__specialty">Mozzarella di bufala, roșii San Marzano, limoncello</p>
+        </div>
+      </div>
+
+      <div class="fr-region-card" data-animate="scale" data-delay="320">
+        <div class="fr-region-card__flag">🫒</div>
+        <div class="fr-region-card__body">
+          <h3 class="fr-region-card__name">Puglia</h3>
+          <p class="fr-region-card__specialty">Orecchiette, olio EVO, taralli, burrata proaspătă</p>
+        </div>
+      </div>
+
+      <div class="fr-region-card" data-animate="scale" data-delay="400">
+        <div class="fr-region-card__flag">🍷</div>
+        <div class="fr-region-card__body">
+          <h3 class="fr-region-card__name">Piemont</h3>
+          <p class="fr-region-card__specialty">Barolo, trufe, Grana Padano, hazelnuts Langhe</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 7. MISIUNEA ──────────────────────────────────────────── -->
+<section class="fr-about-mission">
+  <div class="container">
+    <div class="fr-about-mission__grid">
+      <div class="fr-about-mission__content" data-animate="fade-right">
+        <p class="fr-eyebrow">Misiunea noastră</p>
+        <h2 class="fr-section-title">Să facem fiecare masă<br>o experiență italiană</h2>
+        <p class="fr-about-mission__p">
+          Credem că mâncarea bună nu e un lux — e o formă de respect față de tine,
+          față de producătorul care a muncit cu pasiune și față de cultura care a creat-o.
+          De aceea culegem doar ce e mai bun și livrăm cu grijă.
+        </p>
+        <p class="fr-about-mission__p">
+          Visul nostru e ca fiecare familie din România să aibă acces la produsele cu care
+          italienii se mândresc de sute de ani. <strong>La tine acasă. La un click distanță.</strong>
+        </p>
+        <a href="/collections/all" class="btn btn--outline-dark">
+          Explorează produsele
+        </a>
+      </div>
+      <div class="fr-about-mission__visual" data-animate="fade-left">
+        <div class="fr-about-mission__quote">
+          <svg class="fr-about-mission__quote-mark" viewBox="0 0 60 40" fill="none" aria-hidden="true">
+            <path d="M0 40V22.5C0 10.1 7.5 2.8 22.5 0l3 6C16 7.8 12 12.5 12 20h10V40H0zm32 0V22.5C32 10.1 39.5 2.8 54.5 0l3 6C48 7.8 44 12.5 44 20h10V40H32z" fill="currentColor" opacity=".15"/>
+          </svg>
+          <blockquote class="fr-about-mission__quote-text">
+            La mia cucina è la mia patria.<br>
+            <em>Bucătăria mea este patria mea.</em>
+          </blockquote>
+          <cite class="fr-about-mission__quote-source">— Filosofia Frescia</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 8. CTA BANNER ────────────────────────────────────────── -->
+<section class="fr-about-cta">
+  <div class="fr-about-cta__bg"></div>
+  <div class="container fr-about-cta__container">
+    <p class="fr-eyebrow fr-eyebrow--light" data-animate="fade-up">Gata să guști Italia?</p>
+    <h2 class="fr-about-cta__title" data-animate="fade-up" data-delay="100">
+      Comandă acum și primești<br>livrare gratuită peste 350 RON
+    </h2>
+    <div class="fr-about-cta__actions" data-animate="fade-up" data-delay="220">
+      <a href="/collections/all" class="btn btn--white">Descoperă produsele</a>
+      <a href="/contact" class="btn btn--outline-white">Contactează-ne</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Despre noi",
+  "class": "fr-about-page",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Imagine secțiunea Poveste"
+    }
+  ],
+  "presets": [
+    { "name": "Despre noi" }
+  ]
+}
+{% endschema %}
