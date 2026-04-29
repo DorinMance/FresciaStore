@@ -3002,26 +3002,77 @@ input[type="radio"].product-option-input:checked + .option-btn {
     50%       { transform: translateY(-12px); opacity: .9; }
   }
 
-  /* Colț stâng sus — badge Italian */
+  /* Colț stâng sus — sigiliu Italian */
   .fh-it-corner {
     position: absolute;
-    top: 80px; left: 20px;
-    display: flex; flex-direction: column; gap: 5px;
+    top: 68px; left: 16px;
     animation: fh-content-reveal 1s ease .5s both;
   }
-  .fh-it-flag {
-    display: flex; overflow: hidden; border-radius: 2px;
-    width: 26px; height: 17px;
+  .fh-it-seal {
+    width: 88px; height: 88px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1.5px rgba(116,170,80,.65),
+      0 0 0 4px rgba(116,170,80,.08),
+      0 6px 28px rgba(0,0,0,.45);
   }
-  .fh-it-flag span { flex: 1; display: block; }
-  .fh-it-flag span:nth-child(1) { background: #009246; }
-  .fh-it-flag span:nth-child(2) { background: #f5f2ea; }
-  .fh-it-flag span:nth-child(3) { background: #ce2b37; }
-  .fh-it-label {
-    font-size: .6rem; font-weight: 700;
-    letter-spacing: 1.5px; text-transform: uppercase;
-    color: rgba(255,255,255,.38);
-    writing-mode: horizontal-tb;
+  .fh-it-seal__tricolor {
+    position: absolute; inset: 0;
+    display: flex;
+  }
+  .fh-it-seal__tricolor span { flex: 1; display: block; }
+  .fh-it-seal__tricolor span:nth-child(1) { background: #009246; }
+  .fh-it-seal__tricolor span:nth-child(2) { background: #f0ede4; }
+  .fh-it-seal__tricolor span:nth-child(3) { background: #ce2b37; }
+  .fh-it-seal__overlay {
+    position: absolute; inset: 0;
+    background: rgba(8,20,8,.64);
+  }
+  .fh-it-seal__overlay::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,.07), transparent);
+  }
+  .fh-it-seal__body {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 3px;
+    z-index: 2;
+  }
+  .fh-it-seal__stars {
+    font-size: 6px;
+    color: rgba(116,170,80,.95);
+    letter-spacing: 3px; line-height: 1;
+  }
+  .fh-it-seal__title {
+    font-size: 10px; font-weight: 900;
+    letter-spacing: 2.5px; line-height: 1;
+    color: #fff;
+    font-family: var(--font-body, sans-serif);
+    text-shadow: 0 1px 6px rgba(0,0,0,.6);
+  }
+  .fh-it-seal__divider {
+    display: block;
+    width: 34px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(116,170,80,.75), transparent);
+  }
+  .fh-it-seal__sub {
+    font-size: 7px; font-weight: 300;
+    letter-spacing: 3.5px; line-height: 1;
+    color: rgba(255,255,255,.72);
+    font-family: var(--font-body, sans-serif);
+    font-style: italic;
+  }
+  .fh-it-seal__ring {
+    position: absolute; inset: 6px;
+    border-radius: 50%;
+    border: 1px dashed rgba(116,170,80,.45);
+    z-index: 3;
+    pointer-events: none;
   }
 
   /* Bandă steag dreapta */
