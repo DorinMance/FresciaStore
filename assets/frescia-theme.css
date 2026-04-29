@@ -1335,6 +1335,37 @@ h1, h2, h3, h4, h5 {
   pointer-events: auto;
 }
 
+/* Keyframes instant hero — global (funcționează pe orice breakpoint) */
+@keyframes fh-sway-l {
+  0%, 100% { transform: rotate(-4deg); }
+  50%       { transform: rotate(4deg); }
+}
+@keyframes fh-sway-r {
+  0%, 100% { transform: scaleX(-1) rotate(-4deg); }
+  50%       { transform: scaleX(-1) rotate(4deg); }
+}
+@keyframes fh-float {
+  0%, 100% { transform: translateY(0);     opacity: .55; }
+  50%       { transform: translateY(-12px); opacity: .95; }
+}
+@keyframes fh-seal-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 1.5px rgba(116,170,80,.65),
+                0 0 0  4px rgba(116,170,80,.08),
+                0 6px 28px rgba(0,0,0,.45);
+  }
+  50% {
+    box-shadow: 0 0 0   2px rgba(116,170,80,.9),
+                0 0 0  10px rgba(116,170,80,.18),
+                0 6px 28px rgba(0,0,0,.45),
+                0 0   24px rgba(116,170,80,.38);
+  }
+}
+@keyframes fh-bg-breathe {
+  0%, 100% { opacity: .84; }
+  50%       { opacity: 1; }
+}
+
 /* Vizitator care revine — skip video, totul instant */
 .frescia-hero--instant {
   background:
@@ -1355,6 +1386,7 @@ h1, h2, h3, h4, h5 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  animation: fh-bg-breathe 8s ease-in-out infinite;
 }
 /* Tricolor vertical pe marginea dreaptă */
 .frescia-hero--instant::after {
@@ -1385,57 +1417,120 @@ h1, h2, h3, h4, h5 {
   opacity: 1 !important;
 }
 @media (min-width: 769px) {
+  /* Ramuri — poziție + animație legănat */
   .frescia-hero--instant .fh-branch {
     position: absolute;
-    transform-origin: bottom center;
   }
   .frescia-hero--instant .fh-branch--l {
     bottom: -20px; left: -10px;
     width: 155px; height: 330px;
     transform-origin: bottom left;
+    animation: fh-sway-l 5s ease-in-out infinite;
   }
   .frescia-hero--instant .fh-branch--r {
     top: 70px; right: -5px;
     width: 115px; height: 248px;
     transform-origin: top right;
-    transform: scaleX(-1);
+    animation: fh-sway-r 6.5s ease-in-out infinite;
   }
+  /* Cercuri orbitale — se rotesc */
   .frescia-hero--instant .fh-orb {
     position: absolute;
     border-radius: 50%;
     border: 1px solid rgba(116,170,80,.15);
+    animation: fr-spin-slow 60s linear infinite;
   }
   .frescia-hero--instant .fh-orb--1 {
     width: 400px; height: 400px;
     top: 50%; right: -210px;
-    transform: translateY(-50%);
   }
   .frescia-hero--instant .fh-orb--2 {
     width: 268px; height: 268px;
     top: 50%; right: -164px;
-    transform: translateY(-50%);
     border-color: rgba(116,170,80,.09);
+    animation-direction: reverse;
+    animation-duration: 80s;
   }
+  /* Puncte flotante */
   .frescia-hero--instant .fh-dot {
     position: absolute;
     border-radius: 50%;
     background: rgba(116,170,80,.55);
+    animation: fh-float 4s ease-in-out infinite;
   }
-  .frescia-hero--instant .fh-dot--a { width: 9px;  height: 9px;  top: 32%; right: 20%; }
-  .frescia-hero--instant .fh-dot--b { width: 7px;  height: 7px;  top: 58%; right: 36%; opacity: .7; }
-  .frescia-hero--instant .fh-dot--c { width: 8px;  height: 8px;  top: 44%; right: 10%; }
-  .frescia-hero--instant .fh-dot--d { width: 5px;  height: 5px;  top: 22%; right: 26%; opacity: .5; }
+  .frescia-hero--instant .fh-dot--a { width: 9px; height: 9px; top: 32%; right: 20%; animation-delay: 0s; }
+  .frescia-hero--instant .fh-dot--b { width: 7px; height: 7px; top: 58%; right: 36%; animation-delay: 1s;   opacity: .7; }
+  .frescia-hero--instant .fh-dot--c { width: 8px; height: 8px; top: 44%; right: 10%; animation-delay: 2s; }
+  .frescia-hero--instant .fh-dot--d { width: 5px; height: 5px; top: 22%; right: 26%; animation-delay: 1.6s; opacity: .5; }
+  /* Sigiliu italian — structură completă pe desktop */
   .frescia-hero--instant .fh-it-corner {
     position: absolute;
     top: 108px; left: 28px;
   }
   .frescia-hero--instant .fh-it-seal {
     width: 116px; height: 116px;
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: fh-seal-pulse 3.5s ease-in-out infinite;
   }
-  .frescia-hero--instant .fh-it-seal__title  { font-size: 12px; letter-spacing: 3px; }
-  .frescia-hero--instant .fh-it-seal__sub    { font-size: 9px;  letter-spacing: 4px; }
-  .frescia-hero--instant .fh-it-seal__stars  { font-size: 8px;  letter-spacing: 4px; }
-  .frescia-hero--instant .fh-it-seal__divider { width: 48px; }
+  .frescia-hero--instant .fh-it-seal__tricolor {
+    position: absolute; inset: 0;
+    display: flex;
+  }
+  .frescia-hero--instant .fh-it-seal__tricolor span { flex: 1; display: block; }
+  .frescia-hero--instant .fh-it-seal__tricolor span:nth-child(1) { background: #009246; }
+  .frescia-hero--instant .fh-it-seal__tricolor span:nth-child(2) { background: #f0ede4; }
+  .frescia-hero--instant .fh-it-seal__tricolor span:nth-child(3) { background: #ce2b37; }
+  .frescia-hero--instant .fh-it-seal__overlay {
+    position: absolute; inset: 0;
+    background: rgba(8,20,8,.64);
+  }
+  .frescia-hero--instant .fh-it-seal__overlay::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 50%;
+    background: linear-gradient(to bottom, rgba(255,255,255,.07), transparent);
+  }
+  .frescia-hero--instant .fh-it-seal__body {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 4px;
+    z-index: 2;
+  }
+  .frescia-hero--instant .fh-it-seal__stars {
+    font-size: 8px;
+    color: rgba(116,170,80,.95);
+    letter-spacing: 4px; line-height: 1;
+  }
+  .frescia-hero--instant .fh-it-seal__title {
+    font-size: 12px; font-weight: 900;
+    letter-spacing: 3px; line-height: 1;
+    color: #fff;
+    font-family: var(--font-body, sans-serif);
+    text-shadow: 0 1px 6px rgba(0,0,0,.6);
+  }
+  .frescia-hero--instant .fh-it-seal__divider {
+    display: block;
+    width: 48px; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(116,170,80,.75), transparent);
+  }
+  .frescia-hero--instant .fh-it-seal__sub {
+    font-size: 9px; font-weight: 300;
+    letter-spacing: 4px; line-height: 1;
+    color: rgba(255,255,255,.75);
+    font-family: var(--font-body, sans-serif);
+    font-style: italic;
+  }
+  .frescia-hero--instant .fh-it-seal__ring {
+    position: absolute; inset: 7px;
+    border-radius: 50%;
+    border: 1px dashed rgba(116,170,80,.6);
+    z-index: 3;
+    pointer-events: none;
+    animation: fr-spin-slow 12s linear infinite;
+  }
 }
 
 /* Starea ended: blur pe video + text apare */
