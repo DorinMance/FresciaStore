@@ -2922,12 +2922,24 @@ input[type="radio"].product-option-input:checked + .option-btn {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 70% center;
     z-index: 0;
     transition: opacity 1.4s ease;
   }
   .frescia-hero--ended .fh-mob-video { opacity: 0; }
-  /* Animația cu ramuri rămâne ascunsă — avem video real pe mobile */
-  .fh-mob-vis { display: none; }
+  /* Decorațiunile apar după video */
+  .fh-mob-vis {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .9s ease .4s;
+  }
+  .frescia-hero--ended .fh-mob-vis {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
   /* Ramuri de măslin */
   .fh-branch {
