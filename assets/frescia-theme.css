@@ -436,6 +436,12 @@ h1, h2, h3, h4, h5 {
   width: 100%; height: 100%;
   object-fit: cover;
 }
+.frescia-hero__fallback-img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
 
 .frescia-hero__overlay {
   position: absolute;
@@ -1521,10 +1527,10 @@ input[type="radio"].product-option-input:checked + .option-btn {
     background: linear-gradient(145deg, #1a3318 0%, #0e1c0a 55%, #1a1a20 100%);
   }
   video.frescia-hero__video { object-position: center 20%; }
-  img.frescia-hero__video {
+  .frescia-hero__fallback-img {
     object-fit: contain;
     object-position: center center;
-    opacity: .18;
+    opacity: .12;
   }
   .frescia-hero__title { font-size: clamp(1.9rem, 6.5vw, 2.6rem); }
   .frescia-hero__subtitle { font-size: .9rem; margin-bottom: 24px; }

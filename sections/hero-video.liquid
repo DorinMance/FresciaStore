@@ -20,8 +20,7 @@
     <img
       src="{{ section.settings.fallback_image | img_url: '1920x' }}"
       alt="{{ section.settings.heading | escape }}"
-      class="frescia-hero__video frescia-hero--no-video"
-      style="object-fit:cover;"
+      class="frescia-hero__video frescia-hero__fallback-img"
     >
   {%- else -%}
     <div class="frescia-hero__video" style="background:var(--color-primary);"></div>
