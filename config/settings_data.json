@@ -31,7 +31,7 @@
         "type": "hero-video",
         "settings": {
           "video_url": "https://cdn.shopify.com/videos/c/o/v/1cc1a9de73e2467fbe11db68b421727b.mp4",
-          "overlay_color": "#3F3F44",
+          "overlay_color": "#3f3f44",
           "overlay_opacity": 40,
           "badge_text": "Autentic Italian",
           "heading": "Savoarea Italiei la ușa ta",
@@ -65,6 +65,46 @@
           "bg_color": "#ffffff",
           "padding_top": 56,
           "padding_bottom": 56
+        }
+      },
+      "promo-banner": {
+        "type": "promo-banner",
+        "settings": {
+          "bg_color": "#1a4a2e",
+          "tag": "Ofertă specială",
+          "title": "Produse italiene autentice la prețuri speciale",
+          "title_highlight": "",
+          "description": "Descoperă selecția noastră de produse aduse direct din Italia — paste, uleiuri, brânzeturi și vinuri de top.",
+          "btn1_text": "Cumpără acum",
+          "btn1_url": "",
+          "btn2_text": "",
+          "btn2_url": ""
+        }
+      },
+      "brand-story": {
+        "type": "brand-story",
+        "settings": {
+          "alt_bg": false,
+          "image_right": false,
+          "image": "shopify://shop_images/1.png",
+          "badge_number": "",
+          "badge_text": "",
+          "eyebrow": "Povestea noastră",
+          "title": "Din inima Italiei, direct la masa ta",
+          "text": "Frescia Store s-a născut din pasiunea pentru gastronomia italiană autentică. Selecționăm cu grijă fiecare produs direct de la producători artizanali din toată Italia — de la pastele din grâu dur sicilian până la uleiul de măsline extravirgin din Toscana.",
+          "cta_text": "",
+          "cta_url": ""
+        }
+      },
+      "newsletter": {
+        "type": "newsletter",
+        "settings": {
+          "title": "Fii primul care află ofertele noastre",
+          "description": "Înscrie-te la newsletter și primești 10% reducere la prima comandă + noutăți săptămânale despre produsele noastre italiene.",
+          "placeholder": "adresa@email.ro",
+          "btn_text": "Abonează-te",
+          "success_msg": "Mulțumim! Te-ai abonat cu succes.",
+          "note": "Nu facem spam. Te poți dezabona oricând."
         }
       }
     },
