@@ -1337,7 +1337,43 @@ h1, h2, h3, h4, h5 {
 
 /* Vizitator care revine — skip video, totul instant */
 .frescia-hero--instant {
-  background: linear-gradient(155deg, #1a3318 0%, #0e1c0a 50%, #111418 100%);
+  background:
+    radial-gradient(ellipse 55% 60% at 50% 55%, rgba(116,170,80,.13) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 70% at 4% 82%,  rgba(116,170,80,.18) 0%, transparent 48%),
+    radial-gradient(ellipse 28% 50% at 96% 6%,  rgba(218,41,28,.09) 0%, transparent 50%),
+    linear-gradient(145deg, #1e3d20 0%, #0c1a0a 45%, #10151d 100%);
+}
+/* Arcuri concentrice deasupra overlay-ului */
+.frescia-hero--instant::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 650px at 105% -20%, transparent 644px, rgba(116,170,80,.28) 644px, rgba(116,170,80,.28) 650px, transparent 650px),
+    radial-gradient(circle 490px at 105% -20%, transparent 484px, rgba(116,170,80,.20) 484px, rgba(116,170,80,.20) 489px, transparent 489px),
+    radial-gradient(circle 330px at 105% -20%, transparent 324px, rgba(116,170,80,.14) 324px, rgba(116,170,80,.14) 328px, transparent 328px),
+    radial-gradient(circle 420px at -6% 108%,  transparent 414px, rgba(116,170,80,.20) 414px, rgba(116,170,80,.20) 419px, transparent 419px),
+    radial-gradient(circle 280px at -6% 108%,  transparent 274px, rgba(116,170,80,.13) 274px, rgba(116,170,80,.13) 278px, transparent 278px);
+}
+/* Tricolor vertical pe marginea dreaptă */
+.frescia-hero--instant::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 4px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    #009246 0%,          #009246 33.33%,
+    rgba(245,242,234,.9) 33.33%, rgba(245,242,234,.9) 66.66%,
+    #ce2b37 66.66%);
+  opacity: .55;
+}
+/* Overlay mai verde în loc de carbon gri */
+.frescia-hero--instant .frescia-hero__overlay {
+  background: rgba(8, 22, 8, 0.42) !important;
 }
 .frescia-hero--instant .frescia-hero__video,
 .frescia-hero--instant .fh-mob-video { display: none !important; }
