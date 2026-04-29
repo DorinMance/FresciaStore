@@ -1336,6 +1336,9 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Vizitator care revine — skip video, totul instant */
+.frescia-hero--instant {
+  background: linear-gradient(155deg, #1a3318 0%, #0e1c0a 50%, #111418 100%);
+}
 .frescia-hero--instant .frescia-hero__video,
 .frescia-hero--instant .fh-mob-video { display: none !important; }
 .frescia-hero--instant .frescia-hero__content,
