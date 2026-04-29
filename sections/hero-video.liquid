@@ -3,12 +3,6 @@
   aria-label="{{ section.settings.heading | escape }}"
   id="frescia-hero"
 >
-  <script>
-  if (sessionStorage.getItem('frescia-hero-seen')) {
-    document.getElementById('frescia-hero').classList.add('frescia-hero--ended','frescia-hero--instant');
-  }
-  </script>
-
   {%- comment -%} Video background {%- endcomment -%}
   {%- if section.settings.video_url != blank -%}
     <video
@@ -76,19 +70,29 @@
     <span class="fh-dot fh-dot--b"></span>
     <span class="fh-dot fh-dot--c"></span>
     <span class="fh-dot fh-dot--d"></span>
-    <!-- Sigiliu Italian stânga sus -->
-    <div class="fh-it-corner">
-      <div class="fh-it-seal">
-        <div class="fh-it-seal__tricolor"><span></span><span></span><span></span></div>
-        <div class="fh-it-seal__overlay"></div>
-        <div class="fh-it-seal__body">
-          <span class="fh-it-seal__stars">✦ ✦ ✦</span>
-          <span class="fh-it-seal__title">AUTENTIC</span>
-          <span class="fh-it-seal__divider"></span>
-          <span class="fh-it-seal__sub">ITALIANO</span>
-        </div>
-        <div class="fh-it-seal__ring"></div>
-      </div>
+    <!-- Frunze busuioc stânga sus -->
+    <div class="fh-food-corner" aria-hidden="true">
+      <svg class="fh-basil" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g transform="translate(50,112) rotate(-38)" opacity="0.52">
+          <path d="M0 0 C-13 -15 -20 -34 -18 -50 C-16 -64 -7 -72 0 -72 C7 -72 16 -64 18 -50 C20 -34 13 -15 0 0Z" fill="#74AA50"/>
+          <line x1="0" y1="0" x2="0" y2="-70" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/>
+        </g>
+        <g transform="translate(50,112) rotate(30)" opacity="0.65">
+          <path d="M0 0 C-11 -13 -17 -30 -15 -44 C-13 -56 -5 -64 0 -64 C5 -64 13 -56 15 -44 C17 -30 11 -13 0 0Z" fill="#74AA50"/>
+          <line x1="0" y1="0" x2="0" y2="-62" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+          <path d="M0 -30 C-7 -34 -13 -34 -15 -32" stroke="rgba(255,255,255,.18)" stroke-width="0.8" fill="none"/>
+          <path d="M0 -30 C7 -34 13 -34 15 -32" stroke="rgba(255,255,255,.18)" stroke-width="0.8" fill="none"/>
+        </g>
+        <path d="M50 112 C35 95 26 72 28 54 C30 38 41 28 50 28 C59 28 70 38 72 54 C74 72 65 95 50 112Z" fill="#74AA50" opacity="0.9"/>
+        <line x1="50" y1="112" x2="50" y2="30" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+        <path d="M50 70 C41 65 32 65 29 68" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+        <path d="M50 70 C59 65 68 65 71 68" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
+        <path d="M50 54 C43 49 35 49 32 52" stroke="rgba(255,255,255,.18)" stroke-width="0.9" fill="none"/>
+        <path d="M50 54 C57 49 65 49 68 52" stroke="rgba(255,255,255,.18)" stroke-width="0.9" fill="none"/>
+        <path d="M50 86 C43 82 36 82 34 84" stroke="rgba(255,255,255,.16)" stroke-width="0.8" fill="none"/>
+        <path d="M50 86 C57 82 64 82 66 84" stroke="rgba(255,255,255,.16)" stroke-width="0.8" fill="none"/>
+        <circle cx="50" cy="112" r="4" fill="#74AA50" opacity="0.8"/>
+      </svg>
     </div>
     <!-- Bandă steag dreaptă -->
     <div class="fh-flag-strip"><span></span><span></span><span></span></div>
@@ -160,19 +164,17 @@
   <script>
   (function() {
     var hero = document.getElementById('frescia-hero');
-    if (!hero || hero.classList.contains('frescia-hero--instant')) return;
+    if (!hero) return;
     var v = document.getElementById('fh-mob-video');
     if (!v) return;
     var rate = 1.45;
     v.playbackRate = rate;
     v.addEventListener('loadedmetadata', function() { v.playbackRate = rate; });
     var fallback = setTimeout(function() {
-      sessionStorage.setItem('frescia-hero-seen', '1');
       hero.classList.add('frescia-hero--ended');
     }, 15000);
     v.addEventListener('ended', function() {
       clearTimeout(fallback);
-      sessionStorage.setItem('frescia-hero-seen', '1');
       hero.classList.add('frescia-hero--ended');
     });
   })();

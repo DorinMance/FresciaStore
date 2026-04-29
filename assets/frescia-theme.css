@@ -1411,125 +1411,78 @@ h1, h2, h3, h4, h5 {
 .frescia-hero--instant .frescia-hero__content,
 .frescia-hero--instant .frescia-hero__overlay,
 .frescia-hero--instant .fh-mob-vis { transition: none !important; animation: none !important; }
-/* Desktop: afișează decorațiunile fh-mob-vis și scalează-le */
-.frescia-hero--instant .fh-mob-vis {
+/* Desktop: după video afișează decorațiunile fh-mob-vis */
+.frescia-hero--ended .fh-mob-vis {
   display: block !important;
   opacity: 1 !important;
 }
 @media (min-width: 769px) {
-  /* Ramuri — poziție + animație legănat */
-  .frescia-hero--instant .fh-branch {
-    position: absolute;
+  /* SVG ramuri de măslin deasupra video-ului estompat */
+  .frescia-hero--ended::before {
+    content: '';
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 800' preserveAspectRatio='xMidYMid slice'><path d='M-20 830 C80 680 130 530 165 375 C200 220 215 95 245 -30' stroke='%2374AA50' stroke-width='2.5' fill='none' stroke-linecap='round' opacity='0.5'/><ellipse cx='100' cy='615' rx='35' ry='16' transform='rotate(-38 100 615)' fill='%2374AA50' opacity='0.48'/><ellipse cx='135' cy='582' rx='33' ry='15' transform='rotate(22 135 582)' fill='%2374AA50' opacity='0.38'/><ellipse cx='88' cy='546' rx='30' ry='14' transform='rotate(-52 88 546)' fill='%2374AA50' opacity='0.42'/><ellipse cx='122' cy='512' rx='30' ry='14' transform='rotate(32 122 512)' fill='%2374AA50' opacity='0.36'/><ellipse cx='95' cy='478' rx='28' ry='13' transform='rotate(-28 95 478)' fill='%2374AA50' opacity='0.38'/><ellipse cx='130' cy='446' rx='28' ry='13' transform='rotate(42 130 446)' fill='%2374AA50' opacity='0.32'/><ellipse cx='108' cy='412' rx='26' ry='12' transform='rotate(-35 108 412)' fill='%2374AA50' opacity='0.3'/><ellipse cx='142' cy='380' rx='26' ry='12' transform='rotate(28 142 380)' fill='%2374AA50' opacity='0.26'/><ellipse cx='118' cy='346' rx='24' ry='11' transform='rotate(-45 118 346)' fill='%2374AA50' opacity='0.24'/><ellipse cx='152' cy='314' rx='22' ry='10' transform='rotate(20 152 314)' fill='%2374AA50' opacity='0.2'/><circle cx='95' cy='568' r='5.5' fill='%2374AA50' opacity='0.62'/><circle cx='126' cy='498' r='5' fill='%2374AA50' opacity='0.58'/><circle cx='104' cy='430' r='4.5' fill='%2374AA50' opacity='0.52'/><circle cx='132' cy='364' r='4' fill='%2374AA50' opacity='0.46'/><path d='M32 830 C70 705 80 600 90 480 C100 355 96 255 102 138' stroke='%2374AA50' stroke-width='1.5' fill='none' stroke-linecap='round' opacity='0.28'/><ellipse cx='60' cy='640' rx='22' ry='10' transform='rotate(-45 60 640)' fill='%2374AA50' opacity='0.38'/><ellipse cx='75' cy='558' rx='20' ry='9' transform='rotate(-30 75 558)' fill='%2374AA50' opacity='0.3'/><ellipse cx='68' cy='480' rx='18' ry='8' transform='rotate(-50 68 480)' fill='%2374AA50' opacity='0.25'/><path d='M1460 -20 C1370 130 1322 278 1285 425 C1248 572 1240 685 1228 800' stroke='%2374AA50' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.38'/><ellipse cx='1382' cy='130' rx='28' ry='13' transform='rotate(40 1382 130)' fill='%2374AA50' opacity='0.4'/><ellipse cx='1350' cy='163' rx='26' ry='12' transform='rotate(-22 1350 163)' fill='%2374AA50' opacity='0.34'/><ellipse cx='1374' cy='202' rx='24' ry='11' transform='rotate(52 1374 202)' fill='%2374AA50' opacity='0.3'/><ellipse cx='1340' cy='235' rx='24' ry='11' transform='rotate(-30 1340 235)' fill='%2374AA50' opacity='0.26'/><ellipse cx='1362' cy='275' rx='22' ry='10' transform='rotate(38 1362 275)' fill='%2374AA50' opacity='0.22'/><ellipse cx='1328' cy='308' rx='22' ry='10' transform='rotate(-20 1328 308)' fill='%2374AA50' opacity='0.2'/><circle cx='1366' cy='146' r='4.5' fill='%2374AA50' opacity='0.55'/><circle cx='1357' cy='218' r='4' fill='%2374AA50' opacity='0.48'/><circle cx='1344' cy='290' r='3.5' fill='%2374AA50' opacity='0.42'/><g transform='translate(1180,400)' opacity='0.18'><circle cx='0' cy='0' r='200' stroke='%2374AA50' stroke-width='1.5' fill='none' stroke-dasharray='10 5'/><circle cx='0' cy='0' r='172' stroke='%2374AA50' stroke-width='0.75' fill='none'/><circle cx='0' cy='0' r='144' stroke='%2374AA50' stroke-width='1' fill='none' stroke-dasharray='5 5'/><circle cx='0' cy='0' r='116' stroke='%2374AA50' stroke-width='0.5' fill='none'/></g><rect x='0' y='0' width='4' height='266' fill='%23009246' opacity='0.55'/><rect x='0' y='266' width='4' height='266' fill='%23f5f2ea' opacity='0.35'/><rect x='0' y='532' width='4' height='268' fill='%23ce2b37' opacity='0.55'/></svg>");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: fh-bg-breathe 8s ease-in-out infinite;
   }
-  .frescia-hero--instant .fh-branch--l {
+  /* Tricolor dreapta */
+  .frescia-hero--ended::after {
+    content: '';
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 5px; z-index: 1; pointer-events: none;
+    background: linear-gradient(to bottom,
+      #009246 0%, #009246 33.33%,
+      rgba(245,242,234,.9) 33.33%, rgba(245,242,234,.9) 66.66%,
+      #ce2b37 66.66%);
+    opacity: .6;
+  }
+  /* Ramuri — poziție + animație legănat */
+  .frescia-hero--ended .fh-branch { position: absolute; }
+  .frescia-hero--ended .fh-branch--l {
     bottom: -20px; left: -10px;
     width: 155px; height: 330px;
     transform-origin: bottom left;
     animation: fh-sway-l 5s ease-in-out infinite;
   }
-  .frescia-hero--instant .fh-branch--r {
+  .frescia-hero--ended .fh-branch--r {
     top: 70px; right: -5px;
     width: 115px; height: 248px;
     transform-origin: top right;
     animation: fh-sway-r 6.5s ease-in-out infinite;
   }
-  /* Cercuri orbitale — se rotesc */
-  .frescia-hero--instant .fh-orb {
-    position: absolute;
-    border-radius: 50%;
+  /* Cercuri orbitale */
+  .frescia-hero--ended .fh-orb {
+    position: absolute; border-radius: 50%;
     border: 1px solid rgba(116,170,80,.15);
     animation: fr-spin-slow 60s linear infinite;
   }
-  .frescia-hero--instant .fh-orb--1 {
-    width: 400px; height: 400px;
-    top: 50%; right: -210px;
-  }
-  .frescia-hero--instant .fh-orb--2 {
-    width: 268px; height: 268px;
-    top: 50%; right: -164px;
+  .frescia-hero--ended .fh-orb--1 { width: 400px; height: 400px; top: 50%; right: -210px; }
+  .frescia-hero--ended .fh-orb--2 {
+    width: 268px; height: 268px; top: 50%; right: -164px;
     border-color: rgba(116,170,80,.09);
-    animation-direction: reverse;
-    animation-duration: 80s;
+    animation-direction: reverse; animation-duration: 80s;
   }
   /* Puncte flotante */
-  .frescia-hero--instant .fh-dot {
-    position: absolute;
-    border-radius: 50%;
+  .frescia-hero--ended .fh-dot {
+    position: absolute; border-radius: 50%;
     background: rgba(116,170,80,.55);
     animation: fh-float 4s ease-in-out infinite;
   }
-  .frescia-hero--instant .fh-dot--a { width: 9px; height: 9px; top: 32%; right: 20%; animation-delay: 0s; }
-  .frescia-hero--instant .fh-dot--b { width: 7px; height: 7px; top: 58%; right: 36%; animation-delay: 1s;   opacity: .7; }
-  .frescia-hero--instant .fh-dot--c { width: 8px; height: 8px; top: 44%; right: 10%; animation-delay: 2s; }
-  .frescia-hero--instant .fh-dot--d { width: 5px; height: 5px; top: 22%; right: 26%; animation-delay: 1.6s; opacity: .5; }
-  /* Sigiliu italian — structură completă pe desktop */
-  .frescia-hero--instant .fh-it-corner {
-    position: absolute;
-    top: 108px; left: 28px;
+  .frescia-hero--ended .fh-dot--a { width: 9px; height: 9px; top: 32%; right: 20%; animation-delay: 0s; }
+  .frescia-hero--ended .fh-dot--b { width: 7px; height: 7px; top: 58%; right: 36%; animation-delay: 1s;   opacity: .7; }
+  .frescia-hero--ended .fh-dot--c { width: 8px; height: 8px; top: 44%; right: 10%; animation-delay: 2s; }
+  .frescia-hero--ended .fh-dot--d { width: 5px; height: 5px; top: 22%; right: 26%; animation-delay: 1.6s; opacity: .5; }
+  /* Colț busuioc — desktop */
+  .frescia-hero--ended .fh-food-corner {
+    position: absolute; top: 108px; left: 28px;
   }
-  .frescia-hero--instant .fh-it-seal {
-    width: 116px; height: 116px;
-    position: relative;
-    border-radius: 50%;
-    overflow: hidden;
-    animation: fh-seal-pulse 3.5s ease-in-out infinite;
-  }
-  .frescia-hero--instant .fh-it-seal__tricolor {
-    position: absolute; inset: 0;
-    display: flex;
-  }
-  .frescia-hero--instant .fh-it-seal__tricolor span { flex: 1; display: block; }
-  .frescia-hero--instant .fh-it-seal__tricolor span:nth-child(1) { background: #009246; }
-  .frescia-hero--instant .fh-it-seal__tricolor span:nth-child(2) { background: #f0ede4; }
-  .frescia-hero--instant .fh-it-seal__tricolor span:nth-child(3) { background: #ce2b37; }
-  .frescia-hero--instant .fh-it-seal__overlay {
-    position: absolute; inset: 0;
-    background: rgba(8,20,8,.64);
-  }
-  .frescia-hero--instant .fh-it-seal__overlay::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 50%;
-    background: linear-gradient(to bottom, rgba(255,255,255,.07), transparent);
-  }
-  .frescia-hero--instant .fh-it-seal__body {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 4px;
-    z-index: 2;
-  }
-  .frescia-hero--instant .fh-it-seal__stars {
-    font-size: 8px;
-    color: rgba(116,170,80,.95);
-    letter-spacing: 4px; line-height: 1;
-  }
-  .frescia-hero--instant .fh-it-seal__title {
-    font-size: 12px; font-weight: 900;
-    letter-spacing: 3px; line-height: 1;
-    color: #fff;
-    font-family: var(--font-body, sans-serif);
-    text-shadow: 0 1px 6px rgba(0,0,0,.6);
-  }
-  .frescia-hero--instant .fh-it-seal__divider {
-    display: block;
-    width: 48px; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(116,170,80,.75), transparent);
-  }
-  .frescia-hero--instant .fh-it-seal__sub {
-    font-size: 9px; font-weight: 300;
-    letter-spacing: 4px; line-height: 1;
-    color: rgba(255,255,255,.75);
-    font-family: var(--font-body, sans-serif);
-    font-style: italic;
-  }
-  .frescia-hero--instant .fh-it-seal__ring {
-    position: absolute; inset: 7px;
-    border-radius: 50%;
-    border: 1px dashed rgba(116,170,80,.6);
-    z-index: 3;
-    pointer-events: none;
-    animation: fr-spin-slow 12s linear infinite;
+  .frescia-hero--ended .fh-basil {
+    width: 100px; height: 115px;
+    filter: drop-shadow(0 4px 18px rgba(0,0,0,.5));
+    animation: fh-sway-l 5.5s ease-in-out infinite;
+    transform-origin: bottom center;
   }
 }
 
@@ -3200,77 +3153,17 @@ input[type="radio"].product-option-input:checked + .option-btn {
     50%       { transform: translateY(-12px); opacity: .9; }
   }
 
-  /* Colț stâng sus — sigiliu Italian */
-  .fh-it-corner {
+  /* Colț stâng sus — frunze busuioc */
+  .fh-food-corner {
     position: absolute;
     top: 68px; left: 16px;
     animation: fh-content-reveal 1s ease .5s both;
   }
-  .fh-it-seal {
-    width: 88px; height: 88px;
-    position: relative;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow:
-      0 0 0 1.5px rgba(116,170,80,.65),
-      0 0 0 4px rgba(116,170,80,.08),
-      0 6px 28px rgba(0,0,0,.45);
-  }
-  .fh-it-seal__tricolor {
-    position: absolute; inset: 0;
-    display: flex;
-  }
-  .fh-it-seal__tricolor span { flex: 1; display: block; }
-  .fh-it-seal__tricolor span:nth-child(1) { background: #009246; }
-  .fh-it-seal__tricolor span:nth-child(2) { background: #f0ede4; }
-  .fh-it-seal__tricolor span:nth-child(3) { background: #ce2b37; }
-  .fh-it-seal__overlay {
-    position: absolute; inset: 0;
-    background: rgba(8,20,8,.64);
-  }
-  .fh-it-seal__overlay::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 50%;
-    background: linear-gradient(to bottom, rgba(255,255,255,.07), transparent);
-  }
-  .fh-it-seal__body {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 3px;
-    z-index: 2;
-  }
-  .fh-it-seal__stars {
-    font-size: 6px;
-    color: rgba(116,170,80,.95);
-    letter-spacing: 3px; line-height: 1;
-  }
-  .fh-it-seal__title {
-    font-size: 10px; font-weight: 900;
-    letter-spacing: 2.5px; line-height: 1;
-    color: #fff;
-    font-family: var(--font-body, sans-serif);
-    text-shadow: 0 1px 6px rgba(0,0,0,.6);
-  }
-  .fh-it-seal__divider {
-    display: block;
-    width: 34px; height: 1px;
-    background: linear-gradient(to right, transparent, rgba(116,170,80,.75), transparent);
-  }
-  .fh-it-seal__sub {
-    font-size: 7px; font-weight: 300;
-    letter-spacing: 3.5px; line-height: 1;
-    color: rgba(255,255,255,.72);
-    font-family: var(--font-body, sans-serif);
-    font-style: italic;
-  }
-  .fh-it-seal__ring {
-    position: absolute; inset: 6px;
-    border-radius: 50%;
-    border: 1px dashed rgba(116,170,80,.45);
-    z-index: 3;
-    pointer-events: none;
+  .fh-basil {
+    width: 80px; height: 92px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,.45));
+    animation: fh-sway-l 5s ease-in-out infinite;
+    transform-origin: bottom center;
   }
 
   /* Bandă steag dreapta */
