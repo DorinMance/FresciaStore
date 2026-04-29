@@ -1544,13 +1544,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
   }
   video.frescia-hero__video,
   .frescia-hero__fallback-img { display: none !important; }
-  /* Conținut apare imediat fără să mai aștepte video */
-  .frescia-hero__content {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-    pointer-events: auto !important;
-    animation: fh-content-reveal .9s ease .15s both;
-  }
+  /* Conținut ascuns până video se termină — dezvăluit prin frescia-hero--ended */
   @keyframes fh-content-reveal {
     from { opacity: 0; transform: translateY(28px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -2929,7 +2923,9 @@ input[type="radio"].product-option-input:checked + .option-btn {
     height: 100%;
     object-fit: cover;
     z-index: 0;
+    transition: opacity 1.4s ease;
   }
+  .frescia-hero--ended .fh-mob-video { opacity: 0; }
   /* Animația cu ramuri rămâne ascunsă — avem video real pe mobile */
   .fh-mob-vis { display: none; }
 
