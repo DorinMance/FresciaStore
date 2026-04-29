@@ -1,3 +1,6 @@
+{%- if request.path == '/pages/despre-noi' -%}
+  {%- section 'about-page' -%}
+{%- else -%}
 <div class="container" style="text-align:center;padding:100px 24px;">
   <div style="font-size:7rem;font-family:var(--font-heading);color:var(--color-primary-light);line-height:1;margin-bottom:8px;">404</div>
   <h1 style="font-family:var(--font-heading);font-size:2rem;color:var(--color-primary);margin-bottom:14px;">Pagina nu a fost găsită</h1>
@@ -9,3 +12,4 @@
     <a href="/collections/all" class="btn btn-outline" style="color:var(--color-primary);border-color:var(--color-primary);">Toate produsele</a>
   </div>
 </div>
+{%- endif -%}
