@@ -2007,29 +2007,22 @@ input[type="radio"].product-option-input:checked + .option-btn {
 /* ── 1. HERO ──────────────────────────────────────────────── */
 .fr-about-hero {
   position: relative;
-  min-height: 88vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: var(--color-carbon);
+  background: #0e1c09;
 }
 .fr-about-hero__bg {
   position: absolute; inset: 0;
-  background:
-    linear-gradient(135deg, #1a2e14 0%, #2a4a20 40%, #3F3F44 100%);
-  background-size: 200% 200%;
+  background: radial-gradient(ellipse 85% 110% at 25% 55%, #1e3a14 0%, #0e1c09 52%, #141418 100%);
 }
-/* pattern organic verde */
-.fr-about-hero__bg::after {
-  content: '';
+.fr-about-hero__bg-dots {
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle at 20% 50%, rgba(116,170,80,.18) 0%, transparent 60%),
-                    radial-gradient(circle at 80% 20%, rgba(116,170,80,.12) 0%, transparent 50%),
-                    radial-gradient(circle at 60% 80%, rgba(218,41,28,.08) 0%, transparent 40%);
-}
-.fr-about-hero__overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to right, rgba(26,46,20,.7) 0%, transparent 70%);
+  background-image: radial-gradient(circle, rgba(116,170,80,.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
 }
 .fr-about-hero__container {
   position: relative;
@@ -2037,46 +2030,251 @@ input[type="radio"].product-option-input:checked + .option-btn {
   padding-top: 120px;
   padding-bottom: 80px;
 }
-.fr-about-hero__content { max-width: 620px; }
+.fr-about-hero__grid {
+  display: grid;
+  grid-template-columns: 54% 46%;
+  align-items: center;
+  gap: 40px;
+}
+.fr-about-hero__content { max-width: 580px; }
+
+/* Badge eyebrow */
+.fr-about-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(116,170,80,.1);
+  border: 1px solid rgba(116,170,80,.28);
+  color: rgba(255,255,255,.7);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 6px 14px 6px 10px;
+  border-radius: 100px;
+  margin-bottom: 28px;
+}
+.fr-about-hero__badge-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+  animation: fr-pulse-dot 2.4s ease infinite;
+}
+
+/* Title */
 .fr-about-hero__title {
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-size: clamp(2.6rem, 5.2vw, 4.2rem);
   font-weight: 900;
   color: #fff;
-  line-height: 1.12;
-  margin-bottom: 20px;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -1.5px;
 }
 .fr-about-hero__italic {
+  display: block;
   font-style: italic;
-  color: var(--color-primary);
   font-weight: 300;
+  color: var(--color-primary);
+  font-size: clamp(3rem, 6vw, 5.2rem);
+  line-height: 1.02;
+  letter-spacing: -2px;
 }
-.fr-about-hero__sub {
-  font-size: 1.1rem;
-  color: rgba(255,255,255,.8);
-  max-width: 480px;
-  margin-bottom: 36px;
-  line-height: 1.7;
-}
-.fr-about-hero__cta { margin-top: 4px; }
 
-/* scroll indicator */
+/* Subtitle */
+.fr-about-hero__sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,.6);
+  max-width: 460px;
+  margin-bottom: 44px;
+  line-height: 1.75;
+}
+
+/* Actions row */
+.fr-about-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.fr-about-hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 700;
+  letter-spacing: .4px;
+  padding: 14px 28px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 20px rgba(116,170,80,.35);
+}
+.fr-about-hero__cta:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(116,170,80,.45);
+}
+.fr-about-hero__cta svg { transition: transform .3s ease; }
+.fr-about-hero__cta:hover svg { transform: translateY(3px); }
+
+.fr-about-hero__origine {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: rgba(255,255,255,.45);
+  font-size: .78rem;
+  font-weight: 500;
+}
+.fr-about-hero__flag-it {
+  display: flex;
+  overflow: hidden;
+  border-radius: 2px;
+  height: 14px;
+  width: 22px;
+  flex-shrink: 0;
+}
+.fr-about-hero__flag-it i { flex: 1; display: block; font-style: normal; }
+.fr-about-hero__flag-it i:nth-child(1) { background: #009246; }
+.fr-about-hero__flag-it i:nth-child(2) { background: #fff; }
+.fr-about-hero__flag-it i:nth-child(3) { background: #ce2b37; }
+
+/* ── Decorative right panel ──────────────────────────────── */
+.fr-about-hero__deco {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 500px;
+}
+.fr-about-hero__compass {
+  position: relative;
+  width: 360px;
+  height: 360px;
+}
+.fr-about-hero__compass-rings {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  animation: fr-spin-slow 80s linear infinite;
+}
+@keyframes fr-spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Medallion */
+.fr-about-hero__medal {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 128px; height: 128px;
+  border-radius: 50%;
+  background: rgba(14,28,9,.85);
+  border: 1.5px solid rgba(116,170,80,.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(116,170,80,.08), inset 0 0 20px rgba(116,170,80,.04);
+}
+.fr-about-hero__medal-inner { text-align: center; }
+.fr-about-hero__medal-est {
+  font-size: .58rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: rgba(255,255,255,.4);
+  text-transform: uppercase;
+  margin-bottom: 1px;
+}
+.fr-about-hero__medal-year {
+  font-size: 1.8rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  color: #fff;
+}
+.fr-about-hero__medal-hr {
+  width: 30px; height: 1px;
+  background: rgba(116,170,80,.35);
+  margin: 6px auto;
+}
+.fr-about-hero__medal-it {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 2px;
+  width: 28px; height: 6px;
+  margin: 0 auto 4px;
+}
+.fr-about-hero__medal-it span { flex: 1; display: block; }
+.fr-about-hero__medal-it .it-g { background: #009246; }
+.fr-about-hero__medal-it .it-w { background: #fff; }
+.fr-about-hero__medal-it .it-r { background: #ce2b37; }
+.fr-about-hero__medal-country {
+  font-size: .55rem;
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: rgba(116,170,80,.75);
+  text-transform: uppercase;
+}
+
+/* Floating chips */
+.fr-about-hero__chip {
+  position: absolute;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(116,170,80,.22);
+  backdrop-filter: blur(16px);
+  border-radius: 14px;
+  padding: 13px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 128px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.25);
+}
+.fr-about-hero__chip--tl { top: 24px; left: -12px; }
+.fr-about-hero__chip--br { bottom: 44px; right: -8px; }
+.fr-about-hero__chip-num {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.fr-about-hero__chip-num sup {
+  font-size: .6em;
+  vertical-align: super;
+  color: var(--color-primary);
+  letter-spacing: 0;
+}
+.fr-about-hero__chip-lbl {
+  font-size: .7rem;
+  color: rgba(255,255,255,.5);
+  font-weight: 500;
+}
+
+/* Scroll indicator */
 .fr-about-hero__scroll {
   position: absolute;
   bottom: 32px; left: 50%;
   transform: translateX(-50%);
   display: flex; flex-direction: column; align-items: center;
   gap: 8px;
-  animation: fr-scroll-bob 2s ease-in-out infinite;
+  animation: fr-scroll-bob 2.2s ease-in-out infinite;
 }
 .fr-about-hero__scroll-line {
   width: 1px; height: 40px;
-  background: linear-gradient(to bottom, transparent, rgba(255,255,255,.5));
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,.3));
   display: block;
 }
 .fr-about-hero__scroll-dot {
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--color-primary);
   display: block;
+  animation: fr-pulse-dot 2.4s ease infinite;
 }
 
 /* ── 2. STORY ─────────────────────────────────────────────── */
@@ -2534,7 +2732,11 @@ input[type="radio"].product-option-input:checked + .option-btn {
 
 @media (max-width: 768px) {
   .fr-about-hero { min-height: 100svh; }
-  .fr-about-hero__title { font-size: 2.2rem; }
+  .fr-about-hero__grid { grid-template-columns: 1fr; }
+  .fr-about-hero__deco { display: none; }
+  .fr-about-hero__title { font-size: 2.2rem; letter-spacing: -.5px; }
+  .fr-about-hero__italic { font-size: 2.5rem; }
+  .fr-about-hero__actions { gap: 20px; }
 
   .fr-about-story__grid,
   .fr-about-mission__grid { grid-template-columns: 1fr; gap: 40px; }

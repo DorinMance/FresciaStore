@@ -4,24 +4,84 @@
 
 <!-- ── 1. HERO ─────────────────────────────────────────────── -->
 <section class="fr-about-hero">
-  <div class="fr-about-hero__bg"></div>
-  <div class="fr-about-hero__overlay"></div>
+  <div class="fr-about-hero__bg">
+    <div class="fr-about-hero__bg-dots"></div>
+  </div>
+
   <div class="container fr-about-hero__container">
-    <div class="fr-about-hero__content">
-      <p class="fr-eyebrow fr-eyebrow--light" data-animate="fade-up">Cine suntem</p>
-      <h1 class="fr-about-hero__title" data-animate="fade-up" data-delay="120">
-        Din pasiune pentru<br>
-        <em class="fr-about-hero__italic">gusto dell'Italia</em>
-      </h1>
-      <p class="fr-about-hero__sub" data-animate="fade-up" data-delay="240">
-        Frescia Store aduce autenticul gust italian în casa ta — produse selecționate
-        cu dragoste direct de la artizani din inima Italiei.
-      </p>
-      <a href="#fr-povestea" class="btn btn--primary fr-about-hero__cta" data-animate="fade-up" data-delay="360">
-        Descoperă povestea
-      </a>
+    <div class="fr-about-hero__grid">
+
+      <!-- Content stânga -->
+      <div class="fr-about-hero__content">
+        <div class="fr-about-hero__badge" data-animate="fade-up">
+          <span class="fr-about-hero__badge-dot"></span>
+          Cine suntem
+        </div>
+        <h1 class="fr-about-hero__title" data-animate="fade-up" data-delay="120">
+          Din pasiune<br>pentru
+          <em class="fr-about-hero__italic">gusto<br>dell'Italia</em>
+        </h1>
+        <p class="fr-about-hero__sub" data-animate="fade-up" data-delay="240">
+          Frescia Store aduce autenticul gust italian în casa ta —
+          produse selecționate cu dragoste direct de la artizani din inima Italiei.
+        </p>
+        <div class="fr-about-hero__actions" data-animate="fade-up" data-delay="360">
+          <a href="#fr-povestea" class="fr-about-hero__cta">
+            Descoperă povestea
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          </a>
+          <div class="fr-about-hero__origine">
+            <span class="fr-about-hero__flag-it" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>100% Origine italiană</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorativ dreapta -->
+      <div class="fr-about-hero__deco" aria-hidden="true">
+        <div class="fr-about-hero__compass" data-animate="scale" data-delay="300">
+          <svg class="fr-about-hero__compass-rings" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="250" cy="250" r="236" stroke="rgba(116,170,80,.18)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="210" stroke="rgba(116,170,80,.12)" stroke-width="1"/>
+            <circle cx="250" cy="250" r="178" stroke="rgba(116,170,80,.22)" stroke-width="1.5"/>
+            <circle cx="250" cy="250" r="148" stroke="rgba(255,255,255,.06)" stroke-width="1" stroke-dasharray="3 8"/>
+            <circle cx="250" cy="250" r="112" stroke="rgba(116,170,80,.16)" stroke-width="1"/>
+            <line x1="250" y1="14" x2="250" y2="56" stroke="rgba(116,170,80,.5)" stroke-width="2"/>
+            <line x1="250" y1="444" x2="250" y2="486" stroke="rgba(116,170,80,.5)" stroke-width="2"/>
+            <line x1="14" y1="250" x2="56" y2="250" stroke="rgba(116,170,80,.5)" stroke-width="2"/>
+            <line x1="444" y1="250" x2="486" y2="250" stroke="rgba(116,170,80,.5)" stroke-width="2"/>
+            <line x1="82" y1="82" x2="106" y2="106" stroke="rgba(116,170,80,.22)" stroke-width="1"/>
+            <line x1="418" y1="82" x2="394" y2="106" stroke="rgba(116,170,80,.22)" stroke-width="1"/>
+            <line x1="82" y1="418" x2="106" y2="394" stroke="rgba(116,170,80,.22)" stroke-width="1"/>
+            <line x1="418" y1="418" x2="394" y2="394" stroke="rgba(116,170,80,.22)" stroke-width="1"/>
+            <circle cx="250" cy="14" r="4" fill="rgba(116,170,80,.65)"/>
+            <circle cx="250" cy="486" r="4" fill="rgba(116,170,80,.65)"/>
+            <circle cx="14" cy="250" r="4" fill="rgba(116,170,80,.65)"/>
+            <circle cx="486" cy="250" r="4" fill="rgba(116,170,80,.65)"/>
+          </svg>
+          <div class="fr-about-hero__medal">
+            <div class="fr-about-hero__medal-inner">
+              <div class="fr-about-hero__medal-est">EST.</div>
+              <div class="fr-about-hero__medal-year">2020</div>
+              <div class="fr-about-hero__medal-hr"></div>
+              <div class="fr-about-hero__medal-it"><span class="it-g"></span><span class="it-w"></span><span class="it-r"></span></div>
+              <div class="fr-about-hero__medal-country">ITALIA</div>
+            </div>
+          </div>
+        </div>
+        <div class="fr-about-hero__chip fr-about-hero__chip--tl" data-animate="fade-up" data-delay="520">
+          <span class="fr-about-hero__chip-num">500<sup>+</sup></span>
+          <span class="fr-about-hero__chip-lbl">produse italiene</span>
+        </div>
+        <div class="fr-about-hero__chip fr-about-hero__chip--br" data-animate="fade-up" data-delay="680">
+          <span class="fr-about-hero__chip-num">10K<sup>+</sup></span>
+          <span class="fr-about-hero__chip-lbl">comenzi livrate</span>
+        </div>
+      </div>
+
     </div>
   </div>
+
   <div class="fr-about-hero__scroll" aria-hidden="true">
     <span class="fr-about-hero__scroll-line"></span>
     <span class="fr-about-hero__scroll-dot"></span>
