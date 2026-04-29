@@ -13,29 +13,46 @@
 
       <!-- Content stânga -->
       <div class="fr-about-hero__content">
-        <!-- Mobile: element decorativ vizibil doar pe telefon -->
+        <!-- Mobile: ilustrație gastronomie italiană -->
         <div class="fr-about-hero__mob-art" aria-hidden="true">
-          <svg class="fr-about-hero__mob-rings" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="80" cy="80" r="75" stroke="rgba(116,170,80,.2)" stroke-width="1"/>
-            <circle cx="80" cy="80" r="60" stroke="rgba(116,170,80,.15)" stroke-width="1"/>
-            <circle cx="80" cy="80" r="45" stroke="rgba(116,170,80,.28)" stroke-width="1.5"/>
-            <circle cx="80" cy="80" r="32" stroke="rgba(116,170,80,.12)" stroke-width="1" stroke-dasharray="2 6"/>
-            <line x1="80" y1="5" x2="80" y2="20" stroke="rgba(116,170,80,.5)" stroke-width="1.5"/>
-            <line x1="80" y1="140" x2="80" y2="155" stroke="rgba(116,170,80,.5)" stroke-width="1.5"/>
-            <line x1="5" y1="80" x2="20" y2="80" stroke="rgba(116,170,80,.5)" stroke-width="1.5"/>
-            <line x1="140" y1="80" x2="155" y2="80" stroke="rgba(116,170,80,.5)" stroke-width="1.5"/>
-            <circle cx="80" cy="5" r="2.5" fill="rgba(116,170,80,.65)"/>
-            <circle cx="80" cy="155" r="2.5" fill="rgba(116,170,80,.65)"/>
-            <circle cx="5" cy="80" r="2.5" fill="rgba(116,170,80,.65)"/>
-            <circle cx="155" cy="80" r="2.5" fill="rgba(116,170,80,.65)"/>
+          <svg viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" width="150" height="150">
+            <!-- Inel exterior decorativ -->
+            <circle cx="80" cy="80" r="74" stroke="rgba(116,170,80,.18)" stroke-width="1"/>
+            <!-- Farfurie (cerc interior) -->
+            <circle cx="80" cy="80" r="54" fill="rgba(10,24,8,.75)" stroke="rgba(116,170,80,.32)" stroke-width="1.8"/>
+            <!-- Furculiță (stânga, ușor înclinată) -->
+            <g transform="rotate(-12 80 80)">
+              <rect x="62" y="56" width="5" height="34" rx="2.5" fill="rgba(116,170,80,.85)"/>
+              <rect x="57.5" y="34" width="2.8" height="20" rx="1.4" fill="rgba(116,170,80,.85)"/>
+              <rect x="61.2" y="32" width="2.8" height="22" rx="1.4" fill="rgba(116,170,80,.85)"/>
+              <rect x="64.9" y="32" width="2.8" height="22" rx="1.4" fill="rgba(116,170,80,.85)"/>
+              <path d="M57 54 Q64.5 61 72 54" fill="rgba(116,170,80,.55)"/>
+            </g>
+            <!-- Cuțit (dreapta, ușor înclinat) -->
+            <g transform="rotate(12 80 80)">
+              <rect x="93" y="56" width="5" height="34" rx="2.5" fill="rgba(116,170,80,.85)"/>
+              <path d="M93 30 Q101 44 98 56 L93 56 Z" fill="rgba(116,170,80,.75)"/>
+            </g>
+            <!-- Ramură măslin stânga jos -->
+            <path d="M28 118 Q36 101 48 91" stroke="rgba(116,170,80,.45)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="35" cy="107" rx="9" ry="5" transform="rotate(-42 35 107)" fill="rgba(116,170,80,.28)"/>
+            <ellipse cx="44" cy="95" rx="9" ry="5" transform="rotate(18 44 95)" fill="rgba(116,170,80,.24)"/>
+            <circle cx="49" cy="88" r="3.5" fill="rgba(116,170,80,.5)"/>
+            <!-- Ramură măslin dreapta jos -->
+            <path d="M132 118 Q124 101 112 91" stroke="rgba(116,170,80,.45)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="125" cy="107" rx="9" ry="5" transform="rotate(42 125 107)" fill="rgba(116,170,80,.28)"/>
+            <ellipse cx="116" cy="95" rx="9" ry="5" transform="rotate(-18 116 95)" fill="rgba(116,170,80,.24)"/>
+            <circle cx="111" cy="88" r="3.5" fill="rgba(116,170,80,.5)"/>
+            <!-- Steag italian mic jos -->
+            <rect x="68" y="120" width="9" height="6" rx="1" fill="#009246" opacity=".9"/>
+            <rect x="77" y="120" width="8" height="6" fill="#f0ece3" opacity=".85"/>
+            <rect x="85" y="120" width="9" height="6" rx="1" fill="#ce2b37" opacity=".9"/>
+            <!-- Puncte decorative pe inel -->
+            <circle cx="80" cy="6" r="2.5" fill="rgba(116,170,80,.55)"/>
+            <circle cx="80" cy="154" r="2.5" fill="rgba(116,170,80,.55)"/>
+            <circle cx="6" cy="80" r="2" fill="rgba(116,170,80,.35)"/>
+            <circle cx="154" cy="80" r="2" fill="rgba(116,170,80,.35)"/>
           </svg>
-          <div class="fr-about-hero__mob-medal">
-            <div class="fr-about-hero__medal-est">EST.</div>
-            <div class="fr-about-hero__medal-year">2020</div>
-            <div class="fr-about-hero__medal-hr"></div>
-            <div class="fr-about-hero__medal-it"><span class="it-g"></span><span class="it-w"></span><span class="it-r"></span></div>
-            <div class="fr-about-hero__medal-country">ITALIA</div>
-          </div>
         </div>
 
         <div class="fr-about-hero__badge" data-animate="fade-up">

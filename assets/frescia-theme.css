@@ -1520,21 +1520,28 @@ input[type="radio"].product-option-input:checked + .option-btn {
     max-height: none;
   }
 
-  /* Hero video mobile */
+  /* Hero video mobile — video și imagine ascunse, animație CSS */
   .frescia-hero {
-    height: 62svh;
-    min-height: 380px;
-    background: linear-gradient(145deg, #1a3318 0%, #0e1c0a 55%, #1a1a20 100%);
+    height: 100svh;
+    min-height: 580px;
+    background: linear-gradient(155deg, #1a3318 0%, #0e1c0a 50%, #111418 100%);
   }
-  video.frescia-hero__video { object-position: center 20%; }
-  .frescia-hero__fallback-img {
-    object-fit: contain;
-    object-position: center center;
-    opacity: .12;
+  video.frescia-hero__video,
+  .frescia-hero__fallback-img { display: none !important; }
+  /* Conținut apare imediat fără să mai aștepte video */
+  .frescia-hero__content {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+    animation: fh-content-reveal .9s ease .15s both;
+  }
+  @keyframes fh-content-reveal {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
   .frescia-hero__title { font-size: clamp(1.9rem, 6.5vw, 2.6rem); }
   .frescia-hero__subtitle { font-size: .9rem; margin-bottom: 24px; }
-  .frescia-hero__buttons { flex-direction: column; align-items: stretch; gap: 10px; max-width: 320px; margin: 0 auto; }
+  .frescia-hero__buttons { flex-direction: column; align-items: stretch; gap: 10px; max-width: 300px; margin: 0 auto; }
 
   /* Sidebar — ascuns pe mobile, înlocuit de fr-mob-toolbar */
   .frescia-sidebar { display: none; }
@@ -2797,6 +2804,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
 /* Default: ascuns pe desktop */
 .fr-mob-toolbar { display: none; }
 .fr-about-hero__mob-art { display: none; }
+.fh-mob-vis { display: none; }
 
 @media (max-width: 768px) {
 
@@ -2877,33 +2885,120 @@ input[type="radio"].product-option-input:checked + .option-btn {
     border-color: var(--color-primary);
   }
 
-  /* ── About hero mobile deco ──────────────────────────────── */
+  /* ── About hero mobile deco — tacâmuri + ramuri ────────── */
   .fr-about-hero__mob-art {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 32px;
-    height: 140px;
+    margin-bottom: 28px;
+    height: 160px;
     position: relative;
     flex-shrink: 0;
+    animation: fh-content-reveal 1s ease .1s both;
   }
-  .fr-about-hero__mob-rings {
+
+  /* ── Homepage hero mobile visual ────────────────────────── */
+  .fh-mob-vis {
+    display: block;
     position: absolute;
     inset: 0;
-    width: 100%; height: 100%;
-    animation: fr-spin-slow 80s linear infinite;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
   }
-  .fr-about-hero__mob-medal {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    background: rgba(14,28,9,.9);
-    border: 1.5px solid rgba(116,170,80,.3);
+
+  /* Ramuri de măslin */
+  .fh-branch {
+    position: absolute;
+    transform-origin: bottom center;
+    animation: fh-sway 5s ease-in-out infinite;
+  }
+  @keyframes fh-sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50%       { transform: rotate(5deg); }
+  }
+  .fh-branch--l {
+    bottom: -10px; left: -10px;
+    width: 90px; height: 190px;
+    animation-delay: 0s;
+    transform-origin: bottom left;
+  }
+  .fh-branch--r {
+    top: 60px; right: -8px;
+    width: 70px; height: 150px;
+    animation-delay: 1.5s;
+    transform-origin: top right;
+    transform: scaleX(-1);
+  }
+
+  /* Cercuri decorative dreapta */
+  .fh-orb {
+    position: absolute;
     border-radius: 50%;
-    width: 80px; height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 24px rgba(116,170,80,.1);
+    border: 1px solid rgba(116,170,80,.15);
+    animation: fr-spin-slow 60s linear infinite;
   }
+  .fh-orb--1 {
+    width: 260px; height: 260px;
+    top: 50%; right: -150px;
+    transform: translateY(-50%);
+  }
+  .fh-orb--2 {
+    width: 180px; height: 180px;
+    top: 50%; right: -110px;
+    transform: translateY(-50%);
+    animation-direction: reverse;
+    animation-duration: 80s;
+    border-color: rgba(116,170,80,.09);
+  }
+
+  /* Puncte flotante */
+  .fh-dot {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(116,170,80,.55);
+    animation: fh-float-dot 4s ease-in-out infinite;
+  }
+  .fh-dot--a { width: 7px; height: 7px; top: 32%; right: 18%; animation-delay: 0s; }
+  .fh-dot--b { width: 5px; height: 5px; top: 58%; right: 34%; animation-delay: 1s; opacity: .7; }
+  .fh-dot--c { width: 6px; height: 6px; top: 44%; right: 8%; animation-delay: 2s; }
+  .fh-dot--d { width: 4px; height: 4px; top: 22%; right: 28%; animation-delay: 1.6s; opacity: .5; }
+  @keyframes fh-float-dot {
+    0%, 100% { transform: translateY(0); opacity: .55; }
+    50%       { transform: translateY(-12px); opacity: .9; }
+  }
+
+  /* Colț stâng sus — badge Italian */
+  .fh-it-corner {
+    position: absolute;
+    top: 80px; left: 20px;
+    display: flex; flex-direction: column; gap: 5px;
+    animation: fh-content-reveal 1s ease .5s both;
+  }
+  .fh-it-flag {
+    display: flex; overflow: hidden; border-radius: 2px;
+    width: 26px; height: 17px;
+  }
+  .fh-it-flag span { flex: 1; display: block; }
+  .fh-it-flag span:nth-child(1) { background: #009246; }
+  .fh-it-flag span:nth-child(2) { background: #f5f2ea; }
+  .fh-it-flag span:nth-child(3) { background: #ce2b37; }
+  .fh-it-label {
+    font-size: .6rem; font-weight: 700;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: rgba(255,255,255,.38);
+    writing-mode: horizontal-tb;
+  }
+
+  /* Bandă steag dreapta */
+  .fh-flag-strip {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 5px;
+    display: flex; flex-direction: column;
+  }
+  .fh-flag-strip span { flex: 1; }
+  .fh-flag-strip span:nth-child(1) { background: #009246; opacity: .65; }
+  .fh-flag-strip span:nth-child(2) { background: #f5f2ea; opacity: .45; }
+  .fh-flag-strip span:nth-child(3) { background: #ce2b37; opacity: .65; }
 }

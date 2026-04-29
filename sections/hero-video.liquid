@@ -26,6 +26,48 @@
     <div class="frescia-hero__video" style="background:var(--color-primary);"></div>
   {%- endif -%}
 
+  {%- comment -%} Mobile: animație brand (ascunsă pe desktop) {%- endcomment -%}
+  <div class="fh-mob-vis" aria-hidden="true">
+    <!-- Ramură de măslin stânga jos -->
+    <svg class="fh-branch fh-branch--l" viewBox="0 0 90 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M55 195 Q42 158 48 118 Q55 78 65 42" stroke="rgba(116,170,80,.45)" stroke-width="2" stroke-linecap="round"/>
+      <ellipse cx="44" cy="116" rx="17" ry="9" transform="rotate(-38 44 116)" fill="rgba(116,170,80,.22)"/>
+      <ellipse cx="57" cy="96" rx="17" ry="9" transform="rotate(22 57 96)" fill="rgba(116,170,80,.19)"/>
+      <ellipse cx="43" cy="148" rx="14" ry="8" transform="rotate(-48 43 148)" fill="rgba(116,170,80,.17)"/>
+      <ellipse cx="55" cy="132" rx="14" ry="8" transform="rotate(32 55 132)" fill="rgba(116,170,80,.2)"/>
+      <ellipse cx="41" cy="170" rx="12" ry="7" transform="rotate(-22 41 170)" fill="rgba(116,170,80,.14)"/>
+      <ellipse cx="53" cy="158" rx="12" ry="7" transform="rotate(42 53 158)" fill="rgba(116,170,80,.16)"/>
+      <circle cx="67" cy="44" r="5.5" fill="rgba(116,170,80,.55)"/>
+      <circle cx="74" cy="56" r="4" fill="rgba(116,170,80,.45)"/>
+      <circle cx="61" cy="65" r="4.5" fill="rgba(116,170,80,.5)"/>
+    </svg>
+    <!-- Ramură dreapta sus (oglindită) -->
+    <svg class="fh-branch fh-branch--r" viewBox="0 0 90 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M35 5 Q48 42 42 82 Q35 122 25 158" stroke="rgba(116,170,80,.35)" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="46" cy="84" rx="14" ry="8" transform="rotate(38 46 84)" fill="rgba(116,170,80,.16)"/>
+      <ellipse cx="33" cy="104" rx="14" ry="8" transform="rotate(-22 33 104)" fill="rgba(116,170,80,.14)"/>
+      <ellipse cx="47" cy="52" rx="12" ry="7" transform="rotate(48 47 52)" fill="rgba(116,170,80,.13)"/>
+      <ellipse cx="35" cy="68" rx="12" ry="7" transform="rotate(-32 35 68)" fill="rgba(116,170,80,.15)"/>
+      <circle cx="31" cy="8" r="4" fill="rgba(116,170,80,.4)"/>
+      <circle cx="24" cy="18" r="3" fill="rgba(116,170,80,.35)"/>
+    </svg>
+    <!-- Cercuri decorative dreapta -->
+    <div class="fh-orb fh-orb--1"></div>
+    <div class="fh-orb fh-orb--2"></div>
+    <!-- Puncte flotante (ingrediente) -->
+    <span class="fh-dot fh-dot--a"></span>
+    <span class="fh-dot fh-dot--b"></span>
+    <span class="fh-dot fh-dot--c"></span>
+    <span class="fh-dot fh-dot--d"></span>
+    <!-- Steag italian stânga sus -->
+    <div class="fh-it-corner">
+      <div class="fh-it-flag"><span></span><span></span><span></span></div>
+      <span class="fh-it-label">Autentic Italian</span>
+    </div>
+    <!-- Bandă steag dreaptă -->
+    <div class="fh-flag-strip"><span></span><span></span><span></span></div>
+  </div>
+
   {%- comment -%} Overlay — se întunecă când video-ul se termină {%- endcomment -%}
   <div
     class="frescia-hero__overlay"
