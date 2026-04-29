@@ -106,6 +106,12 @@
           "success_msg": "Mulțumim! Te-ai abonat cu succes.",
           "note": "Nu facem spam. Te poți dezabona oricând."
         }
+      },
+      "about-page": {
+        "type": "about-page",
+        "settings": {
+          "story_image": "shopify://shop_images/2.png"
+        }
       }
     },
     "content_for_index": []
