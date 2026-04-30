@@ -1,15 +1,34 @@
+{%- comment -%} Pre-check returning visitor BEFORE video elements parse {%- endcomment -%}
+<script>
+  (function() {
+    var SESSION_KEY = 'fh_hero_seen';
+    var navEntry = (performance.getEntriesByType('navigation') || [])[0];
+    var isReload = navEntry && navEntry.type === 'reload';
+    if (isReload) sessionStorage.removeItem(SESSION_KEY);
+    if (!isReload && sessionStorage.getItem(SESSION_KEY)) {
+      document.documentElement.classList.add('fh-returning');
+    }
+  })();
+</script>
+
+{%- comment -%} Preload Lottie file în paralel cu video — gata când e nevoie {%- endcomment -%}
+<link rel="preload" href="https://lottie.host/3c7aa575-9dce-4930-a65b-45c53ab820e1/Bp97Y27C0A.lottie" as="fetch" crossorigin="anonymous">
+
+<script type="module">
+  import 'https://cdn.jsdelivr.net/npm/@dotlottie/player-component@2.7.12/+esm';
+</script>
+
 <section
   class="frescia-hero{% unless section.settings.video_url != blank %} frescia-hero--no-video{% endunless %}"
   aria-label="{{ section.settings.heading | escape }}"
   id="frescia-hero"
 >
-  {%- comment -%} Video background {%- endcomment -%}
+  {%- comment -%} Video background — src setat prin JS doar pentru vizitatori noi {%- endcomment -%}
   {%- if section.settings.video_url != blank -%}
     <video
       class="frescia-hero__video"
       id="hero-video"
-      src="{{ section.settings.video_url }}"
-      autoplay
+      data-src="{{ section.settings.video_url }}"
       muted
       playsinline
       preload="none"
@@ -29,73 +48,101 @@
   <video
     class="fh-mob-video"
     id="fh-mob-video"
-    src="{{ 'frescia-mobile.mp4' | asset_url }}"
-    autoplay
+    data-src="{{ 'frescia-mobile.mp4' | asset_url }}"
     muted
     playsinline
     preload="none"
     aria-hidden="true"
   ></video>
 
-  {%- comment -%} Mobile: animație brand fallback (ascunsă pe desktop și când avem video) {%- endcomment -%}
-  <div class="fh-mob-vis" aria-hidden="true">
-    <!-- Ramură de măslin stânga jos -->
-    <svg class="fh-branch fh-branch--l" viewBox="0 0 90 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M55 195 Q42 158 48 118 Q55 78 65 42" stroke="rgba(116,170,80,.45)" stroke-width="2" stroke-linecap="round"/>
-      <ellipse cx="44" cy="116" rx="17" ry="9" transform="rotate(-38 44 116)" fill="rgba(116,170,80,.22)"/>
-      <ellipse cx="57" cy="96" rx="17" ry="9" transform="rotate(22 57 96)" fill="rgba(116,170,80,.19)"/>
-      <ellipse cx="43" cy="148" rx="14" ry="8" transform="rotate(-48 43 148)" fill="rgba(116,170,80,.17)"/>
-      <ellipse cx="55" cy="132" rx="14" ry="8" transform="rotate(32 55 132)" fill="rgba(116,170,80,.2)"/>
-      <ellipse cx="41" cy="170" rx="12" ry="7" transform="rotate(-22 41 170)" fill="rgba(116,170,80,.14)"/>
-      <ellipse cx="53" cy="158" rx="12" ry="7" transform="rotate(42 53 158)" fill="rgba(116,170,80,.16)"/>
-      <circle cx="67" cy="44" r="5.5" fill="rgba(116,170,80,.55)"/>
-      <circle cx="74" cy="56" r="4" fill="rgba(116,170,80,.45)"/>
-      <circle cx="61" cy="65" r="4.5" fill="rgba(116,170,80,.5)"/>
+  {%- comment -%} Emblem italian — sigiliu vintage, apare după video {%- endcomment -%}
+  <div class="fh-emblem" aria-hidden="true">
+    <svg class="fh-emblem__seal" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <path id="fh-seal-textpath" d="M 180 22 a 158 158 0 1 1 -0.001 0"/>
+      </defs>
+
+      <!-- Fundal întunecat — badge pe fundal verde -->
+      <circle cx="180" cy="180" r="165" fill="rgba(10,24,10,0.88)"/>
+
+      <!-- Inele decorative exterioare -->
+      <circle cx="180" cy="180" r="168" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <circle cx="180" cy="180" r="162" stroke="rgba(116,170,80,0.14)" stroke-width="0.5"/>
+
+      <!-- Inel text rotativ -->
+      <g class="fh-seal__ring">
+        <text font-family="Mulish, sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.36)" letter-spacing="3.8">
+          <textPath href="#fh-seal-textpath">PRODUSE ITALIENE AUTENTICE · FRESCIA · GUSTO DELL'ITALIA · PRODUSE ITALIENE AUTENTICE · FRESCIA · GUSTO DELL'ITALIA · </textPath>
+        </text>
+      </g>
+
+      <!-- Inel interior -->
+      <circle cx="180" cy="180" r="140" stroke="rgba(116,170,80,0.24)" stroke-width="1"/>
+      <circle cx="180" cy="180" r="133" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>
+      <circle cx="180" cy="180" r="132" fill="rgba(116,170,80,0.03)"/>
+
+      <!-- Ramuri dafin stânga -->
+      <g fill="rgba(116,170,80,0.45)">
+        <ellipse cx="57" cy="200" rx="7" ry="14" transform="rotate(18 57 200)"/>
+        <ellipse cx="61" cy="181" rx="6" ry="12" transform="rotate(8 61 181)"/>
+        <ellipse cx="69" cy="163" rx="6" ry="11" transform="rotate(-2 69 163)"/>
+        <ellipse cx="80" cy="148" rx="5" ry="10" transform="rotate(-14 80 148)"/>
+        <ellipse cx="93" cy="135" rx="5" ry="9" transform="rotate(-26 93 135)"/>
+      </g>
+      <path d="M 58 212 Q 71 184 96 132" stroke="rgba(116,170,80,0.28)" stroke-width="1" stroke-linecap="round"/>
+
+      <!-- Ramuri dafin dreapta (oglindite) -->
+      <g fill="rgba(116,170,80,0.45)">
+        <ellipse cx="303" cy="200" rx="7" ry="14" transform="rotate(-18 303 200)"/>
+        <ellipse cx="299" cy="181" rx="6" ry="12" transform="rotate(-8 299 181)"/>
+        <ellipse cx="291" cy="163" rx="6" ry="11" transform="rotate(2 291 163)"/>
+        <ellipse cx="280" cy="148" rx="5" ry="10" transform="rotate(14 280 148)"/>
+        <ellipse cx="267" cy="135" rx="5" ry="9" transform="rotate(26 267 135)"/>
+      </g>
+      <path d="M 302 212 Q 289 184 264 132" stroke="rgba(116,170,80,0.28)" stroke-width="1" stroke-linecap="round"/>
+
+      <!-- Puncte ornament sus -->
+      <circle cx="180" cy="58" r="3.5" fill="rgba(116,170,80,0.75)"/>
+      <circle cx="166" cy="66" r="2.5" fill="rgba(116,170,80,0.5)"/>
+      <circle cx="194" cy="66" r="2.5" fill="rgba(116,170,80,0.5)"/>
+
+      <!-- Etichetă sus -->
+      <text x="180" y="103" text-anchor="middle" font-family="Mulish, sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.4)" letter-spacing="5">IMPORTATOR</text>
+      <line x1="118" y1="111" x2="242" y2="111" stroke="rgba(116,170,80,0.25)" stroke-width="0.5"/>
+
+      <!-- "F" filigran fundal -->
+      <text x="180" y="212" text-anchor="middle" font-family="Mulish, sans-serif" font-size="112" font-weight="900" fill="rgba(116,170,80,0.055)">F</text>
+
+      <!-- ITALIA — text principal -->
+      <text x="180" y="195" text-anchor="middle" font-family="Mulish, sans-serif" font-size="30" font-weight="900" fill="rgba(255,255,255,0.9)" letter-spacing="9">ITALIA</text>
+
+      <!-- Linie separatoare cu puncte verde -->
+      <line x1="115" y1="209" x2="245" y2="209" stroke="rgba(116,170,80,0.45)" stroke-width="0.8"/>
+      <circle cx="112" cy="209" r="2.5" fill="rgba(116,170,80,0.75)"/>
+      <circle cx="248" cy="209" r="2.5" fill="rgba(116,170,80,0.75)"/>
+
+      <!-- "autentici" italic -->
+      <text x="180" y="232" text-anchor="middle" font-family="Mulish, sans-serif" font-size="13" font-weight="300" font-style="italic" fill="rgba(255,255,255,0.48)" letter-spacing="2">autentici</text>
+
+      <!-- Ornament trei pătrate verde -->
+      <rect x="167" y="245" width="5" height="5" fill="rgba(116,170,80,0.65)" rx="1"/>
+      <rect x="177.5" y="245" width="5" height="5" fill="rgba(116,170,80,0.42)" rx="1"/>
+      <rect x="188" y="245" width="5" height="5" fill="rgba(116,170,80,0.65)" rx="1"/>
+
+      <!-- Linie jos -->
+      <line x1="118" y1="261" x2="242" y2="261" stroke="rgba(116,170,80,0.25)" stroke-width="0.5"/>
+
+      <!-- FRESCIA -->
+      <text x="180" y="279" text-anchor="middle" font-family="Mulish, sans-serif" font-size="10" font-weight="700" fill="rgba(116,170,80,0.72)" letter-spacing="6">FRESCIA</text>
+
+      <!-- ROMÂNIA -->
+      <text x="180" y="297" text-anchor="middle" font-family="Mulish, sans-serif" font-size="7.5" font-weight="500" fill="rgba(255,255,255,0.32)" letter-spacing="4">ROMÂNIA</text>
+
+      <!-- Puncte ornament jos -->
+      <circle cx="180" cy="312" r="3" fill="rgba(116,170,80,0.65)"/>
+      <circle cx="167" cy="307" r="2" fill="rgba(116,170,80,0.42)"/>
+      <circle cx="193" cy="307" r="2" fill="rgba(116,170,80,0.42)"/>
     </svg>
-    <!-- Ramură dreapta sus (oglindită) -->
-    <svg class="fh-branch fh-branch--r" viewBox="0 0 90 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M35 5 Q48 42 42 82 Q35 122 25 158" stroke="rgba(116,170,80,.35)" stroke-width="1.5" stroke-linecap="round"/>
-      <ellipse cx="46" cy="84" rx="14" ry="8" transform="rotate(38 46 84)" fill="rgba(116,170,80,.16)"/>
-      <ellipse cx="33" cy="104" rx="14" ry="8" transform="rotate(-22 33 104)" fill="rgba(116,170,80,.14)"/>
-      <ellipse cx="47" cy="52" rx="12" ry="7" transform="rotate(48 47 52)" fill="rgba(116,170,80,.13)"/>
-      <ellipse cx="35" cy="68" rx="12" ry="7" transform="rotate(-32 35 68)" fill="rgba(116,170,80,.15)"/>
-      <circle cx="31" cy="8" r="4" fill="rgba(116,170,80,.4)"/>
-      <circle cx="24" cy="18" r="3" fill="rgba(116,170,80,.35)"/>
-    </svg>
-    <!-- Cercuri decorative dreapta -->
-    <div class="fh-orb fh-orb--1"></div>
-    <div class="fh-orb fh-orb--2"></div>
-    <!-- Puncte flotante (ingrediente) -->
-    <span class="fh-dot fh-dot--a"></span>
-    <span class="fh-dot fh-dot--b"></span>
-    <span class="fh-dot fh-dot--c"></span>
-    <span class="fh-dot fh-dot--d"></span>
-    <!-- Frunze busuioc stânga sus -->
-    <div class="fh-food-corner" aria-hidden="true">
-      <svg class="fh-basil" viewBox="0 0 100 115" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g transform="translate(50,112) rotate(-38)" opacity="0.52">
-          <path d="M0 0 C-13 -15 -20 -34 -18 -50 C-16 -64 -7 -72 0 -72 C7 -72 16 -64 18 -50 C20 -34 13 -15 0 0Z" fill="#74AA50"/>
-          <line x1="0" y1="0" x2="0" y2="-70" stroke="rgba(255,255,255,.2)" stroke-width="1.2"/>
-        </g>
-        <g transform="translate(50,112) rotate(30)" opacity="0.65">
-          <path d="M0 0 C-11 -13 -17 -30 -15 -44 C-13 -56 -5 -64 0 -64 C5 -64 13 -56 15 -44 C17 -30 11 -13 0 0Z" fill="#74AA50"/>
-          <line x1="0" y1="0" x2="0" y2="-62" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
-          <path d="M0 -30 C-7 -34 -13 -34 -15 -32" stroke="rgba(255,255,255,.18)" stroke-width="0.8" fill="none"/>
-          <path d="M0 -30 C7 -34 13 -34 15 -32" stroke="rgba(255,255,255,.18)" stroke-width="0.8" fill="none"/>
-        </g>
-        <path d="M50 112 C35 95 26 72 28 54 C30 38 41 28 50 28 C59 28 70 38 72 54 C74 72 65 95 50 112Z" fill="#74AA50" opacity="0.9"/>
-        <line x1="50" y1="112" x2="50" y2="30" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
-        <path d="M50 70 C41 65 32 65 29 68" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
-        <path d="M50 70 C59 65 68 65 71 68" stroke="rgba(255,255,255,.22)" stroke-width="1" fill="none"/>
-        <path d="M50 54 C43 49 35 49 32 52" stroke="rgba(255,255,255,.18)" stroke-width="0.9" fill="none"/>
-        <path d="M50 54 C57 49 65 49 68 52" stroke="rgba(255,255,255,.18)" stroke-width="0.9" fill="none"/>
-        <path d="M50 86 C43 82 36 82 34 84" stroke="rgba(255,255,255,.16)" stroke-width="0.8" fill="none"/>
-        <path d="M50 86 C57 82 64 82 66 84" stroke="rgba(255,255,255,.16)" stroke-width="0.8" fill="none"/>
-        <circle cx="50" cy="112" r="4" fill="#74AA50" opacity="0.8"/>
-      </svg>
-    </div>
-    <!-- Bandă steag dreaptă -->
-    <div class="fh-flag-strip"><span></span><span></span><span></span></div>
   </div>
 
   {%- comment -%} Overlay — se întunecă când video-ul se termină {%- endcomment -%}
@@ -144,6 +191,33 @@
   </div>
 
   {%- comment -%} Buton play/pause (vizibil doar după ce apare conținutul) {%- endcomment -%}
+  {%- comment -%} Lottie pizza ingredients — animație decorativă dreapta hero {%- endcomment -%}
+  {%- comment -%} SVG filter: elimină pixelii albi din Lottie fără a tinge culorile {%- endcomment -%}
+  <svg style="display:none;position:absolute;width:0;height:0;" aria-hidden="true">
+    <defs>
+      <filter id="fh-remove-white" color-interpolation-filters="sRGB">
+        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 3 0"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="fh-lottie-wrap" aria-hidden="true">
+    <dotlottie-player
+      class="fh-lottie"
+      src="https://lottie.host/3c7aa575-9dce-4930-a65b-45c53ab820e1/Bp97Y27C0A.lottie"
+      background="transparent"
+      speed="0.8"
+      autoplay
+    ></dotlottie-player>
+  </div>
+
+  {%- comment -%} Marquee produse — bandă cinetică, apare după video {%- endcomment -%}
+  <div class="fh-marquee" aria-hidden="true">
+    <div class="fh-marquee__track">
+      <span class="fh-marquee__item">PASTE</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">ULEI DE MĂSLINE</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">CONSERVE</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">PARMIGIANO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">PROSCIUTTO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">DOLCI</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">RISOTTO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">MOZZARELLA</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">PESTO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">OȚET BALSAMIC</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">PASTE</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">ULEI DE MĂSLINE</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">CONSERVE</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">PARMIGIANO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">PROSCIUTTO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">DOLCI</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">RISOTTO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">MOZZARELLA</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">PESTO</span><span class="fh-marquee__sep">·</span><span class="fh-marquee__item">OȚET BALSAMIC</span><span class="fh-marquee__sep">·</span>
+    </div>
+  </div>
+
   {%- if section.settings.video_url != blank -%}
     <button
       class="frescia-hero__play-btn"
@@ -165,17 +239,71 @@
   (function() {
     var hero = document.getElementById('frescia-hero');
     if (!hero) return;
-    var v = document.getElementById('fh-mob-video');
-    if (!v) return;
-    var rate = 1.45;
-    v.playbackRate = rate;
-    v.addEventListener('loadedmetadata', function() { v.playbackRate = rate; });
-    var fallback = setTimeout(function() {
+
+    var SESSION_KEY = 'fh_hero_seen';
+    var isReturning = document.documentElement.classList.contains('fh-returning');
+    var dp = hero.querySelector('dotlottie-player');
+
+    function lottiePause() {
+      if (!dp) return;
+      try {
+        if (typeof dp.stop === 'function') dp.stop();
+        else if (typeof dp.pause === 'function') dp.pause();
+      } catch(e){}
+    }
+    function lottiePlayFresh() {
+      if (!dp) return;
+      try {
+        if (typeof dp.stop === 'function') dp.stop();
+        if (typeof dp.play === 'function') dp.play();
+      } catch(e){}
+    }
+    function onLottieReady(fn) {
+      if (!dp) return;
+      fn();
+      customElements.whenDefined('dotlottie-player').then(function() {
+        fn();
+        dp.addEventListener('ready', fn);
+        dp.addEventListener('load', fn);
+      });
+    }
+
+    function showEnded() {
       hero.classList.add('frescia-hero--ended');
-    }, 15000);
-    v.addEventListener('ended', function() {
+      onLottieReady(lottiePlayFresh);
+    }
+
+    /* Vizitator care revine: autoplay pe dp face restul, plus play() agresiv */
+    if (isReturning) {
+      showEnded();
+      return;
+    }
+
+    /* Vizită nouă/refresh: marchează imediat sesiunea (chiar dacă userul navighează) */
+    sessionStorage.setItem(SESSION_KEY, '1');
+
+    /* Oprește Lottie până se termină video-ul */
+    onLottieReady(lottiePause);
+
+    /* Detectează dispozitivul, rulează doar video-ul corect */
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
+    var primary = isMobile
+      ? document.getElementById('fh-mob-video')
+      : document.getElementById('hero-video');
+    if (!primary || !primary.dataset.src) return;
+
+    primary.src = primary.dataset.src;
+    if (isMobile) {
+      var rate = 1.45;
+      primary.playbackRate = rate;
+      primary.addEventListener('loadedmetadata', function() { primary.playbackRate = rate; });
+    }
+    primary.play().catch(function(){});
+
+    var fallback = setTimeout(showEnded, 15000);
+    primary.addEventListener('ended', function() {
       clearTimeout(fallback);
-      hero.classList.add('frescia-hero--ended');
+      showEnded();
     });
   })();
   </script>

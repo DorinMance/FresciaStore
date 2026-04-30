@@ -1323,8 +1323,8 @@ h1, h2, h3, h4, h5 {
 
 .frescia-hero__content {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.2s ease 0.4s, transform 1.2s ease 0.4s;
+  transform: translateY(44px);
+  transition: opacity 2.4s var(--ease-out-expo) 0.9s, transform 2s var(--ease-out-expo) 0.9s;
   pointer-events: none;
 }
 
@@ -1367,14 +1367,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* Vizitator care revine — skip video, totul instant */
-.frescia-hero--instant {
-  background:
-    radial-gradient(ellipse 45% 50% at 8% 88%,   rgba(116,170,80,.24) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 50% at 50% 108%,  rgba(116,170,80,.16) 0%, transparent 58%),
-    radial-gradient(ellipse 32% 42% at 95% 6%,    rgba(218,41,28,.11)  0%, transparent 48%),
-    radial-gradient(ellipse 18% 25% at 50% 48%,   rgba(116,170,80,.06) 0%, transparent 100%),
-    linear-gradient(158deg, #1b3d1e 0%, #0b1a0c 28%, #0d1319 58%, #111722 100%);
-}
+.frescia-hero--instant {}
 /* Ramuri de măslin SVG + elemente decorative italiene */
 .frescia-hero--instant::before {
   content: '';
@@ -1388,6 +1381,7 @@ h1, h2, h3, h4, h5 {
   background-repeat: no-repeat;
   animation: fh-bg-breathe 8s ease-in-out infinite;
 }
+.frescia-hero--instant::before { content: none; }
 /* Tricolor vertical pe marginea dreaptă */
 .frescia-hero--instant::after {
   content: '';
@@ -1397,30 +1391,40 @@ h1, h2, h3, h4, h5 {
   z-index: 1;
   pointer-events: none;
   background: linear-gradient(to bottom,
-    #009246 0%,          #009246 33.33%,
-    rgba(245,242,234,.9) 33.33%, rgba(245,242,234,.9) 66.66%,
-    #ce2b37 66.66%);
-  opacity: .6;
+    #74AA50 0%,          #74AA50 33.33%,
+    rgba(255,255,255,.92) 33.33%, rgba(255,255,255,.92) 66.66%,
+    #DA291C 66.66%);
+  opacity: .65;
 }
-/* Overlay mai întunecat */
+/* Overlay instant — verde bg, fără întuneric suplimentar */
 .frescia-hero--instant .frescia-hero__overlay {
-  background: rgba(8, 22, 8, 0.42) !important;
+  background: rgba(0, 0, 0, 0.05) !important;
 }
 .frescia-hero--instant .frescia-hero__video,
 .frescia-hero--instant .fh-mob-video { display: none !important; }
 .frescia-hero--instant .frescia-hero__content,
 .frescia-hero--instant .frescia-hero__overlay,
-.frescia-hero--instant .fh-mob-vis { transition: none !important; animation: none !important; }
+.frescia-hero--instant .fh-emblem,
+.frescia-hero--instant .fh-lottie-wrap,
+.frescia-hero--instant .fh-marquee__track { transition: none !important; animation: none !important; }
 /* ── HERO ENDED STATE — stare după video ─────────────────── */
 
-/* Fundal: verde italian noaptea — curat, unitar, fără split */
-.frescia-hero--ended {
+/* Fundal: verde brand Frescia — #74AA50 conform ghid vizual */
+.frescia-hero--ended,
+.frescia-hero--instant {
   background:
-    radial-gradient(ellipse 55% 44% at -4% 108%, rgba(116,170,80,.28) 0%, transparent 52%),
-    #0d1f0f;
+    radial-gradient(ellipse 50% 60% at 76% 44%, rgba(218,41,28,.18) 0%, transparent 52%),
+    radial-gradient(ellipse 45% 55% at 8% 85%, rgba(63,63,68,.32) 0%, transparent 48%),
+    radial-gradient(ellipse 60% 40% at 45% -8%, rgba(255,255,255,.14) 0%, transparent 42%),
+    #74AA50;
 }
+/* Video: fade-out lent în loc de display:none brusc */
+.frescia-hero__video,
+.fh-mob-video { transition: opacity 1.1s cubic-bezier(0.4, 0, 0.2, 1); }
 .frescia-hero--ended .frescia-hero__video,
-.frescia-hero--ended .fh-mob-video { display: none !important; }
+.frescia-hero--ended .fh-mob-video { opacity: 0; pointer-events: none; }
+.frescia-hero--instant .frescia-hero__video,
+.frescia-hero--instant .fh-mob-video { display: none !important; }
 
 .frescia-hero--ended .frescia-hero__content {
   opacity: 1;
@@ -1428,60 +1432,156 @@ h1, h2, h3, h4, h5 {
   pointer-events: auto;
 }
 
-/* Overlay transparent — fundalul e deja întunecat */
+/* Overlay: verde bg — fără overlay suplimentar */
 .frescia-hero--ended .frescia-hero__overlay {
-  background: rgba(0, 0, 0, 0.04) !important;
-  transition: none;
+  background: rgba(0, 0, 0, 0.0) !important;
+  transition: background 3.2s ease !important;
 }
 
-/* Text mai clar pe fundal mai închis */
-.frescia-hero--ended .frescia-hero__title {
-  text-shadow: 0 2px 32px rgba(0,0,0,.7), 0 0 80px rgba(116,170,80,.10);
+/* Verde bg: titlu alb cu shadow discret */
+.frescia-hero--ended .frescia-hero__title,
+.frescia-hero--instant .frescia-hero__title {
+  text-shadow: 0 2px 20px rgba(0,0,0,.36), 0 0 50px rgba(63,63,68,.18);
+}
+
+/* Verde bg: tagline nud cald (italian feel, conform brand) */
+.frescia-hero--ended .frescia-hero__tagline,
+.frescia-hero--instant .frescia-hero__tagline {
+  color: #E0C6AD;
+}
+
+/* Verde bg: subtitle nud-warm (NU alb pur — folosește paletă brand) */
+.frescia-hero--ended .frescia-hero__subtitle,
+.frescia-hero--instant .frescia-hero__subtitle {
+  color: rgba(224,198,173,0.92);
+}
+
+/* Verde bg: buton primar roșu brand #DA291C */
+.frescia-hero--ended .btn-primary,
+.frescia-hero--instant .btn-primary {
+  background: #DA291C;
+  border-color: #DA291C;
+  box-shadow: 0 4px 20px rgba(218,41,28,.28);
+}
+.frescia-hero--ended .btn-primary:hover,
+.frescia-hero--instant .btn-primary:hover {
+  background: #b81e12;
+  border-color: #b81e12;
+  box-shadow: 0 6px 28px rgba(218,41,28,.42);
+}
+
+/* Verde bg: badge nud (#E0C6AD) cu text carbon (#3F3F44) — italian, cald */
+.frescia-hero--ended .badge-italian,
+.frescia-hero--instant .badge-italian {
+  background: #E0C6AD;
+  border-color: rgba(63,63,68,0.18);
+  color: #3F3F44;
+  backdrop-filter: none;
+}
+.frescia-hero--ended .badge-italian svg,
+.frescia-hero--instant .badge-italian svg {
+  color: #DA291C;
+  stroke: #DA291C;
+}
+
+/* Verde bg: separator marquee roșu, text mai vizibil */
+.frescia-hero--ended .fh-marquee__sep,
+.frescia-hero--instant .fh-marquee__sep {
+  color: rgba(218,41,28,.70);
+}
+.frescia-hero--ended .fh-marquee__item,
+.frescia-hero--instant .fh-marquee__item {
+  color: rgba(255,255,255,.48);
+}
+.frescia-hero--ended .fh-marquee,
+.frescia-hero--instant .fh-marquee {
+  border-top-color: rgba(218,41,28,.22);
 }
 
 .frescia-hero--ended .frescia-hero__play-btn { display: none !important; }
 
-/* Afișează decorații */
-.frescia-hero--ended .fh-mob-vis {
-  display: block !important;
-  opacity: 1 !important;
+/* Afișează emblem și marquee în stările ended/instant */
+.frescia-hero--ended .fh-emblem,
+.frescia-hero--instant .fh-emblem { display: block !important; }
+
+.frescia-hero--ended .fh-marquee,
+.frescia-hero--instant .fh-marquee {
+  display: flex;
+  animation: fh-marquee-fadein 1.2s var(--ease-out-expo) 2.8s both;
 }
 
-/* ── Desktop: editorial minimal — un singur element, tricolor ── */
+/* ── Desktop: editorial + composizione italiana ── */
 @media (min-width: 769px) {
-  /* Elimină SVG-ul scatter */
-  .frescia-hero--ended::before { content: none; }
+  .frescia-hero--ended::before,
+  .frescia-hero--instant::before { content: none; }
 
   /* Tricolor italian — 4px, margine dreaptă */
-  .frescia-hero--ended::after {
+  .frescia-hero--ended::after,
+  .frescia-hero--instant::after {
     content: '';
     position: absolute; top: 0; right: 0; bottom: 0;
     width: 4px; z-index: 2; pointer-events: none;
     background: linear-gradient(to bottom,
-      #009246 0%,          #009246 33.33%,
-      rgba(245,242,234,.8) 33.33%, rgba(245,242,234,.8) 66.66%,
-      #ce2b37 66.66%);
+      #74AA50 0%,          #74AA50 33.33%,
+      rgba(255,255,255,.88) 33.33%, rgba(255,255,255,.88) 66.66%,
+      #DA291C 66.66%);
     opacity: .55;
   }
 
-  /* Ramura stânga — singura decorațiune, mare și editorială */
-  .frescia-hero--ended .fh-branch { position: absolute; }
-  .frescia-hero--ended .fh-branch--l {
-    bottom: -50px; left: -18px;
-    width: 210px; height: 450px;
-    transform-origin: bottom left;
-    opacity: .82;
-    filter: drop-shadow(0 0 48px rgba(116,170,80,.22)) brightness(1.25);
-    animation: fh-sway-l 8s ease-in-out infinite;
+  /* Content: editorial stânga — max 44vw ca să nu lase gol */
+  .frescia-hero--ended .frescia-hero__content,
+  .frescia-hero--instant .frescia-hero__content {
+    text-align: left;
+    margin-left: max(6vw, 48px);
+    margin-right: auto;
+    max-width: min(510px, 44vw);
   }
+  .frescia-hero--ended .frescia-hero__subtitle,
+  .frescia-hero--instant .frescia-hero__subtitle { margin-left: 0; }
+  .frescia-hero--ended .frescia-hero__buttons,
+  .frescia-hero--instant .frescia-hero__buttons { justify-content: flex-start; }
 
-  /* Ascunde tot restul — less is more */
-  .frescia-hero--ended .fh-branch--r,
-  .frescia-hero--ended .fh-orb,
-  .frescia-hero--ended .fh-dot,
-  .frescia-hero--ended .fh-food-corner,
-  .frescia-hero--ended .fh-flag-strip { display: none !important; }
+  /* Emblem: mic, dreapta sus — element decorativ discret */
+  .frescia-hero--ended .fh-emblem,
+  .frescia-hero--instant .fh-emblem {
+    position: absolute;
+    right: clamp(28px, 4vw, 64px);
+    top: clamp(20px, 4vh, 48px);
+    left: auto;
+    transform: none;
+    width: clamp(130px, 16vw, 200px);
+    opacity: 0.88;
+  }
+  .frescia-hero--ended .fh-emblem {
+    animation: fh-emblem-rise 1.8s var(--ease-out-expo) 1.8s both;
+  }
 }
+
+@keyframes fh-emblem-rise {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 0.88; transform: scale(1); }
+}
+@keyframes fh-marquee-fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Stagger elemente conținut hero */
+@keyframes fh-child-rise {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.frescia-hero--ended .frescia-hero__badge    { animation: fh-child-rise 1s var(--ease-out-expo) 1s    both; }
+.frescia-hero--ended .frescia-hero__title    { animation: fh-child-rise 1.1s var(--ease-out-expo) 1.25s both; }
+.frescia-hero--ended .frescia-hero__tagline  { animation: fh-child-rise 1s var(--ease-out-expo) 1.5s  both; }
+.frescia-hero--ended .frescia-hero__subtitle { animation: fh-child-rise 1s var(--ease-out-expo) 1.7s  both; }
+.frescia-hero--ended .frescia-hero__buttons  { animation: fh-child-rise 1s var(--ease-out-expo) 1.9s  both; }
+/* Instant: fără animație pe copii */
+.frescia-hero--instant .frescia-hero__badge,
+.frescia-hero--instant .frescia-hero__title,
+.frescia-hero--instant .frescia-hero__tagline,
+.frescia-hero--instant .frescia-hero__subtitle,
+.frescia-hero--instant .frescia-hero__buttons { animation: none !important; }
 
 /* ── 18. CATEGORY TILES ───────────────────────────────────── */
 .frescia-cat-tiles__header {
@@ -1662,11 +1762,14 @@ input[type="radio"].product-option-input:checked + .option-btn {
     max-height: none;
   }
 
-  /* Hero video mobile — video și imagine ascunse, animație CSS */
+  /* Hero mobile — fundal verde brand #74AA50 + accente carbon (paletă oficială) */
   .frescia-hero {
     height: 100svh;
     min-height: 580px;
-    background: linear-gradient(155deg, #1a3318 0%, #0e1c0a 50%, #111418 100%);
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 105%, rgba(63,63,68,.32) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(255,255,255,.10) 0%, transparent 50%),
+      #74AA50;
   }
   video.frescia-hero__video,
   .frescia-hero__fallback-img { display: none !important; }
@@ -2948,6 +3051,43 @@ input[type="radio"].product-option-input:checked + .option-btn {
 .fr-about-hero__mob-art { display: none; }
 .fh-mob-vis { display: none; }
 .fh-mob-video { display: none; }
+/* Lottie wrapper — SVG filter elimină pixelii albi fără a tinge culorile */
+.fh-lottie-wrap { display: none; position: absolute; z-index: 0; pointer-events: none; filter: url(#fh-remove-white); }
+.fh-lottie { width: 100%; height: 100%; }
+.frescia-hero--ended .fh-lottie-wrap { display: block; animation: fh-lottie-rise 0.7s var(--ease-out-expo) 0s both; }
+.frescia-hero--instant .fh-lottie-wrap { display: block; opacity: 0.90; }
+@keyframes fh-lottie-rise {
+  from { opacity: 0; transform: scale(1.03); }
+  to   { opacity: 0.90; transform: scale(1); }
+}
+/* Desktop: dreapta hero, în spatele sigiliului */
+@media (min-width: 769px) {
+  .frescia-hero--ended .fh-lottie-wrap,
+  .frescia-hero--instant .fh-lottie-wrap {
+    left: 40%;
+    right: 0;
+    top: 0;
+    bottom: 40px;
+  }
+}
+/* Mobile: ascuns */
+@media (max-width: 768px) {
+  .fh-lottie-wrap { display: none !important; }
+}
+
+.fh-emblem { display: none; position: absolute; z-index: 1; pointer-events: none; }
+.fh-emblem__seal { display: block; width: 100%; height: auto; }
+.fh-seal__ring { transform-origin: 180px 180px; animation: fh-seal-spin 38s linear infinite; }
+@keyframes fh-seal-spin { to { transform: rotate(360deg); } }
+.fh-marquee { display: none; position: absolute; bottom: 0; left: 0; right: 0; height: 40px; overflow: hidden; align-items: center; border-top: 1px solid rgba(116,170,80,0.18); z-index: 2; }
+.fh-marquee__track { display: flex; align-items: center; white-space: nowrap; animation: fh-marquee-scroll 52s linear infinite; }
+.fh-marquee__item { font-family: var(--font-body); font-size: 0.67rem; font-weight: 700; letter-spacing: 0.16em; color: rgba(255,255,255,0.27); padding: 0 20px; text-transform: uppercase; }
+.fh-marquee__sep { color: rgba(116,170,80,0.5); font-size: 0.8rem; flex-shrink: 0; line-height: 1; }
+@keyframes fh-marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .fh-marquee__track { animation-play-state: paused; }
+  .fh-seal__ring { animation: none; }
+}
 
 @media (max-width: 768px) {
 
@@ -3053,103 +3193,15 @@ input[type="radio"].product-option-input:checked + .option-btn {
     transition: opacity 1.4s ease;
   }
   .frescia-hero--ended .fh-mob-video { opacity: 0; }
-  /* Decorațiunile apar după video */
-  .fh-mob-vis {
-    display: block;
+  /* Emblem: centrat în zona goală de deasupra textului */
+  .frescia-hero--ended .fh-emblem,
+  .frescia-hero--instant .fh-emblem {
     position: absolute;
-    inset: 0;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity .9s ease .4s;
+    left: 50%;
+    top: 28px;
+    transform: translateX(-50%);
+    width: 220px;
+    opacity: 0.42;
+    animation: none;
   }
-  .frescia-hero--ended .fh-mob-vis {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  /* Ramuri de măslin */
-  .fh-branch {
-    position: absolute;
-    transform-origin: bottom center;
-    animation: fh-sway 5s ease-in-out infinite;
-  }
-  @keyframes fh-sway {
-    0%, 100% { transform: rotate(-5deg); }
-    50%       { transform: rotate(5deg); }
-  }
-  .fh-branch--l {
-    bottom: -10px; left: -10px;
-    width: 90px; height: 190px;
-    animation-delay: 0s;
-    transform-origin: bottom left;
-  }
-  .fh-branch--r {
-    top: 60px; right: -8px;
-    width: 70px; height: 150px;
-    animation-delay: 1.5s;
-    transform-origin: top right;
-    transform: scaleX(-1);
-  }
-
-  /* Cercuri decorative dreapta */
-  .fh-orb {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(116,170,80,.15);
-    animation: fr-spin-slow 60s linear infinite;
-  }
-  .fh-orb--1 {
-    width: 260px; height: 260px;
-    top: 50%; right: -150px;
-    transform: translateY(-50%);
-  }
-  .fh-orb--2 {
-    width: 180px; height: 180px;
-    top: 50%; right: -110px;
-    transform: translateY(-50%);
-    animation-direction: reverse;
-    animation-duration: 80s;
-    border-color: rgba(116,170,80,.09);
-  }
-
-  /* Puncte flotante */
-  .fh-dot {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(116,170,80,.55);
-    animation: fh-float-dot 4s ease-in-out infinite;
-  }
-  .fh-dot--a { width: 7px; height: 7px; top: 32%; right: 18%; animation-delay: 0s; }
-  .fh-dot--b { width: 5px; height: 5px; top: 58%; right: 34%; animation-delay: 1s; opacity: .7; }
-  .fh-dot--c { width: 6px; height: 6px; top: 44%; right: 8%; animation-delay: 2s; }
-  .fh-dot--d { width: 4px; height: 4px; top: 22%; right: 28%; animation-delay: 1.6s; opacity: .5; }
-  @keyframes fh-float-dot {
-    0%, 100% { transform: translateY(0); opacity: .55; }
-    50%       { transform: translateY(-12px); opacity: .9; }
-  }
-
-  /* Colț stâng sus — frunze busuioc */
-  .fh-food-corner {
-    position: absolute;
-    top: 68px; left: 16px;
-    animation: fh-content-reveal 1s ease .5s both;
-  }
-  .fh-basil {
-    width: 80px; height: 92px;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,.45));
-    animation: fh-sway-l 5s ease-in-out infinite;
-    transform-origin: bottom center;
-  }
-
-  /* Bandă steag dreapta */
-  .fh-flag-strip {
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    width: 5px;
-    display: flex; flex-direction: column;
-  }
-  .fh-flag-strip span { flex: 1; }
-  .fh-flag-strip span:nth-child(1) { background: #009246; opacity: .65; }
-  .fh-flag-strip span:nth-child(2) { background: #f5f2ea; opacity: .45; }
-  .fh-flag-strip span:nth-child(3) { background: #ce2b37; opacity: .65; }
 }
