@@ -3070,9 +3070,24 @@ input[type="radio"].product-option-input:checked + .option-btn {
     bottom: 40px;
   }
 }
-/* Mobile: ascuns */
+/* Mobile: jos, iese din cadru, tăiat de overflow: hidden al hero-ului */
 @media (max-width: 768px) {
-  .fh-lottie-wrap { display: none !important; }
+  .frescia-hero--ended .fh-lottie-wrap,
+  .frescia-hero--instant .fh-lottie-wrap {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: 36px;
+    transform: translateX(-50%);
+    width: 260px;
+    height: 200px;
+    opacity: 0.70;
+  }
+  /* Ecrane prea scurte — ascunde ca să nu înghesue conținutul */
+  @media (max-height: 620px) {
+    .frescia-hero--ended .fh-lottie-wrap,
+    .frescia-hero--instant .fh-lottie-wrap { display: none !important; }
+  }
 }
 
 .fh-emblem { display: none; position: absolute; z-index: 1; pointer-events: none; }
@@ -3193,16 +3208,28 @@ input[type="radio"].product-option-input:checked + .option-btn {
     transition: opacity 1.4s ease;
   }
   .frescia-hero--ended .fh-mob-video { opacity: 0; }
-  /* Emblem: colț dreapta-sus pe mobile, mic, nu suprapune conținut */
+  /* Emblem: centrat sus pe mobile, conținut coboară sub el */
   .frescia-hero--ended .fh-emblem,
   .frescia-hero--instant .fh-emblem {
     position: absolute;
-    right: 16px;
+    left: 50%;
     top: 16px;
-    left: auto;
-    transform: none;
-    width: 88px;
+    right: auto;
+    transform: translateX(-50%);
+    width: clamp(120px, 36vw, 155px);
     opacity: 0.88;
     animation: none;
+  }
+
+  /* Hero: aliniere sus + padding care curăță sigiliul */
+  .frescia-hero--ended,
+  .frescia-hero--instant {
+    align-items: flex-start;
+  }
+  .frescia-hero--ended .frescia-hero__content,
+  .frescia-hero--instant .frescia-hero__content {
+    padding-top: clamp(148px, 42vw, 185px);
+    padding-bottom: 28px;
+    width: 100%;
   }
 }
