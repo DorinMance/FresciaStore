@@ -3193,15 +3193,16 @@ input[type="radio"].product-option-input:checked + .option-btn {
     transition: opacity 1.4s ease;
   }
   .frescia-hero--ended .fh-mob-video { opacity: 0; }
-  /* Emblem: centrat în zona goală de deasupra textului */
+  /* Emblem: colț dreapta-sus pe mobile, mic, nu suprapune conținut */
   .frescia-hero--ended .fh-emblem,
   .frescia-hero--instant .fh-emblem {
     position: absolute;
-    left: 50%;
-    top: 28px;
-    transform: translateX(-50%);
-    width: 220px;
-    opacity: 0.42;
+    right: 16px;
+    top: 16px;
+    left: auto;
+    transform: none;
+    width: 88px;
+    opacity: 0.88;
     animation: none;
   }
 }
