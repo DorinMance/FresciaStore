@@ -51,7 +51,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-text);
-  background: var(--color-bg);
+  background: var(--color-carbon-light);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -183,8 +183,8 @@ h1, h2, h3, h4, h5 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--color-white);
-  border-bottom: 1px solid var(--color-border);
+  background: var(--color-nud);
+  border-bottom: 1px solid rgba(63,63,68,.18);
   height: var(--nav-h);
   transition: box-shadow var(--transition);
 }
@@ -211,6 +211,7 @@ h1, h2, h3, h4, h5 {
   height: 48px;
   width: auto;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 .frescia-logo__dot { color: var(--color-accent); }
 .frescia-logo__domain { color: var(--color-accent); }
@@ -247,6 +248,194 @@ h1, h2, h3, h4, h5 {
 
 .frescia-nav__link:hover::after,
 .frescia-nav__link.active::after { width: 100%; }
+
+/* Nav Dropdown */
+.frescia-nav__item {
+  display: flex;
+  align-items: center;
+}
+
+.frescia-nav__item--dropdown {
+  position: relative;
+}
+
+.frescia-nav__item--dropdown > .frescia-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.frescia-nav__chevron {
+  flex-shrink: 0;
+  transition: transform var(--transition);
+}
+
+.frescia-nav__item--dropdown:hover .frescia-nav__chevron {
+  transform: rotate(180deg);
+}
+
+.frescia-nav__dropdown {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  min-width: 210px;
+  padding: 8px 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition), transform var(--transition);
+  z-index: 200;
+}
+
+.frescia-nav__item--dropdown:hover .frescia-nav__dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.frescia-nav__dropdown-link {
+  display: block;
+  padding: 9px 20px;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--color-text);
+  transition: background var(--transition), color var(--transition);
+}
+
+.frescia-nav__dropdown-link:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.frescia-nav__dropdown-link--all {
+  font-weight: 600;
+  color: var(--color-primary);
+  border-top: 1px solid var(--color-border);
+  margin-top: 4px;
+  padding-top: 12px;
+}
+
+/* Desktop nav — "Despre noi" link normal (ca celelalte), fără stilizare specială */
+/* Clasa --brand există dar nu modifică nimic, link-ul moștenește stilul standard */
+
+/* Butoane antet — coș cu accent brand */
+.frescia-nav__icon-btn--cart {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-radius: var(--radius-md);
+}
+.frescia-nav__icon-btn--cart:hover {
+  background: var(--color-primary-dark);
+  color: #ffffff !important;
+}
+.frescia-nav__icon-btn--cart .frescia-nav__badge {
+  background: var(--color-accent);
+  border: 2px solid var(--color-nud);
+}
+
+/* Mobile menu child links */
+.frescia-mobile-menu__link--child {
+  padding-left: 32px !important;
+  font-size: .875rem !important;
+  color: var(--color-text-light) !important;
+  border-bottom-color: transparent !important;
+}
+
+.frescia-mobile-menu__link--brand {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 13px;
+}
+
+.frescia-mobile-menu__link--brand:hover {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+}
+
+/* Category List — vertical layout */
+.frescia-cat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.frescia-cat-list__item {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 20px;
+  background: var(--color-white);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  text-decoration: none;
+}
+
+.frescia-cat-list__item:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateX(4px);
+}
+
+.frescia-cat-list__img-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid var(--color-primary-light);
+}
+
+.frescia-cat-list__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.frescia-cat-list__item:hover .frescia-cat-list__img { transform: scale(1.08); }
+
+.frescia-cat-list__placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frescia-cat-list__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.frescia-cat-list__name {
+  font-family: var(--font-heading);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.frescia-cat-list__count {
+  font-size: .78rem;
+  color: var(--color-text-light);
+}
+
+.frescia-cat-list__arrow {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
 
 /* Search */
 .frescia-nav__search {
@@ -1169,8 +1358,8 @@ h1, h2, h3, h4, h5 {
 
 /* ── 15. FOOTER ───────────────────────────────────────────── */
 .frescia-footer {
-  background: var(--color-carbon);
-  color: rgba(255,255,255,.85);
+  background: var(--color-nud);
+  color: var(--color-text);
   padding: 64px 0 0;
 }
 
@@ -1185,14 +1374,14 @@ h1, h2, h3, h4, h5 {
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-white);
+  color: var(--color-black);
   margin-bottom: 14px;
 }
 
 .frescia-footer__desc {
   font-size: .88rem;
   line-height: 1.7;
-  color: rgba(255,255,255,.65);
+  color: var(--color-text-light);
   margin-bottom: 24px;
 }
 
@@ -1204,12 +1393,12 @@ h1, h2, h3, h4, h5 {
 .frescia-footer__social-link {
   width: 38px; height: 38px;
   border-radius: var(--radius-md);
-  background: rgba(255,255,255,.1);
+  background: rgba(63,63,68,.12);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-white);
-  transition: background var(--transition), transform var(--transition);
+  color: var(--color-carbon);
+  transition: background var(--transition), transform var(--transition), color var(--transition);
 }
 
 .frescia-footer__social-link:hover {
@@ -1223,7 +1412,7 @@ h1, h2, h3, h4, h5 {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--color-white);
+  color: var(--color-carbon);
   margin-bottom: 16px;
 }
 
@@ -1235,7 +1424,7 @@ h1, h2, h3, h4, h5 {
 
 .frescia-footer__link {
   font-size: .85rem;
-  color: rgba(255,255,255,.65);
+  color: var(--color-text-light);
   transition: color var(--transition);
   padding: 2px 0;
 }
@@ -1243,7 +1432,7 @@ h1, h2, h3, h4, h5 {
 .frescia-footer__link:hover { color: var(--color-accent); }
 
 .frescia-footer__bottom {
-  border-top: 1px solid rgba(255,255,255,.12);
+  border-top: 1px solid rgba(63,63,68,.2);
   padding: 20px 0;
   display: flex;
   align-items: center;
@@ -1254,7 +1443,7 @@ h1, h2, h3, h4, h5 {
 
 .frescia-footer__copy {
   font-size: .8rem;
-  color: rgba(255,255,255,.45);
+  color: var(--color-text-light);
 }
 
 .frescia-footer__payments {
@@ -1265,14 +1454,14 @@ h1, h2, h3, h4, h5 {
 
 .frescia-footer__payment-badge {
   height: 24px;
-  background: rgba(255,255,255,.9);
+  background: rgba(63,63,68,.15);
   border-radius: 4px;
   padding: 3px 7px;
   display: flex;
   align-items: center;
   font-size: .7rem;
   font-weight: 700;
-  color: var(--color-black);
+  color: var(--color-carbon);
   letter-spacing: .3px;
 }
 
@@ -1728,6 +1917,353 @@ input[type="radio"].product-option-input:checked + .option-btn {
   color: var(--color-primary);
   font-weight: 600;
 }
+
+/* ── Secțiuni pe fundal gri — card-uri rămân albe ─────────── */
+.frescia-cat-list__item,
+.frescia-card,
+.frescia-sidebar,
+.frescia-fp-section { background: var(--color-white); }
+
+/* ── OFERTE SPECIALE — Carusel ────────────────────────────── */
+.frescia-oferte-section { background: var(--color-white); }
+
+.frescia-oferte__header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.frescia-oferte-carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+.frescia-oferte-track {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.frescia-oferte-slide {
+  flex: 0 0 100%;
+  min-width: 100%;
+}
+
+.frescia-oferte-card {
+  display: block;
+  position: relative;
+  height: 400px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .frescia-oferte-card { height: 280px; }
+}
+
+.frescia-oferte-card__img-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.frescia-oferte-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.frescia-oferte-card:hover .frescia-oferte-card__img { transform: scale(1.04); }
+
+.frescia-oferte-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+}
+
+.frescia-oferte-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.28) 50%, rgba(0,0,0,.05) 100%);
+}
+
+.frescia-oferte-card__content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 36px 40px;
+  z-index: 2;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .frescia-oferte-card__content { padding: 24px 20px; }
+}
+
+.frescia-oferte-card__badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #fff;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.frescia-oferte-card__title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+
+.frescia-oferte-card__subtitle {
+  font-size: .95rem;
+  color: rgba(255,255,255,.82);
+  margin-bottom: 20px;
+}
+
+.frescia-oferte-card__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: .9rem;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.frescia-oferte-card:hover .frescia-oferte-card__btn {
+  background: var(--color-primary-dark);
+  transform: translateX(4px);
+}
+
+.frescia-oferte-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  border: 2px solid rgba(255,255,255,.4);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), border-color var(--transition);
+  cursor: pointer;
+}
+
+.frescia-oferte-arrow:hover { background: rgba(255,255,255,.3); border-color: rgba(255,255,255,.7); }
+.frescia-oferte-arrow--prev { left: 16px; }
+.frescia-oferte-arrow--next { right: 16px; }
+
+.frescia-oferte-dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.frescia-oferte-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.4);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  padding: 0;
+}
+
+.frescia-oferte-dot.is-active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+/* ── PAGINA REVISTĂ ───────────────────────────────────────── */
+.frescia-revista-page {
+  padding: 56px 0 72px;
+}
+
+.frescia-revista__header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.frescia-revista__subtitle {
+  color: var(--color-text-light);
+  font-size: 1rem;
+  margin-top: 8px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.frescia-revista__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 900px) {
+  .frescia-revista__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .frescia-revista__grid { grid-template-columns: 1fr; max-width: 360px; margin: 0 auto; }
+}
+
+.frescia-revista-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--color-border);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.frescia-revista-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.frescia-revista-card__cover {
+  position: relative;
+  aspect-ratio: 5/7;
+  overflow: hidden;
+  background: var(--color-primary-light);
+}
+
+.frescia-revista-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.frescia-revista-card:hover .frescia-revista-card__img { transform: scale(1.03); }
+
+.frescia-revista-card__img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--color-primary);
+  font-size: .82rem;
+  font-weight: 600;
+}
+
+.frescia-revista-card__label {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+.frescia-revista-card__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.frescia-revista-card__title {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+.frescia-revista-card__desc {
+  font-size: .85rem;
+  color: var(--color-text-light);
+  line-height: 1.5;
+}
+
+.frescia-revista-card__download {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-size: .85rem;
+  font-weight: 700;
+  margin-top: 8px;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.frescia-revista-card__download:hover {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
+.frescia-revista-card__view {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-light);
+  font-size: .82rem;
+  font-weight: 500;
+  margin-top: 2px;
+  transition: color var(--transition);
+}
+
+.frescia-revista-card__view:hover { color: var(--color-primary); }
+
+.frescia-revista__empty {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--color-text-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.frescia-revista__subscribe {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-primary-light);
+  border: 1px solid rgba(116,170,80,.2);
+  border-radius: var(--radius-md);
+  padding: 16px 24px;
+  font-size: .9rem;
+  color: var(--color-text);
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── PROMO PRODUCTS — secțiune cu produse reducere ─────────── */
+.frescia-promo-products { background: var(--color-carbon-light); }
+.frescia-promo-products__header { text-align: center; margin-bottom: 32px; }
 
 /* ── 17. RESPONSIVE ───────────────────────────────────────── */
 
@@ -2201,7 +2737,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
 @media (max-width: 480px) {
   .container { padding: 0 16px; }
 
-  .frescia-trust-bar__grid { grid-template-columns: 1fr; }
+  .frescia-trust-bar__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
   .frescia-product-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
 
@@ -2220,6 +2756,82 @@ input[type="radio"].product-option-input:checked + .option-btn {
   }
 }
 
+
+/* ════════════════════════════════════════════════════════════
+   MOBILE RESPONSIVE — fixes specifice pentru ecrane mici
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* ── Navbar mobile ──────────────────────────────────────── */
+  .frescia-logo--img img { height: 38px; }
+
+  .frescia-navbar__inner { gap: 12px; }
+
+  /* ── Topbar mobile ──────────────────────────────────────── */
+  .frescia-topbar { padding: 8px 16px; }
+  .frescia-topbar__text { font-size: .78rem; justify-content: center; flex-wrap: wrap; gap: 4px; }
+
+  /* ── Mobile menu bej nud ────────────────────────────────── */
+  .frescia-mobile-menu__panel { background: #faf6f1; }
+  .frescia-mobile-menu__link--child {
+    padding-left: 28px !important;
+    font-size: .82rem !important;
+    color: var(--color-text-light) !important;
+  }
+
+  /* ── Trust bar compact ──────────────────────────────────── */
+  .frescia-trust-bar { padding: 0; }
+  .frescia-trust-bar__grid { grid-template-columns: repeat(2, 1fr); gap: 8px; padding: 12px 16px; }
+  .frescia-trust-bar__item { padding: 12px 10px; gap: 8px; flex-direction: column; align-items: flex-start; }
+  .frescia-trust-bar__icon { width: 32px; height: 32px; border-radius: var(--radius-sm); }
+  .frescia-trust-bar__icon svg { width: 16px; height: 16px; }
+  .frescia-trust-bar__title { font-size: .78rem; margin-bottom: 1px; }
+  .frescia-trust-bar__desc { font-size: .68rem; line-height: 1.3; }
+
+  /* ── Section paddings ───────────────────────────────────── */
+  .frescia-cat-tiles-section { padding: 28px 0 20px !important; }
+  .frescia-fp-section { padding-top: 28px !important; padding-bottom: 28px !important; }
+  .frescia-promo-banner { padding: 40px 0; }
+  .frescia-brand-story { padding: 48px 0; }
+
+  /* ── Section titles ─────────────────────────────────────── */
+  .frescia-section-title { font-size: clamp(1.3rem, 5vw, 1.8rem); }
+  .frescia-cat-tiles__header { margin-bottom: 20px; }
+
+  /* ── Category list mobile ───────────────────────────────── */
+  .frescia-cat-list { gap: 8px; }
+  .frescia-cat-list__item { padding: 12px 14px; gap: 12px; }
+  .frescia-cat-list__img-wrap { width: 48px; height: 48px; }
+  .frescia-cat-list__name { font-size: .88rem; }
+  .frescia-cat-list__count { font-size: .72rem; }
+
+  /* ── Product cards ──────────────────────────────────────── */
+  .frescia-card__title { font-size: .85rem; }
+  .frescia-card__price { font-size: .92rem; }
+  .frescia-card__add-btn { padding: 9px 12px; font-size: .8rem; }
+
+  /* ── Promo banner ───────────────────────────────────────── */
+  .frescia-promo-banner__title { font-size: clamp(1.4rem, 5vw, 1.9rem); }
+  .frescia-promo-banner__desc { font-size: .88rem; }
+  .frescia-promo-banner__btn { padding: 12px 24px; font-size: .88rem; }
+
+  /* ── Footer mobile ──────────────────────────────────────── */
+  .frescia-footer { padding: 40px 0 0; }
+  .frescia-footer__grid { gap: 24px; padding-bottom: 32px; }
+  .frescia-footer__col-title { font-size: .8rem; margin-bottom: 10px; }
+  .frescia-footer__link { font-size: .82rem; }
+  .frescia-footer__copy { font-size: .75rem; }
+}
+
+/* ── Sub 400px — ecrane foarte mici ──────────────────────── */
+@media (max-width: 400px) {
+  .frescia-logo--img img { height: 34px; }
+  .frescia-hero__title { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+  .frescia-hero__buttons { gap: 8px; }
+  .btn { padding: 11px 20px; font-size: .88rem; }
+  .frescia-cat-list__item { padding: 10px 12px; }
+}
 
 /* ════════════════════════════════════════════════════════════
    DESPRE NOI — Animații + Secțiuni
@@ -2280,15 +2892,15 @@ input[type="radio"].product-option-input:checked + .option-btn {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: #0e1c09;
+  background: var(--color-nud);
 }
 .fr-about-hero__bg {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 85% 110% at 25% 55%, #1e3a14 0%, #0e1c09 52%, #141418 100%);
+  background: radial-gradient(ellipse 85% 110% at 25% 55%, rgba(255,255,255,.40) 0%, var(--color-nud) 52%, #c9ad94 100%);
 }
 .fr-about-hero__bg-dots {
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle, rgba(116,170,80,.07) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(63,63,68,.08) 1px, transparent 1px);
   background-size: 32px 32px;
   mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
@@ -2312,9 +2924,9 @@ input[type="radio"].product-option-input:checked + .option-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(116,170,80,.1);
-  border: 1px solid rgba(116,170,80,.28);
-  color: rgba(255,255,255,.7);
+  background: rgba(63,63,68,.08);
+  border: 1px solid rgba(63,63,68,.20);
+  color: var(--color-carbon);
   font-size: .75rem;
   font-weight: 700;
   letter-spacing: 2.5px;
@@ -2335,7 +2947,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
 .fr-about-hero__title {
   font-size: clamp(2.6rem, 5.2vw, 4.2rem);
   font-weight: 900;
-  color: #fff;
+  color: var(--color-carbon);
   line-height: 1.1;
   margin-bottom: 24px;
   letter-spacing: -1.5px;
@@ -2353,7 +2965,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
 /* Subtitle */
 .fr-about-hero__sub {
   font-size: 1.05rem;
-  color: rgba(255,255,255,.6);
+  color: rgba(63,63,68,.75);
   max-width: 460px;
   margin-bottom: 44px;
   line-height: 1.75;
@@ -2393,7 +3005,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
   display: flex;
   align-items: center;
   gap: 9px;
-  color: rgba(255,255,255,.45);
+  color: rgba(63,63,68,.60);
   font-size: .78rem;
   font-weight: 500;
 }

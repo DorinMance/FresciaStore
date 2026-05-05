@@ -1,0 +1,239 @@
+<section class="frescia-oferte-section" style="padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="container">
+
+    <div class="frescia-oferte__header reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="frescia-section-eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="frescia-section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="frescia-oferte-carousel" id="frescia-oferte-{{ section.id }}">
+        <div class="frescia-oferte-track">
+          {%- for block in section.blocks -%}
+            <div class="frescia-oferte-slide reveal reveal--delay-{{ forloop.index | modulo: 4 | plus: 1 }}" {{ block.shopify_attributes }}>
+              <a href="{{ block.settings.url | default: '/collections/all' }}" class="frescia-oferte-card">
+                <div class="frescia-oferte-card__img-wrap">
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      src="{{ block.settings.image | img_url: '800x500', crop: 'center' }}"
+                      alt="{{ block.settings.title | escape }}"
+                      class="frescia-oferte-card__img"
+                      loading="lazy"
+                      width="800" height="500"
+                    >
+                  {%- elsif block.settings.collection != blank -%}
+                    {%- assign oferta_col = collections[block.settings.collection] -%}
+                    {%- if oferta_col.image -%}
+                      <img
+                        src="{{ oferta_col.image | img_url: '800x500', crop: 'center' }}"
+                        alt="{{ block.settings.title | default: oferta_col.title | escape }}"
+                        class="frescia-oferte-card__img"
+                        loading="lazy"
+                        width="800" height="500"
+                      >
+                    {%- else -%}
+                      <div class="frescia-oferte-card__img-placeholder"></div>
+                    {%- endif -%}
+                  {%- else -%}
+                    <div class="frescia-oferte-card__img-placeholder"></div>
+                  {%- endif -%}
+                  <div class="frescia-oferte-card__overlay"></div>
+                </div>
+
+                <div class="frescia-oferte-card__content">
+                  {%- if block.settings.badge != blank -%}
+                    <span class="frescia-oferte-card__badge">{{ block.settings.badge }}</span>
+                  {%- endif -%}
+                  <h3 class="frescia-oferte-card__title">
+                    {%- if block.settings.title != blank -%}
+                      {{ block.settings.title }}
+                    {%- elsif block.settings.collection != blank -%}
+                      {{ collections[block.settings.collection].title }}
+                    {%- endif -%}
+                  </h3>
+                  {%- if block.settings.subtitle != blank -%}
+                    <p class="frescia-oferte-card__subtitle">{{ block.settings.subtitle }}</p>
+                  {%- endif -%}
+                  <span class="frescia-oferte-card__btn">
+                    {{ block.settings.cta_text | default: 'Cumpără acum' }}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </span>
+                </div>
+              </a>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.blocks.size > 1 -%}
+          <button class="frescia-oferte-arrow frescia-oferte-arrow--prev" aria-label="Anterior" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+          </button>
+          <button class="frescia-oferte-arrow frescia-oferte-arrow--next" aria-label="Următor" type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </button>
+          <div class="frescia-oferte-dots">
+            {%- for block in section.blocks -%}
+              <button class="frescia-oferte-dot{% if forloop.first %} is-active{% endif %}" aria-label="Slide {{ forloop.index }}" type="button" data-index="{{ forloop.index0 }}"></button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <p style="text-align:center;color:var(--color-text-light);padding:40px 0;">
+        Adaugă bannere din Customizer → această secțiune → "Adaugă banner".
+      </p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<script>
+(function() {
+  var carousel = document.getElementById('frescia-oferte-{{ section.id }}');
+  if (!carousel) return;
+  var track = carousel.querySelector('.frescia-oferte-track');
+  var slides = carousel.querySelectorAll('.frescia-oferte-slide');
+  var dots = carousel.querySelectorAll('.frescia-oferte-dot');
+  var prev = carousel.querySelector('.frescia-oferte-arrow--prev');
+  var next = carousel.querySelector('.frescia-oferte-arrow--next');
+  if (slides.length <= 1) return;
+
+  var current = 0;
+  var autoTimer = null;
+
+  function goTo(idx) {
+    current = (idx + slides.length) % slides.length;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(d, i) { d.classList.toggle('is-active', i === current); });
+  }
+
+  function startAuto() {
+    autoTimer = setInterval(function() { goTo(current + 1); }, 5000);
+  }
+  function stopAuto() { clearInterval(autoTimer); }
+
+  if (prev) prev.addEventListener('click', function() { stopAuto(); goTo(current - 1); startAuto(); });
+  if (next) next.addEventListener('click', function() { stopAuto(); goTo(current + 1); startAuto(); });
+  dots.forEach(function(d) {
+    d.addEventListener('click', function() { stopAuto(); goTo(parseInt(d.dataset.index)); startAuto(); });
+  });
+
+  /* Touch swipe */
+  var startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; stopAuto(); }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+    startAuto();
+  });
+
+  startAuto();
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Oferte speciale (carusel)",
+  "tag": "section",
+  "class": "frescia-oferte-speciale",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Text mic deasupra titlului",
+      "default": "Oferte speciale"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu secțiune",
+      "default": "Oferte speciale"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Spațiu sus (px)",
+      "min": 0,
+      "max": 80,
+      "step": 8,
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Spațiu jos (px)",
+      "min": 0,
+      "max": 80,
+      "step": 8,
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "banner",
+      "name": "Banner categorie",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagine banner (opțional, altfel ia imaginea colecției)"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colecție (pentru imagine și link automat)"
+        },
+        {
+          "type": "url",
+          "id": "url",
+          "label": "Link manual (opțional, suprascrie colecția)"
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge (ex: -20%, Ofertă)",
+          "placeholder": "ex: Ofertă lunii"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titlu banner",
+          "placeholder": "ex: Uleiuri extra virgin"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitlu (opțional)",
+          "placeholder": "ex: Selecție din Toscana"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Text buton",
+          "default": "Cumpără acum"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oferte speciale",
+      "settings": {
+        "eyebrow": "Oferte speciale",
+        "title": "Oferte speciale"
+      }
+    }
+  ]
+}
+{% endschema %}

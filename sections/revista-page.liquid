@@ -1,0 +1,190 @@
+<div class="frescia-revista-page">
+  <div class="container">
+
+    {%- comment -%} Header pagină {%- endcomment -%}
+    <div class="frescia-revista__header">
+      <p class="frescia-section-eyebrow">{{ section.settings.eyebrow | default: 'Lunar' }}</p>
+      <h1 class="frescia-section-title">{{ section.settings.title | default: page.title }}</h1>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="frescia-revista__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Grid reviste (blocuri configurabile) {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="frescia-revista__grid">
+        {%- for block in section.blocks -%}
+          <div class="frescia-revista-card reveal reveal--delay-{{ forloop.index | modulo: 3 | plus: 1 }}" {{ block.shopify_attributes }}>
+            <div class="frescia-revista-card__cover">
+              {%- if block.settings.cover_image != blank -%}
+                <img
+                  src="{{ block.settings.cover_image | img_url: '400x560', crop: 'center' }}"
+                  alt="{{ block.settings.title | default: 'Revistă Frescia' | escape }}"
+                  class="frescia-revista-card__img"
+                  loading="lazy"
+                  width="400" height="560"
+                >
+              {%- else -%}
+                <div class="frescia-revista-card__img-placeholder">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="1" opacity=".4">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                  </svg>
+                  <span>Revistă Frescia</span>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.label != blank -%}
+                <span class="frescia-revista-card__label">{{ block.settings.label }}</span>
+              {%- endif -%}
+            </div>
+
+            <div class="frescia-revista-card__body">
+              {%- if block.settings.title != blank -%}
+                <h3 class="frescia-revista-card__title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="frescia-revista-card__desc">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.pdf_url != blank -%}
+                <a href="{{ block.settings.pdf_url }}" class="frescia-revista-card__download" download target="_blank" rel="noopener">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  {{ block.settings.download_text | default: 'Descarcă revista (PDF)' }}
+                </a>
+              {%- endif -%}
+
+              {%- if block.settings.view_url != blank -%}
+                <a href="{{ block.settings.view_url }}" class="frescia-revista-card__view" target="_blank" rel="noopener">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  Vizualizează online
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <div class="frescia-revista__empty">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" opacity=".3">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <p>Nicio revistă adăugată încă. Adaugă reviste din Customizer → această pagină → "Adaugă revistă".</p>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Notă abonare {%- endcomment -%}
+    {%- if section.settings.subscribe_text != blank -%}
+      <div class="frescia-revista__subscribe">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <p>{{ section.settings.subscribe_text }}</p>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pagina Revistă",
+  "tag": "section",
+  "class": "frescia-revista-section",
+  "max_blocks": 24,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Text mic deasupra titlului",
+      "default": "Lunar"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu pagină",
+      "default": "Revistă Frescia"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitlu (opțional)",
+      "placeholder": "ex: Catalog lunar cu produse și oferte speciale"
+    },
+    {
+      "type": "text",
+      "id": "subscribe_text",
+      "label": "Text notă abonare (opțional)",
+      "placeholder": "ex: Abonează-te la newsletter pentru a primi revista lunar."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "revista",
+      "name": "Revistă / Flyer",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "cover_image",
+          "label": "Copertă revistă"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etichetă (ex: Mai 2025)",
+          "placeholder": "ex: Mai 2025"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titlu revistă",
+          "placeholder": "ex: Catalog Mai 2025"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Descriere scurtă (opțional)"
+        },
+        {
+          "type": "url",
+          "id": "pdf_url",
+          "label": "Link PDF pentru download"
+        },
+        {
+          "type": "text",
+          "id": "download_text",
+          "label": "Text buton download",
+          "default": "Descarcă revista (PDF)"
+        },
+        {
+          "type": "url",
+          "id": "view_url",
+          "label": "Link vizualizare online (opțional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pagina Revistă",
+      "settings": {
+        "eyebrow": "Lunar",
+        "title": "Revistă Frescia",
+        "subtitle": "Catalog lunar cu produse italiene autentice și oferte speciale.",
+        "subscribe_text": "Abonează-te la newsletter pentru a primi revista lunar direct pe email."
+      }
+    }
+  ]
+}
+{% endschema %}
