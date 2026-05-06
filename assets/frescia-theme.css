@@ -323,15 +323,14 @@ h1, h2, h3, h4, h5 {
 /* Desktop nav — "Despre noi" link normal (ca celelalte), fără stilizare specială */
 /* Clasa --brand există dar nu modifică nimic, link-ul moștenește stilul standard */
 
-/* Butoane antet — coș cu accent brand */
+/* Butoane antet — coș identic cu butonul de login */
 .frescia-nav__icon-btn--cart {
-  background: var(--color-primary);
-  color: #ffffff;
-  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text);
 }
 .frescia-nav__icon-btn--cart:hover {
-  background: var(--color-primary-dark);
-  color: #ffffff !important;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
 .frescia-nav__icon-btn--cart .frescia-nav__badge {
   background: var(--color-accent);
