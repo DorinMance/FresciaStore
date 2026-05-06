@@ -35,8 +35,8 @@
   {%- comment -%} Google Fonts — async to avoid render-blocking {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,600&display=swap" rel="stylesheet"></noscript>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"></noscript>
 
   {%- comment -%} Theme CSS {%- endcomment -%}
   {{ 'frescia-theme.css' | asset_url | stylesheet_tag }}
@@ -211,20 +211,10 @@
           {%- assign mob_nav = linklists[settings.main_menu] -%}
           {%- for link in mob_nav.links -%}
             <a href="{{ link.url }}" class="frescia-mobile-menu__link">{{ link.title }}</a>
-            {%- if link.links.size > 0 -%}
-              {%- for child in link.links -%}
-                <a href="{{ child.url }}" class="frescia-mobile-menu__link frescia-mobile-menu__link--child">{{ child.title }}</a>
-              {%- endfor -%}
-            {%- endif -%}
           {%- endfor -%}
         {%- else -%}
           <a href="/" class="frescia-mobile-menu__link">Acasă</a>
           <a href="/collections/all" class="frescia-mobile-menu__link">Catalog</a>
-          {%- for col in collections limit: 8 -%}
-            {%- unless col.handle == 'all' or col.handle == 'frontpage' -%}
-              <a href="{{ col.url }}" class="frescia-mobile-menu__link frescia-mobile-menu__link--child">{{ col.title }}</a>
-            {%- endunless -%}
-          {%- endfor -%}
           <a href="/pages/revista" class="frescia-mobile-menu__link">Revistă</a>
           <a href="/pages/despre-noi" class="frescia-mobile-menu__link frescia-mobile-menu__link--brand">Despre noi</a>
           <a href="/account" class="frescia-mobile-menu__link">Contul meu</a>

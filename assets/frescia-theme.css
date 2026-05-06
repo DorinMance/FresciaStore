@@ -11,15 +11,15 @@
   --color-accent:       #DA291C;
   --color-accent-dark:  #b5221a;
   --color-carbon:       #3F3F44;
-  --color-carbon-light: #f2f2f3;
+  --color-carbon-light: #EBEBED;
   --color-nud:          #E0C6AD;
   --color-white:        #ffffff;
   --color-black:        #1a1a1a;
   --color-text:         #3F3F44;
   --color-text-light:   #6b7280;
   --color-border:       #e5e7eb;
-  --color-bg:           #ffffff;
-  --color-bg-alt:       #f9fafb;
+  --color-bg:           #EBEBED;
+  --color-bg-alt:       #E3E3E5;
 
   --font-heading: 'Mulish', sans-serif;
   --font-body:    'Mulish', sans-serif;
@@ -348,13 +348,13 @@ h1, h2, h3, h4, h5 {
 .frescia-mobile-menu__link--brand {
   color: var(--color-primary);
   font-weight: 600;
-  border-left: 3px solid var(--color-primary);
-  padding-left: 13px;
 }
 
 .frescia-mobile-menu__link--brand:hover {
   background: var(--color-primary-light);
   color: var(--color-primary-dark);
+  border-left: 3px solid var(--color-primary);
+  padding-left: 13px;
 }
 
 /* Category List — vertical layout */
@@ -1371,11 +1371,12 @@ h1, h2, h3, h4, h5 {
 }
 
 .frescia-footer__logo {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-black);
   margin-bottom: 14px;
+}
+.frescia-footer__logo img {
+  height: 40px;
+  width: auto;
+  mix-blend-mode: multiply;
 }
 
 .frescia-footer__desc {
@@ -1921,8 +1922,9 @@ input[type="radio"].product-option-input:checked + .option-btn {
 /* ── Secțiuni pe fundal gri — card-uri rămân albe ─────────── */
 .frescia-cat-list__item,
 .frescia-card,
-.frescia-sidebar,
-.frescia-fp-section { background: var(--color-white); }
+.frescia-sidebar { background: var(--color-white); }
+
+.frescia-fp-section { background: transparent; }
 
 /* ── OFERTE SPECIALE — Carusel ────────────────────────────── */
 .frescia-oferte-section { background: var(--color-white); }
@@ -3332,7 +3334,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
 .fr-about-value-card__icon--green  { background: var(--color-primary-light); color: var(--color-primary); }
 .fr-about-value-card__icon--red    { background: #fdecea; color: var(--color-accent); }
 .fr-about-value-card__icon--nud    { background: #f7efe6; color: #a07040; }
-.fr-about-value-card__icon--carbon { background: #f2f2f3; color: var(--color-carbon); }
+.fr-about-value-card__icon--carbon { background: var(--color-carbon-light); color: var(--color-carbon); }
 .fr-about-value-card__title {
   font-size: 1.05rem;
   font-weight: 800;
@@ -3660,6 +3662,7 @@ input[type="radio"].product-option-input:checked + .option-btn {
 
 /* Default: ascuns pe desktop */
 .fr-mob-toolbar { display: none; }
+.fr-cats-drawer { display: none; }
 .fr-about-hero__mob-art { display: none; }
 .fh-mob-vis { display: none; }
 .fh-mob-video { display: none; }
@@ -3762,38 +3765,143 @@ input[type="radio"].product-option-input:checked + .option-btn {
   }
   .fr-mob-search-btn:hover { background: var(--color-primary-dark); }
 
-  .fr-mob-cats-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 10px 16px;
-  }
-  .fr-mob-cats-wrap::-webkit-scrollbar { display: none; }
-  .fr-mob-cats {
+  /* ── Filter bar mobil ────────────────────────── */
+  .fr-mob-filter-bar {
     display: flex;
-    gap: 8px;
-    white-space: nowrap;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px 12px;
   }
-  .fr-mob-cat {
+  .fr-mob-filter-btn {
     display: inline-flex;
     align-items: center;
-    padding: 6px 15px;
-    border-radius: 100px;
-    font-size: .8rem;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-carbon);
+    color: #fff;
+    font-size: .85rem;
     font-weight: 600;
-    color: var(--color-text);
+    font-family: var(--font-body);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+  }
+  .fr-mob-filter-badge {
+    position: absolute;
+    top: -5px; right: -5px;
+    width: 18px; height: 18px;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: .65rem;
+    font-weight: 700;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .fr-mob-active-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
     background: var(--color-primary-light);
-    border: 1.5px solid transparent;
+    color: var(--color-primary-dark);
+    border-radius: var(--radius-pill);
+    font-size: .82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    max-width: 200px;
+    overflow: visible;
+  }
+  .fr-mob-active-cat span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 130px;
+    display: inline-block;
+  }
+  .fr-mob-active-cat__clear {
+    color: var(--color-primary);
+    font-size: .85rem;
+    line-height: 1;
     text-decoration: none;
-    transition: all var(--transition);
     flex-shrink: 0;
   }
-  .fr-mob-cat:hover { background: rgba(116,170,80,.2); color: var(--color-primary); }
-  .fr-mob-cat--active {
-    background: var(--color-primary);
-    color: #fff;
-    border-color: var(--color-primary);
+
+  /* ── Drawer categorii (bottom sheet) ─────────── */
+  .fr-cats-drawer { display: block; }
+  .fr-cats-drawer__overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 1100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s;
   }
+  .fr-cats-drawer__sheet {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--color-white);
+    border-radius: 20px 20px 0 0;
+    z-index: 1101;
+    transform: translateY(100%);
+    transition: transform .35s cubic-bezier(.32,1,.4,1);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+  }
+  .fr-cats-drawer.is-open .fr-cats-drawer__overlay {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .fr-cats-drawer.is-open .fr-cats-drawer__sheet {
+    transform: translateY(0);
+  }
+  .fr-cats-drawer__handle {
+    width: 40px; height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    margin: 12px auto 4px;
+  }
+  .fr-cats-drawer__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px 8px;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .fr-cats-drawer__title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-carbon);
+  }
+  .fr-cats-drawer__close {
+    background: none; border: none;
+    cursor: pointer;
+    color: var(--color-text-light);
+    padding: 4px;
+    display: flex;
+  }
+  .fr-cats-drawer__list {
+    padding: 8px 0 16px;
+  }
+  .fr-cats-drawer__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    font-size: .95rem;
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+    transition: background .15s;
+  }
+  .fr-cats-drawer__item:last-child { border-bottom: none; }
+  .fr-cats-drawer__item:active { background: var(--color-carbon-light); }
+  .fr-cats-drawer__item--active {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  .fr-cats-drawer__item--active svg { stroke: var(--color-primary); }
 
   /* ── About hero mobile deco — tacâmuri + ramuri ────────── */
   .fr-about-hero__mob-art {

@@ -3,36 +3,74 @@
   <form action="/search" method="get" class="fr-mob-search-form" role="search">
     <input type="hidden" name="type" value="product">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input
-      type="search"
-      name="q"
-      placeholder="Caută produse italiene..."
-      class="fr-mob-search-input"
-      autocomplete="off"
-      {% if search.terms %}value="{{ search.terms | escape }}"{% endif %}
-    >
+    <input type="search" name="q" placeholder="Caută produse italiene..." class="fr-mob-search-input" autocomplete="off" {% if search.terms %}value="{{ search.terms | escape }}"{% endif %}>
     <button type="submit" class="fr-mob-search-btn" aria-label="Caută">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </button>
   </form>
-  <div class="fr-mob-cats-wrap">
-    <nav class="fr-mob-cats" aria-label="Categorii">
-      <a href="/collections/all" class="fr-mob-cat{% if collection.handle == 'all' %} fr-mob-cat--active{% endif %}">Toate</a>
+
+  <!-- Buton categorii + categorie activă -->
+  <div class="fr-mob-filter-bar">
+    <button class="fr-mob-filter-btn" id="fr-cats-open" type="button">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+      Categorii
+      {%- unless collection.handle == 'all' or collection.handle == blank -%}
+        <span class="fr-mob-filter-badge">1</span>
+      {%- endunless -%}
+    </button>
+    {%- unless collection.handle == 'all' or collection.handle == blank -%}
+      <span class="fr-mob-active-cat">
+        <span>{{ collection.title }}</span>
+        <a href="/collections/all" class="fr-mob-active-cat__clear" aria-label="Șterge filtru">✕</a>
+      </span>
+    {%- endunless -%}
+  </div>
+</div>
+
+<!-- Drawer categorii (bottom sheet) -->
+<div class="fr-cats-drawer" id="fr-cats-drawer" aria-hidden="true">
+  <div class="fr-cats-drawer__overlay" id="fr-cats-overlay"></div>
+  <div class="fr-cats-drawer__sheet" role="dialog" aria-modal="true" aria-label="Alege categoria">
+    <div class="fr-cats-drawer__handle"></div>
+    <div class="fr-cats-drawer__header">
+      <span class="fr-cats-drawer__title">Categorii</span>
+      <button class="fr-cats-drawer__close" id="fr-cats-close" type="button" aria-label="Închide">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="fr-cats-drawer__list">
+      <a href="/collections/all" class="fr-cats-drawer__item{% if collection.handle == 'all' or collection.handle == blank %} fr-cats-drawer__item--active{% endif %}">
+        <span>Toate produsele</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
       {%- for col in collections -%}
         {%- unless col.handle == 'all' or col.handle == 'frontpage' -%}
-          <a href="{{ col.url }}" class="fr-mob-cat{% if col.handle == collection.handle %} fr-mob-cat--active{% endif %}">
-            {{ col.title }}
+          <a href="{{ col.url }}" class="fr-cats-drawer__item{% if col.handle == collection.handle %} fr-cats-drawer__item--active{% endif %}">
+            <span>{{ col.title }}</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
           </a>
         {%- endunless -%}
       {%- endfor -%}
     </nav>
   </div>
 </div>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var active = document.querySelector('.fr-mob-cat--active');
-    if (active) active.scrollIntoView({ inline: 'center', behavior: 'instant', block: 'nearest' });
-  });
+(function() {
+  var btn = document.getElementById('fr-cats-open');
+  var drawer = document.getElementById('fr-cats-drawer');
+  var overlay = document.getElementById('fr-cats-overlay');
+  var closeBtn = document.getElementById('fr-cats-close');
+  if (!btn || !drawer) return;
+
+  function open() { drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+  function close() { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; }
+
+  btn.addEventListener('click', open);
+  if (overlay) overlay.addEventListener('click', close);
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') close(); });
+})();
 </script>
 
 <div class="container">
@@ -69,12 +107,15 @@
         </span>
       </div>
 
-      {%- comment -%} Sort {%- endcomment -%}
+      {%- comment -%} Sort + Stock filter {%- endcomment -%}
       <div style="margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
         <label for="sort-by" style="font-size:.85rem;font-weight:600;color:var(--color-text-light);">
           {{ 'collections.sort.label' | t }}:
         </label>
-        <form method="get" action="{{ collection.url }}">
+        <form method="get" action="{{ collection.url }}" id="sort-form">
+          {%- if request.query_string contains 'filter.p.available' -%}
+            <input type="hidden" name="filter.p.available" value="1">
+          {%- endif -%}
           <select
             id="sort-by"
             name="sort_by"
@@ -91,6 +132,20 @@
             <option value="created-descending"{%- if sort_by == 'created-descending' -%}selected{%- endif -%}>{{ 'collections.sort.created_descending' | t }}</option>
           </select>
         </form>
+        {%- assign in_stock_active = false -%}
+        {%- if request.query_string contains 'filter.p.available' -%}{%- assign in_stock_active = true -%}{%- endif -%}
+        {%- if in_stock_active -%}
+          <a href="{{ collection.url }}?sort_by={{ collection.sort_by | default: collection.default_sort_by }}"
+             style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1.5px solid var(--color-primary);border-radius:var(--radius-md);font-size:.82rem;font-weight:600;color:var(--color-primary);background:var(--color-primary-light);">
+            ✓ Disponibil
+            <span style="font-size:.9rem;">✕</span>
+          </a>
+        {%- else -%}
+          <a href="{{ collection.url }}?sort_by={{ collection.sort_by | default: collection.default_sort_by }}&filter.p.available=1"
+             style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);font-size:.82rem;font-weight:500;color:var(--color-text-light);background:var(--color-white);transition:border-color .2s,color .2s;">
+            Doar disponibil
+          </a>
+        {%- endif -%}
       </div>
 
       {%- comment -%} ── Grid produse cu paginare ── {%- endcomment -%}

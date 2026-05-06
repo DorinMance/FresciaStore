@@ -5,7 +5,7 @@
       {%- comment -%} ── Coloana 1: Brand ── {%- endcomment -%}
       <div>
         <div class="frescia-footer__logo">
-          {{ settings.logo_text | default: 'frescia' }}<span style="color:var(--color-accent)">.</span>{{ settings.logo_domain | default: 'store' }}
+          <img src="{{ 'frescia-logo.png' | asset_url }}" alt="{{ shop.name }}" width="140" height="42" loading="lazy">
         </div>
         <p class="frescia-footer__desc">{{ settings.footer_description }}</p>
 

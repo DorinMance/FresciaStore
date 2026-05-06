@@ -11,7 +11,7 @@
   "current": {
     "color_primary": "#74AA50",
     "color_accent": "#DA291C",
-    "color_background": "#ffffff",
+    "color_background": "#EBEBED",
     "color_text": "#3F3F44",
     "color_text_light": "#6b7280",
     "topbar_enabled": true,
@@ -62,7 +62,7 @@
           "subtitle": "",
           "cta_text": "",
           "cta_url": "",
-          "bg_color": "#ffffff",
+          "bg_color": "#EBEBED",
           "padding_top": 56,
           "padding_bottom": 56
         }
